@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#075b45">
+    <title>Masuk · SIM Babul Khoerot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/app.css">
+</head>
+<body class="login-page">
+<main class="login-shell">
+    <section class="login-visual" aria-labelledby="brand-heading">
+        <div class="brand brand--light">
+            <span class="brand__mark" aria-hidden="true">BK</span>
+            <span><strong>Babul Khoerot</strong><small>Sistem Informasi Manajemen Pesantren</small></span>
+        </div>
+        <div class="login-visual__content">
+            <span class="eyebrow eyebrow--light">Sistem terintegrasi</span>
+            <h1 id="brand-heading">Satu ruang digital untuk sekolah dan pesantren.</h1>
+            <p>Kelola akademik, asrama, tahfidz, ibadah, kesehatan, dan pembinaan santri dalam satu sistem yang aman.</p>
+            <ul class="login-visual__highlights"><li>Akses berbasis peran dan room</li><li>Data santri terpusat dan terdokumentasi</li><li>Monitoring sekolah dan pesantren</li></ul>
+            <div class="login-visual__insight"><span class="eyebrow eyebrow--light">Insight</span><h2>Data santri terpusat, akses terkontrol</h2><p>Pantau kehadiran, kesehatan, dan pembinaan dari satu dashboard untuk meningkatkan kualitas layanan pesantren.</p></div>
+        </div>
+        <div class="login-visual__pattern" aria-hidden="true"></div>
+        <p class="login-visual__footer">© 2026 Pondok Pesantren Babul Khoerot</p>
+    </section>
+
+    <section class="login-panel" aria-labelledby="login-heading">
+        <div class="login-mobile-header"><div class="login-mobile-brand brand">
+            <span class="brand__mark" aria-hidden="true">BK</span>
+            <span><strong>Babul Khoerot</strong><small>Sistem Informasi Manajemen Pesantren</small></span>
+        </div>
+        </div><p class="login-mobile-headline">Sekolah dan pesantren dalam satu ruang digital.</p>
+        <div class="login-card"><span class="preview-label">UI Preview</span>
+            <span class="login-security-pill">Akses aman SIM Babul Khoerot</span>
+            <h2 id="login-heading">Selamat datang kembali</h2>
+            <p class="muted">Masuk menggunakan akun yang telah diberikan administrator.</p>
+
+            <form  class="auth-form" data-submit-form>
+                <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="nama@babulkhoerot.sch.id" autocomplete="username"></div>
+
+                <div class="field">
+                    <div class="field__label-row">
+                        <label for="password">Kata sandi</label>
+
+                    </div>
+                    <div class="password-control">
+                        <input id="password" type="password" autocomplete="current-password" placeholder="Masukkan kata sandi" aria-describedby="password-help">
+                        <button type="button" class="password-toggle" data-password-toggle aria-label="Tampilkan kata sandi" aria-pressed="false">
+                            <svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg><span>Tampilkan</span>
+                        </button>
+                    </div>
+                    <small id="password-help" class="sr-only">Gunakan tombol tampilkan untuk melihat kata sandi.</small>
+                </div>
+
+                <div class="login-helper-row"><label class="check-control"><input type="checkbox" value="1" ><span>Ingat saya</span></label><a href="#admin-help">Lupa kata sandi?</a></div>
+                <button class="button button--login button--wide" type="button" data-preview-login>
+                    <span class="button__label">Masuk ke Sistem</span>
+                </button>
+            </form>
+
+            <div id="admin-help" class="login-help"><span>Butuh bantuan akses?</span><a href="#admin-help">Hubungi administrator pondok</a></div>
+        </div>
+        <p class="login-panel__footer">Pratinjau UI: tidak menyimpan data atau mencatat akses.</p>
+    </section>
+</main>
+<svg class="svg-sprite" aria-hidden="true"><symbol id="icon-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></symbol></svg>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
