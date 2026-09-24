@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#075b45">
+    <title>Dashboard Pesantren · SIM Babul Khoerot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/app.css">
+</head>
+<body class="app-page">
+<div class="app-shell" data-app-shell><span class="preview-label preview-label--dashboard">UI Preview</span>
+    <aside class="sidebar" id="primary-navigation" data-sidebar>
+        <div class="sidebar__top">
+            <a class="brand brand--light" href="index.html"><span class="brand__mark">BK</span><span><strong>Babul Khoerot</strong><small>SIM Pesantren</small></span></a>
+            <button type="button" class="icon-button sidebar__close" data-menu-close aria-label="Tutup navigasi">×</button>
+        </div>
+        <div class="room-switcher">
+            <span class="room-switcher__label">Ruang aktif</span>
+            <button type="button" class="room-switcher__button" aria-haspopup="true" aria-expanded="false" data-room-toggle>
+                <span class="room-switcher__icon">P</span><span><strong>Pesantren</strong><small>Administrasi pondok</small></span><span class="chevron">⌄</span>
+            </button>
+            <div class="room-switcher__menu" data-room-menu hidden>
+                <a href="index.html">Pilih ruang lain</a>
+            </div>
+        </div>
+        <nav class="sidebar__nav" aria-label="Navigasi utama">
+            <span class="nav-heading">Menu Pesantren</span>
+            <a href="pesantren.html" class="nav-link is-active" aria-current="page"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span>Dashboard Pesantren</span></a>
+            <a class="nav-link" aria-disabled="true" tabindex="-1" title="Belum tersedia di preview"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Santri</span></a>
+            <a class="nav-link" aria-disabled="true" tabindex="-1" title="Belum tersedia di preview"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"/></svg><span>Asrama / Kamar</span></a>
+            <a class="nav-link" aria-disabled="true" tabindex="-1" title="Belum tersedia di preview"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Musyrif</span></a>
+            <a class="nav-link" aria-disabled="true" tabindex="-1" title="Belum tersedia di preview"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Absensi Pesantren</span></a>
+            <a class="nav-link" aria-disabled="true" tabindex="-1" title="Belum tersedia di preview"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13Z"/><path d="M8 7h8"/></svg><span>Tahfidz</span></a>
+            <a class="nav-link" aria-disabled="true" tabindex="-1" title="Belum tersedia di preview"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg><span>Ibadah</span></a>
+            <a class="nav-link" aria-disabled="true" tabindex="-1" title="Belum tersedia di preview"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg><span>Aktivitas Asrama</span></a>
+            <a class="nav-link" aria-disabled="true" tabindex="-1" title="Belum tersedia di preview"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span>Kesehatan</span></a>
+            <a class="nav-link" aria-disabled="true" tabindex="-1" title="Belum tersedia di preview"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M10.3 3.7 2.2 18a2 2 0 0 0 1.8 3h16a2 2 0 0 0 1.8-3L13.7 3.7a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg><span>Pelanggaran</span></a>
+
+        </nav>
+        <div class="sidebar__support"><span class="sidebar__support-icon">?</span><div><strong>Butuh bantuan?</strong><small>Hubungi administrator sistem</small></div></div>
+    </aside>
+    <div class="sidebar-backdrop" data-menu-close></div>
+
+    <div class="app-content">
+        <header class="topbar">
+            <div class="topbar__start"><button class="icon-button menu-button" type="button" data-menu-open aria-controls="primary-navigation" aria-expanded="false"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span class="sr-only">Buka navigasi</span></button><div><p class="topbar__room">Room Pesantren</p><p class="topbar__date">Tampilan demonstrasi</p></div></div>
+            <div class="topbar__actions">
+                <button type="button" class="icon-button notification-button" aria-label="Notifikasi (contoh)" disabled><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span></span></button>
+                <div class="profile"><span class="profile__avatar">AP</span><span class="profile__copy"><strong>Admin Preview</strong><small>Administrator</small></span></div>
+                <form action="index.html"><button class="icon-button" title="Keluar" aria-label="Keluar"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M10 17l5-5-5-5M15 12H3M21 19V5a2 2 0 0 0-2-2h-5"/></svg></button></form>
+            </div>
+        </header>
+
+        <main class="dashboard">
+            
+            <div class="page-heading"><div><span class="eyebrow">Ringkasan hari ini</span><h1>Assalamu’alaikum, Admin!</h1><p>Pantau aktivitas dan kondisi pesantren dalam satu tampilan.</p></div><button class="button button--secondary" type="button" disabled><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/></svg> Unduh laporan</button></div>
+            <div class="alert alert--info" role="status"><span class="alert__icon" aria-hidden="true">i</span><div><strong>Data demonstrasi</strong><div>Angka contoh untuk pratinjau UI; tidak terhubung ke backend.</div></div></div>
+
+            <section class="stats-grid" aria-label="Ringkasan pesantren">
+                <article class="stat-card"><div class="stat-card__top"><span class="stat-card__icon stat-card__icon--emerald"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="badge badge--success">+2,4%</span></div><p>Total Santri</p><strong class="stat-card__value">1.248</strong><small>12 santri baru bulan ini</small></article>
+                <article class="stat-card"><div class="stat-card__top"><span class="stat-card__icon stat-card__icon--blue"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><span class="badge badge--neutral">+1,2%</span></div><p>Kehadiran Hari Ini</p><strong class="stat-card__value">96,8%</strong><small>1.208 dari 1.248 santri</small></article>
+                <article class="stat-card"><div class="stat-card__top"><span class="stat-card__icon stat-card__icon--amber"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"/></svg></span><span class="badge badge--neutral">Normal</span></div><p>Kapasitas Kamar</p><strong class="stat-card__value">87%</strong><small>42 dari 48 kamar terisi</small></article>
+                <article class="stat-card"><div class="stat-card__top"><span class="stat-card__icon stat-card__icon--rose"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M10.3 3.7 2.2 18a2 2 0 0 0 1.8 3h16a2 2 0 0 0 1.8-3L13.7 3.7a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg></span><span class="badge badge--neutral">Tinjau</span></div><p>Perlu Perhatian</p><strong class="stat-card__value">8</strong><small>Pelanggaran dan kesehatan</small></article>
+            </section>
+
+            <div class="dashboard-grid">
+                <section class="panel activity-panel">
+                    <div class="panel__header"><div><h2>Aktivitas terbaru</h2><p>Pembaruan operasional pesantren hari ini</p></div><span class="preview-disabled">Lihat semua</span></div>
+                    <div class="table-wrap"><table><thead><tr><th>Aktivitas</th><th>Santri</th><th>Waktu</th><th>Status</th></tr></thead><tbody>
+                        <tr><td><strong>Absensi Subuh</strong><small>Masjid Utama</small></td><td>Ahmad Fauzan</td><td>05.02</td><td><span class="badge badge--success">Hadir</span></td></tr>
+                        <tr><td><strong>Setoran Tahfidz</strong><small>Surah Al-Mulk</small></td><td>M. Rizky Maulana</td><td>06.40</td><td><span class="badge badge--info">Selesai</span></td></tr>
+                        <tr><td><strong>Pemeriksaan kesehatan</strong><small>UKS Pesantren</small></td><td>Abdul Hamid</td><td>08.15</td><td><span class="badge badge--warning">Dipantau</span></td></tr>
+                        <tr><td><strong>Izin keluar</strong><small>Keperluan keluarga</small></td><td>Fikri Ramadhan</td><td>09.20</td><td><span class="badge badge--neutral">Menunggu</span></td></tr>
+                    </tbody></table></div>
+                </section>
+                <aside class="panel quick-panel"><div class="panel__header"><div><h2>Akses cepat</h2><p>Tindakan yang sering digunakan</p></div></div>
+                    <div class="quick-actions"><a aria-disabled="true" tabindex="-1"><span class="quick-actions__icon"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><span><strong>Input absensi</strong><small>Catat kehadiran santri</small></span><b>›</b></a><a aria-disabled="true" tabindex="-1"><span class="quick-actions__icon"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13Z"/><path d="M8 7h8"/></svg></span><span><strong>Setoran tahfidz</strong><small>Tambah progres hafalan</small></span><b>›</b></a><a aria-disabled="true" tabindex="-1"><span class="quick-actions__icon"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></span><span><strong>Catatan kesehatan</strong><small>Rekam kondisi santri</small></span><b>›</b></a></div>
+                </aside>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body></html>
