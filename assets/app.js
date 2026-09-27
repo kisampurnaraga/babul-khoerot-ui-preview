@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   'santri':{title:'Tambah Santri',fields:[['Nama lengkap','text','Nama santri'],['NIS','text','Nomor induk'],['Kelas','select','VII A|VII B|VIII A|VIII B|IX A|IX B'],['Asrama / Kamar','text','Contoh: Putra 1 · A-01'],['Status','select','Aktif|Cuti|Nonaktif']]},
   'kamar':{title:'Tambah Kamar',fields:[['Asrama','select','Asrama Putra 1|Asrama Putra 2|Asrama Putri 1|Asrama Putri 2'],['Kode kamar','text','Contoh: A-01'],['Nama kamar','text','Nama kamar'],['Kapasitas','number','Jumlah tempat tidur']]},
   'musyrif':{title:'Tambah Musyrif',fields:[['Nama','text','Nama musyrif/musyrifah'],['Nomor staf','text','Nomor staf'],['Asrama','select','Asrama Putra 1|Asrama Putra 2|Asrama Putri 1|Asrama Putri 2'],['Mulai tugas','date','']]},
-  'tahfidz':{title:'Input Setoran Tahfidz',fields:[['Santri','text','Nama atau NIS santri'],['Surat / Juz','text','Contoh: Al-Mulk'],['Ayat','text','Contoh: 1–12'],['Status','select','Selesai|Murajaah|Perlu pendampingan'],['Catatan','textarea','Catatan pembimbing']]},
-  'ibadah':{title:'Catat Ibadah',fields:[['Kegiatan','select','Shalat Subuh|Tilawah Pagi|Shalat Dhuha|Dzikir Petang'],['Santri','text','Nama atau NIS santri'],['Status','select','Selesai|Belum|Izin'],['Catatan','textarea','Catatan bila diperlukan']]},
+  'tahfidz':{title:'Input Setoran Tahfidz',fields:[['Santri','text','Nama atau NIS santri'],['Jenis Setoran','select','Setoran Baru|Murajaah'],['Juz','number','Contoh: 30'],['Surat','text','Contoh: Al-Mulk'],['Ayat','text','Contoh: 1–12'],['Hasil','select','Lulus|Perlu Ulang|Belum Lancar'],['Catatan','textarea','Catatan pembimbing']]},
+  'ibadah':{title:'Catat Ibadah',fields:[['Kegiatan','select','__WORSHIP_MASTER__'],['Santri','text','Nama atau NIS santri'],['Status','select','Selesai|Belum|Izin'],['Catatan','textarea','Catatan bila diperlukan']]},
   'aktivitas':{title:'Tambah Aktivitas Asrama',fields:[['Nama aktivitas','text','Nama kegiatan'],['Waktu','time',''],['Lokasi','text','Lokasi kegiatan'],['Penanggung jawab','text','Nama petugas'],['Catatan','textarea','Catatan kegiatan']]},
   'kesehatan':{title:'Catat Pemeriksaan',fields:[['Santri','text','Nama atau NIS santri'],['Keluhan','text','Keluhan utama'],['Kondisi','select','Ringan|Dipantau|Istirahat|Rujukan'],['Tindak lanjut','textarea','Instruksi atau tindak lanjut']]},
   'pelanggaran':{title:'Catat Pelanggaran',fields:[['Santri','text','Nama atau NIS santri'],['Kategori','select','Ringan|Sedang|Berat'],['Kejadian','textarea','Uraian kejadian'],['Status pembinaan','select','Pembinaan|Selesai'],['Tindak lanjut','textarea','Tindak lanjut pembinaan']]},
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const cfg=forms[key]; if(!cfg)return; const modal=ensureModal(); modal.querySelector('[data-form-title]').textContent=cfg.title;
   const fields=modal.querySelector('[data-form-fields]');fields.innerHTML='';
   cfg.fields.forEach(([label,type,data])=>{const div=document.createElement('label');div.className='form-field';div.innerHTML='<span>'+label+'</span>';
-   let input;if(type==='select'){input=document.createElement('select');data.split('|').forEach(v=>{const o=document.createElement('option');o.textContent=v;input.appendChild(o)})}
+   let input;if(type==='select'){input=document.createElement('select');const source=data==='__WORSHIP_MASTER__'?(window.previewWorshipItems||[]).filter(x=>x.active).map(x=>x.name):data.split('|');source.forEach(v=>{const o=document.createElement('option');o.textContent=v;input.appendChild(o)})}
    else if(type==='textarea'){input=document.createElement('textarea');input.rows=3;input.placeholder=data||''}
    else{input=document.createElement('input');input.type=type;input.placeholder=data||''}
    if(label==='Sub keterangan'){div.classList.add('form-field--conditional');input.dataset.subKeterangan=''}
@@ -61,10 +61,10 @@ document.addEventListener('DOMContentLoaded',()=>{
  const studentsPesantren=[
   ['Ahmad Fauzan','BK26001','VII A','Putra 1 · A-01'],
   ['Nabila Azzahra','BK26003','VII B','Putri 1 · P-01'],
-  ['Rizky Maulana','BK25014','VIII A','Putra 1 · A-03'],
+  ['Rizky Maulana','BK25014','VIII A','Putra 1 · A-01'],
   ['Fikri Hidayat','BK26004','IX A','Putra 2 · B-03'],
-  ['Siti Rahmah','BK25018','VIII B','Putri 2 · P-05'],
-  ['Muhammad Fajar','BK26021','VII A','Putra 1 · A-05']
+  ['Siti Rahmah','BK25018','VIII B','Putri 1 · P-01'],
+  ['Muhammad Fajar','BK26021','VII A','Putra 1 · A-01']
  ];
  const studentsSekolah=[
   ['Ahmad Fauzan','BK26001','VII A',''],
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  const ensureBulk=()=>{
   let wrap=document.querySelector('[data-bulk-modal]'); if(wrap)return wrap;
   wrap=document.createElement('div');wrap.className='form-modal';wrap.dataset.bulkModal='';wrap.hidden=true;
-  wrap.innerHTML='<div class="form-modal__backdrop" data-bulk-close></div><section class="form-modal__panel form-modal__panel--wide" role="dialog" aria-modal="true"><header class="form-modal__header"><div><span class="eyebrow">Absensi Manual</span><h2 data-bulk-title>Input Absensi</h2><p class="modal-subtitle">Tandai status setiap santri/siswa sekaligus.</p></div><button class="icon-button" type="button" data-bulk-close aria-label="Tutup">×</button></header><div class="bulk-toolbar"><div class="search-box">⌕ <input type="search" data-bulk-search placeholder="Cari nama atau NIS"></div><select data-bulk-scope></select><button class="button button--secondary" type="button" data-set-all-hadir>Semua Hadir</button></div><form class="form-modal__body" data-bulk-form><div class="bulk-attendance" data-bulk-list></div><div class="form-note" data-bulk-note>Preview UI saja. Data belum tersimpan.</div><footer class="form-modal__footer"><button class="button button--secondary" type="button" data-bulk-close>Batal</button><button class="button button--primary" type="submit">Simpan Absensi</button></footer></form></section>';
+  wrap.innerHTML='<div class="form-modal__backdrop" data-bulk-close></div><section class="form-modal__panel form-modal__panel--wide" role="dialog" aria-modal="true"><header class="form-modal__header"><div><span class="eyebrow">Absensi Manual</span><h2 data-bulk-title>Input Absensi</h2><p class="modal-subtitle">Tandai status setiap santri/siswa sekaligus.</p></div><button class="icon-button" type="button" data-bulk-close aria-label="Tutup">×</button></header><div class="bulk-toolbar"><div class="search-box">⌕ <input type="search" data-bulk-search placeholder="Cari nama atau NIS"></div><select data-bulk-activity></select><select data-bulk-room></select><button class="button button--secondary" type="button" data-set-all-hadir>Semua Hadir</button></div><form class="form-modal__body" data-bulk-form><div class="bulk-attendance" data-bulk-list></div><div class="form-note" data-bulk-note>Preview UI saja. Data belum tersimpan.</div><footer class="form-modal__footer"><button class="button button--secondary" type="button" data-bulk-close>Batal</button><button class="button button--primary" type="submit">Simpan Absensi</button></footer></form></section>';
   document.body.appendChild(wrap);
   wrap.querySelectorAll('[data-bulk-close]').forEach(x=>x.addEventListener('click',()=>{wrap.hidden=true;document.body.classList.remove('modal-open')}));
   wrap.querySelector('[data-bulk-form]').addEventListener('submit',e=>{e.preventDefault();const n=wrap.querySelector('[data-bulk-note]');n.textContent='Preview berhasil: absensi massal siap disimpan saat backend dihubungkan.';n.classList.add('is-success')});
@@ -86,34 +86,50 @@ document.addEventListener('DOMContentLoaded',()=>{
   return wrap;
  };
  const renderBulk=(mode)=>{
-  const modal=ensureBulk(), rows=mode==='pesantren'?studentsPesantren:studentsSekolah;
+  const modal=ensureBulk(), allRows=mode==='pesantren'?studentsPesantren:studentsSekolah;
   modal.querySelector('[data-bulk-title]').textContent=mode==='pesantren'?'Buat Absensi Pesantren':'Input Absensi Sekolah';
-  const scope=modal.querySelector('[data-bulk-scope]');
-  scope.innerHTML=mode==='pesantren'?'<option>Subuh</option><option>Tahfidz</option><option>Ibadah</option><option>Aktivitas Asrama</option>':'<option>VII A</option><option>VII B</option><option>VIII A</option><option>VIII B</option><option>IX A</option>';
-  const list=modal.querySelector('[data-bulk-list]');list.innerHTML='';
-  rows.forEach((r,i)=>{
-   const row=document.createElement('div');row.className='attendance-row';
-   row.innerHTML='<div class="attendance-person"><span class="person-avatar">'+r[0].split(' ').map(x=>x[0]).join('').slice(0,2)+'</span><span><strong>'+r[0]+'</strong><small>'+r[1]+' · '+r[2]+(r[3]?' · '+r[3]:'')+'</small></span></div><div class="attendance-status" role="radiogroup"><label><input type="radio" name="att-'+i+'" value="Hadir" checked><span>Hadir</span></label><label><input type="radio" name="att-'+i+'" value="Izin"><span>Izin</span></label><label><input type="radio" name="att-'+i+'" value="Sakit"><span>Sakit</span></label><label><input type="radio" name="att-'+i+'" value="Alfa"><span>Alfa</span></label></div><div class="attendance-reason" hidden><input type="text" placeholder="Keterangan izin (wajib)"></div>';
-   row.querySelectorAll('input[type=radio]').forEach(rad=>rad.addEventListener('change',()=>{const reason=row.querySelector('.attendance-reason'),inp=reason.querySelector('input');const izin=rad.checked&&rad.value==='Izin';reason.hidden=!izin;inp.required=izin;if(!izin)inp.value=''}));
-   list.appendChild(row);
-  });
-  modal.querySelector('[data-bulk-note]').textContent='Preview UI saja. Data belum tersimpan.';modal.querySelector('[data-bulk-note]').classList.remove('is-success');
+  const activity=modal.querySelector('[data-bulk-activity]'), room=modal.querySelector('[data-bulk-room]');
+  if(mode==='pesantren'){
+   activity.hidden=false;
+   activity.innerHTML='<option value="">Pilih kegiatan</option>'+worshipItems.filter(x=>x.active).map(x=>'<option>'+x.name+'</option>').join('');
+   const rooms=[...new Set(allRows.map(r=>r[3]))];
+   room.innerHTML='<option value="">Pilih kamar</option>'+rooms.map(v=>'<option>'+v+'</option>').join('');
+  }else{
+   activity.hidden=true;
+   room.innerHTML='<option value="">Pilih kelas</option>'+[...new Set(allRows.map(r=>r[2]))].map(v=>'<option>'+v+'</option>').join('');
+  }
+  const list=modal.querySelector('[data-bulk-list]');
+  const paint=()=>{
+   const selected=room.value;
+   const rows=!selected?[]:allRows.filter(r=>mode==='pesantren'?r[3]===selected:r[2]===selected);
+   list.innerHTML='';
+   if(!selected){list.innerHTML='<div class="bulk-empty">Pilih '+(mode==='pesantren'?'kamar':'kelas')+' terlebih dahulu untuk menampilkan santri/siswa.</div>';return}
+   rows.forEach((r,i)=>{
+    const row=document.createElement('div');row.className='attendance-row';
+    row.innerHTML='<div class="attendance-person"><span class="person-avatar">'+r[0].split(' ').map(x=>x[0]).join('').slice(0,2)+'</span><span><strong>'+r[0]+'</strong><small>'+r[1]+' · '+r[2]+(r[3]?' · '+r[3]:'')+'</small></span></div><div class="attendance-status" role="radiogroup"><label><input type="radio" name="att-'+i+'" value="Hadir" checked><span>Hadir</span></label><label><input type="radio" name="att-'+i+'" value="Izin"><span>Izin</span></label><label><input type="radio" name="att-'+i+'" value="Sakit"><span>Sakit</span></label><label><input type="radio" name="att-'+i+'" value="Alfa"><span>Alfa</span></label></div><div class="attendance-reason" hidden><input type="text" placeholder="Keterangan izin (wajib)"></div>';
+    row.querySelectorAll('input[type=radio]').forEach(rad=>rad.addEventListener('change',()=>{const reason=row.querySelector('.attendance-reason'),inp=reason.querySelector('input');const izin=rad.checked&&rad.value==='Izin';reason.hidden=!izin;inp.required=izin;if(!izin)inp.value=''}));
+    list.appendChild(row);
+   });
+  };
+  room.onchange=paint;paint();
+  modal.querySelector('[data-bulk-note]').textContent=mode==='pesantren'?'Pilih kegiatan dan kamar. Daftar santri mengikuti kamar aktif.':'Pilih kelas untuk menampilkan siswa.';
+  modal.querySelector('[data-bulk-note]').classList.remove('is-success');
   modal.hidden=false;document.body.classList.add('modal-open');
  };
  document.querySelectorAll('[data-bulk-attendance]').forEach(b=>b.addEventListener('click',()=>renderBulk(b.dataset.bulkAttendance)));
 
- const worshipItems=['Shalat Subuh','Tilawah Pagi','Shalat Dhuha','Dzikir Petang'];
+ const worshipItems=[{name:'Shalat Subuh',active:true},{name:'Tilawah Pagi',active:true},{name:'Shalat Dhuha',active:true},{name:'Dzikir Petang',active:true}]; window.previewWorshipItems=worshipItems;
  const ensureWorship=()=>{
   let wrap=document.querySelector('[data-worship-modal]');if(wrap)return wrap;
   wrap=document.createElement('div');wrap.className='form-modal';wrap.dataset.worshipModal='';wrap.hidden=true;
   wrap.innerHTML='<div class="form-modal__backdrop" data-worship-close></div><section class="form-modal__panel" role="dialog" aria-modal="true"><header class="form-modal__header"><div><span class="eyebrow">Master Kegiatan</span><h2>Kelola Kegiatan Ibadah</h2><p class="modal-subtitle">Tambah, ubah, nonaktifkan atau hapus kegiatan sesuai kebutuhan pondok.</p></div><button class="icon-button" data-worship-close type="button">×</button></header><div class="form-modal__body"><div class="inline-create"><input type="text" data-worship-new placeholder="Nama kegiatan ibadah baru"><button class="button button--primary" type="button" data-worship-add>+ Tambah</button></div><div class="worship-manager" data-worship-list></div><div class="form-note">Preview UI. Pada aplikasi final, daftar ini menjadi master data sehingga form Catat Ibadah mengambil pilihan dari sini.</div><footer class="form-modal__footer"><button class="button button--secondary" type="button" data-worship-close>Selesai</button></footer></div></section>';
   document.body.appendChild(wrap);wrap.querySelectorAll('[data-worship-close]').forEach(x=>x.addEventListener('click',()=>{wrap.hidden=true;document.body.classList.remove('modal-open')}));
-  wrap.querySelector('[data-worship-add]').addEventListener('click',()=>{const inp=wrap.querySelector('[data-worship-new]');const v=inp.value.trim();if(v){worshipItems.push(v);inp.value='';renderWorship()}});
+  wrap.querySelector('[data-worship-add]').addEventListener('click',()=>{const inp=wrap.querySelector('[data-worship-new]');const v=inp.value.trim();if(v){worshipItems.push({name:v,active:true});inp.value='';renderWorship()}});
   return wrap;
  };
  const renderWorship=()=>{
   const modal=ensureWorship(),list=modal.querySelector('[data-worship-list]');list.innerHTML='';
-  worshipItems.forEach((name,i)=>{const row=document.createElement('div');row.className='worship-manager__row';row.innerHTML='<input value="'+name.replace(/"/g,'&quot;')+'" aria-label="Nama kegiatan"><label class="toggle-control"><input type="checkbox" checked><span>Aktif</span></label><button class="table-action" type="button">Hapus</button>';row.querySelector('input[type=text],input:not([type])')?.addEventListener('change',e=>worshipItems[i]=e.target.value);row.querySelector('button').addEventListener('click',()=>{worshipItems.splice(i,1);renderWorship()});list.appendChild(row)});
+  worshipItems.forEach((item,i)=>{const row=document.createElement('div');row.className='worship-manager__row';row.innerHTML='<input value="'+item.name.replace(/"/g,'&quot;')+'" aria-label="Nama kegiatan"><label class="toggle-control"><input type="checkbox" '+(item.active?'checked':'')+'><span>Aktif</span></label><button class="table-action" type="button">Hapus</button>';const nameInput=row.querySelector('input:not([type])');nameInput?.addEventListener('change',e=>{worshipItems[i].name=e.target.value});const active=row.querySelector('input[type=checkbox]');active?.addEventListener('change',e=>{worshipItems[i].active=e.target.checked});row.querySelector('button').addEventListener('click',()=>{worshipItems.splice(i,1);renderWorship()});list.appendChild(row)});
   modal.hidden=false;document.body.classList.add('modal-open');
  };
  document.querySelector('[data-manage-worship]')?.addEventListener('click',renderWorship);
