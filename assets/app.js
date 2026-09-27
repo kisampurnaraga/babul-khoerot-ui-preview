@@ -201,9 +201,16 @@ document.addEventListener('DOMContentLoaded',()=>{
    const samples={nis:'BK26001',nama_lengkap:'Ahmad Fauzan',jenis_kelamin:'L',kelas:'VII A',tahun_masuk:'2026',status:'Aktif',kode_kelas:'VII-A',nama_kelas:'VII A',tingkat:'VII',wali_kelas:'Ust. Rahmat',kapasitas:'30',tahun_akademik:'2026/2027',nomor_staf:'STF001',jenis:'Guru',mata_pelajaran:'Matematika',kode_mapel:'MAT',nama_mapel:'Matematika',kategori:'Umum',guru_pengampu:'Ust. Rahmat',hari:'Senin',guru:'Ust. Rahmat',waktu_mulai:'07:00',waktu_selesai:'08:20',ruang:'Ruang 7A',tanggal:'2026-09-27',waktu:'16:00',nama_kegiatan:'Olahraga Sore',lokasi:'Lapangan',asrama:'Asrama Putra 1',kamar:'A-01',penanggung_jawab:'Ust. Ahmad',catatan:'',semester:'Ganjil',jenis_penilaian:'UH 1',nilai:'88',semester_aktif:'Ganjil',kode:'2026-2027',nama:'2026 / 2027',tanggal_mulai:'2026-07-01',tanggal_selesai:'2027-06-30',kode_asrama:'AP1',nama_asrama:'Asrama Putra 1',kode_kamar:'A-01',nama_kamar:'Kamar A-01',mulai_tugas:'2026-07-01'};
    return samples[c]??'';
   });
-  const csv='\ufeff'+cfg.columns.join(',')+'\r\n'+sample.map(v=>String(v).includes(',')?'"'+String(v).replace(/"/g,'""')+'"':v).join(',')+'\r\n';
-  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
-  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=cfg.file;a.click();setTimeout(()=>URL.revokeObjectURL(url),500);
+  if(window.XLSX){
+   const ws=window.XLSX.utils.aoa_to_sheet([cfg.columns,sample]);
+   const wb=window.XLSX.utils.book_new();
+   window.XLSX.utils.book_append_sheet(wb,ws,'Template');
+   window.XLSX.writeFile(wb,cfg.file.replace(/\.csv$/i,'.xlsx'));
+  }else{
+   const csv='\ufeff'+cfg.columns.join(',')+'\r\n'+sample.map(v=>String(v).includes(',')?'"'+String(v).replace(/"/g,'""')+'"':v).join(',')+'\r\n';
+   const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+   const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=cfg.file;a.click();setTimeout(()=>URL.revokeObjectURL(url),500);
+  }
  };
  const ensureImport=()=>{
   let wrap=document.querySelector('[data-excel-modal]');if(wrap)return wrap;
