@@ -180,3 +180,43 @@ document.addEventListener('DOMContentLoaded',()=>{
    alert('Form laporan masalah akan tersedia pada aplikasi produksi.');
  });
 });
+
+document.addEventListener('DOMContentLoaded',()=>{
+ const excelSchemas={
+  santri:{title:'Data Santri',file:'template-data-santri.csv',columns:['nis','nama_lengkap','jenis_kelamin','kelas','asrama','kamar','tahun_masuk','status']},
+  kamar:{title:'Data Asrama / Kamar',file:'template-asrama-kamar.csv',columns:['kode_asrama','nama_asrama','kode_kamar','nama_kamar','kapasitas','status']},
+  musyrif:{title:'Data Musyrif',file:'template-musyrif.csv',columns:['nomor_staf','nama_lengkap','jenis_kelamin','asrama','mulai_tugas','status']},
+  aktivitas:{title:'Agenda Kegiatan Asrama',file:'template-agenda-pesantren.csv',columns:['tanggal','waktu','nama_kegiatan','lokasi','asrama','penanggung_jawab','catatan']},
+  siswa:{title:'Data Siswa / Santri Sekolah',file:'template-data-siswa.csv',columns:['nis','nama_lengkap','jenis_kelamin','kelas','tahun_masuk','status']},
+  kelas:{title:'Data Kelas',file:'template-kelas.csv',columns:['kode_kelas','nama_kelas','tingkat','wali_kelas','kapasitas','tahun_akademik','status']},
+  'guru-staf':{title:'Data Guru & Staf',file:'template-guru-staf.csv',columns:['nomor_staf','nama_lengkap','jenis','mata_pelajaran','wali_kelas','tanggal_mulai','status']},
+  mapel:{title:'Data Mata Pelajaran',file:'template-mata-pelajaran.csv',columns:['kode_mapel','nama_mapel','kategori','tingkat','guru_pengampu','status']},
+  jadwal:{title:'Jadwal KBM',file:'template-jadwal-kbm.csv',columns:['hari','kelas','mata_pelajaran','guru','waktu_mulai','waktu_selesai','ruang']},
+  nilai:{title:'Data Nilai',file:'template-nilai.csv',columns:['nis','kelas','mata_pelajaran','jenis_penilaian','nilai','semester','tahun_akademik','status']},
+  'tahun-akademik':{title:'Tahun Akademik',file:'template-tahun-akademik.csv',columns:['kode','nama','tanggal_mulai','tanggal_selesai','semester_aktif','status']}
+ };
+ const downloadTemplate=(key)=>{
+  const cfg=excelSchemas[key];if(!cfg)return;
+  const sample=cfg.columns.map(c=>{
+   const samples={nis:'BK26001',nama_lengkap:'Ahmad Fauzan',jenis_kelamin:'L',kelas:'VII A',tahun_masuk:'2026',status:'Aktif',kode_kelas:'VII-A',nama_kelas:'VII A',tingkat:'VII',wali_kelas:'Ust. Rahmat',kapasitas:'30',tahun_akademik:'2026/2027',nomor_staf:'STF001',jenis:'Guru',mata_pelajaran:'Matematika',kode_mapel:'MAT',nama_mapel:'Matematika',kategori:'Umum',guru_pengampu:'Ust. Rahmat',hari:'Senin',guru:'Ust. Rahmat',waktu_mulai:'07:00',waktu_selesai:'08:20',ruang:'Ruang 7A',tanggal:'2026-09-27',waktu:'16:00',nama_kegiatan:'Olahraga Sore',lokasi:'Lapangan',asrama:'Asrama Putra 1',kamar:'A-01',penanggung_jawab:'Ust. Ahmad',catatan:'',semester:'Ganjil',jenis_penilaian:'UH 1',nilai:'88',semester_aktif:'Ganjil',kode:'2026-2027',nama:'2026 / 2027',tanggal_mulai:'2026-07-01',tanggal_selesai:'2027-06-30',kode_asrama:'AP1',nama_asrama:'Asrama Putra 1',kode_kamar:'A-01',nama_kamar:'Kamar A-01',mulai_tugas:'2026-07-01'};
+   return samples[c]??'';
+  });
+  const csv='\ufeff'+cfg.columns.join(',')+'\r\n'+sample.map(v=>String(v).includes(',')?'"'+String(v).replace(/"/g,'""')+'"':v).join(',')+'\r\n';
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=cfg.file;a.click();setTimeout(()=>URL.revokeObjectURL(url),500);
+ };
+ const ensureImport=()=>{
+  let wrap=document.querySelector('[data-excel-modal]');if(wrap)return wrap;
+  wrap=document.createElement('div');wrap.className='form-modal';wrap.dataset.excelModal='';wrap.hidden=true;
+  wrap.innerHTML='<div class="form-modal__backdrop" data-excel-close></div><section class="form-modal__panel" role="dialog" aria-modal="true"><header class="form-modal__header"><div><span class="eyebrow">Import Data</span><h2 data-excel-title>Upload Excel</h2><p class="modal-subtitle">Gunakan template agar urutan kolom tetap konsisten.</p></div><button class="icon-button" type="button" data-excel-close aria-label="Tutup">×</button></header><form class="form-modal__body" data-excel-form><label class="excel-dropzone"><input type="file" accept=".xlsx,.xls,.csv" data-excel-file><span class="excel-dropzone__icon">⇧</span><strong>Pilih file Excel</strong><small>.xlsx, .xls atau .csv</small></label><div class="excel-schema"><strong>Kolom template</strong><div data-excel-columns></div></div><div class="form-note" data-excel-note>File akan divalidasi sebelum data disimpan.</div><footer class="form-modal__footer"><button class="button button--secondary" type="button" data-excel-template>Unduh Template</button><button class="button button--secondary" type="button" data-excel-close>Batal</button><button class="button button--primary" type="submit">Validasi & Import</button></footer></form></section>';
+  document.body.appendChild(wrap);
+  wrap.querySelectorAll('[data-excel-close]').forEach(x=>x.addEventListener('click',()=>{wrap.hidden=true;document.body.classList.remove('modal-open')}));
+  wrap.querySelector('[data-excel-form]').addEventListener('submit',e=>{e.preventDefault();const file=wrap.querySelector('[data-excel-file]').files[0],note=wrap.querySelector('[data-excel-note]');if(!file){note.textContent='Pilih file terlebih dahulu.';return}note.textContent='Preview: '+file.name+' siap divalidasi. Penyimpanan real akan dilakukan oleh backend Laravel.';note.classList.add('is-success')});
+  return wrap;
+ };
+ let currentKey=null;
+ document.querySelectorAll('[data-template]').forEach(b=>b.addEventListener('click',()=>downloadTemplate(b.dataset.template)));
+ document.querySelectorAll('[data-excel-import]').forEach(b=>b.addEventListener('click',()=>{
+  currentKey=b.dataset.excelImport;const cfg=excelSchemas[currentKey];if(!cfg)return;const m=ensureImport();m.querySelector('[data-excel-title]').textContent='Upload Excel · '+cfg.title;m.querySelector('[data-excel-columns]').innerHTML=cfg.columns.map(x=>'<span>'+x+'</span>').join('');m.querySelector('[data-excel-file]').value='';m.querySelector('[data-excel-note]').textContent='File akan divalidasi sebelum data disimpan.';m.querySelector('[data-excel-note]').classList.remove('is-success');m.querySelector('[data-excel-template]').onclick=()=>downloadTemplate(currentKey);m.hidden=false;document.body.classList.add('modal-open');
+ }));
+});
