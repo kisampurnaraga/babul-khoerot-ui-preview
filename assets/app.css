@@ -38,3 +38,7 @@
 
 /* Static UI preview only */
 .preview-label{display:inline-flex;align-items:center;border-radius:99px;background:#fff2dc;color:#8b5207;border:1px solid #f2d19b;padding:5px 10px;font-size:10px;font-weight:700;letter-spacing:.04em;margin-bottom:12px}.preview-label--dashboard{position:fixed;z-index:40;right:12px;bottom:12px;box-shadow:0 4px 12px #0002;margin:0}.preview-disabled{font-size:10px;color:var(--muted)}[aria-disabled="true"]{cursor:default}.quick-actions a[aria-disabled="true"]{opacity:.75}button:disabled{cursor:default;opacity:.6}.preview-panel{display:none}.preview-panel.is-active{display:block}@media(max-width:760px){.login-card .preview-label{margin-bottom:6px}}
+
+/* Preview hardening: close control belongs to the mobile/tablet drawer only. */
+@media(min-width:1021px){.sidebar__close{display:none!important}}
+@media(max-width:1020px){.sidebar__close{display:grid!important}}
