@@ -1,4 +1,11 @@
 /* Static routing only; never calls Laravel endpoints or persists data. */
+document.addEventListener('submit',event=>{
+  if(event.target.matches('.auth-form')){
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    location.assign(event.target.getAttribute('action'));
+  }
+},true);
 document.addEventListener('change',event=>{
   const child=event.target.closest('[data-child-selector]');
   if(child){
