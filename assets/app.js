@@ -157,3 +157,26 @@ document.addEventListener('DOMContentLoaded',()=>{
   m.hidden=false;document.body.classList.add('modal-open');
  }));
 });
+
+document.addEventListener('DOMContentLoaded',()=>{
+ const search=document.querySelector('[data-help-search]');
+ const grid=document.querySelector('[data-help-grid]');
+ search?.addEventListener('input',()=>{
+   const q=search.value.trim().toLowerCase();
+   const items=[...document.querySelectorAll('[data-help-item]')];
+   let shown=0;
+   items.forEach(item=>{const ok=!q||item.textContent.toLowerCase().includes(q);item.hidden=!ok;if(ok)shown++});
+   let empty=document.querySelector('[data-help-empty]');
+   if(!shown){if(!empty){empty=document.createElement('div');empty.className='help-empty';empty.dataset.helpEmpty='';empty.textContent='Panduan tidak ditemukan.';grid?.appendChild(empty)}}else empty?.remove();
+ });
+ document.querySelectorAll('[data-help-topic]').forEach(btn=>btn.addEventListener('click',()=>{
+   const topic=btn.dataset.helpTopic;
+   alert('Panduan '+topic+' akan dilengkapi pada tahap dokumentasi final. Preview ini menunjukkan struktur Pusat Bantuan.');
+ }));
+ document.querySelector('[data-help-contact]')?.addEventListener('click',()=>{
+   alert('Pada aplikasi produksi tombol ini akan membuka kontak administrator sistem yang dikonfigurasi oleh Admin.');
+ });
+ document.querySelector('[data-help-report]')?.addEventListener('click',()=>{
+   alert('Form laporan masalah akan tersedia pada aplikasi produksi.');
+ });
+});
