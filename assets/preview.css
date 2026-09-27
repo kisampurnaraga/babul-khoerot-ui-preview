@@ -1,0 +1,10 @@
+/* Static mirror controls only. App visuals come from approved Laravel CSS. */
+.preview-controls{display:flex;align-items:center;gap:12px;margin-left:auto;margin-right:16px;min-width:0}
+.preview-mode{display:inline-flex;align-items:center;border:1px solid #b9e4d4;background:#e9f7f1;color:#075b45;border-radius:999px;padding:7px 11px;font-size:11px;font-weight:700;white-space:nowrap}
+.preview-controls label{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;white-space:nowrap;color:#55736a}
+.preview-controls select{max-width:165px;min-height:36px;border:1px solid #cbded6;border-radius:9px;background:#fff;color:#16332b;font:600 11px 'DM Sans',sans-serif;padding:6px 8px}
+.preview-login-note{background:#e9f7f1;border:1px solid #c4e5d8;border-radius:10px;color:#075b45;font-size:12px;line-height:1.5;padding:10px 12px;margin:14px 0}
+.topbar__actions>a{width:37px;height:37px;min-height:37px;padding:0;flex:none;font-size:0;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364716c' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 17l5-5-5-5M15 12H3M21 19V5a2 2 0 0 0-2-2h-5'/%3E%3C/svg%3E") center/18px no-repeat}
+a[aria-disabled="true"]{opacity:.55;pointer-events:none}
+@media(max-width:900px){.preview-controls{gap:5px;margin-right:8px}.preview-controls label{font-size:0}.preview-controls select{max-width:116px;font-size:10px}.preview-mode{font-size:10px;padding:5px 7px}}
+@media(max-width:480px){.topbar{height:auto;min-height:106px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:10px 16px 12px;align-items:center}.topbar__start{grid-column:1;grid-row:1}.topbar__actions{grid-column:2;grid-row:1}.preview-controls{grid-column:1/-1;grid-row:2;width:100%;margin:0;justify-content:space-between}.preview-controls label{font-size:11px}.preview-controls select{max-width:145px}.preview-mode{font-size:10px}}
