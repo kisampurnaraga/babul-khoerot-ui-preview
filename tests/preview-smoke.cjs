@@ -18,6 +18,10 @@ fs.mkdirSync(out, { recursive: true });
     await page.locator('[data-submit-button]').click();
     await page.waitForURL(base + '/pesantren.html');
     await page.locator('main h1').first().waitFor();
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(base + '/index.html');
+    await page.screenshot({ path: path.join(out, 'login-mobile.png'), fullPage: true });
+    await page.setViewportSize({ width: 1440, height: 900 });
 
     const roles = ['admin', 'mudir', 'guru-musyrif', 'santri', 'orang-tua'];
     for (const role of roles) {
@@ -60,6 +64,25 @@ fs.mkdirSync(out, { recursive: true });
     await page.locator('[data-excel-import]').first().click();
     if (await page.getByRole('button', { name: 'Konfirmasi simulasi' }).isVisible()) throw new Error('Import confirmation shown before validation');
     await page.screenshot({ path: path.join(out, 'excel-modal.png'), fullPage: true });
+    await page.waitForFunction(() => !!window.XLSX, null, { timeout: 15000 });
+    const upload = async (headers, rows) => {
+      const bytes = await page.evaluate(({ headers, rows }) => {
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet([headers, ...rows]), 'Template');
+        return Array.from(XLSX.write(wb, { bookType: 'xlsx', type: 'array' }));
+      }, { headers, rows });
+      await page.locator('.form-modal input[type=file]').setInputFiles({ name: 'data-contoh.xlsx', mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', buffer: Buffer.from(bytes) });
+      await page.getByRole('button', { name: 'Validasi & pratinjau' }).click();
+    };
+    await upload(['kolom_salah'], [['contoh']]);
+    await page.locator('.form-modal .form-note').getByText('Header tidak valid', { exact: false }).waitFor();
+    const headers = ['nis', 'nama_lengkap', 'jenis_kelamin', 'kelas', 'asrama', 'kamar', 'tahun_masuk', 'status'];
+    await upload(headers, [['BK001', '', 'L', 'VII A', '', '', '2026', 'Aktif']]);
+    await page.locator('.form-modal .form-note').getByText('Baris tidak valid', { exact: false }).waitFor();
+    await upload(headers, [['BK001', 'Santri Contoh', 'L', 'VII A', '', '', '2026', 'Aktif']]);
+    await page.locator('.form-modal .form-note').getByText('Siap diimport setelah backend terhubung', { exact: false }).waitFor();
+    await page.getByRole('button', { name: 'Konfirmasi simulasi' }).click();
+    await page.locator('.form-modal .form-note').getByText('Tidak ada data yang disimpan', { exact: false }).waitFor();
     await page.keyboard.press('Escape');
     await page.goto(base + '/screens/admin-pesantren-absensi.html');
     await page.locator('[data-bulk-attendance]').first().click();
@@ -77,6 +100,6 @@ fs.mkdirSync(out, { recursive: true });
     await page.setViewportSize({ width: 390, height: 844 });
     await page.screenshot({ path: path.join(out, 'help-mobile.png'), fullPage: true });
     if (errors.length) throw new Error('Browser errors: ' + errors.join('; '));
-    console.log('Static preview browser smoke PASS: 10 role/room dashboards, 5 viewports, selector, room switch, Wali, Excel, attendance, Tahfidz, Help');
+    console.log('Static preview browser smoke PASS: 10 role/room dashboards, 5 viewports, selector, room switch, Wali, Excel states, attendance, Tahfidz, Help');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });
