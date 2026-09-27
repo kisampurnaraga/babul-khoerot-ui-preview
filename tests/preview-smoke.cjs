@@ -37,7 +37,7 @@ fs.mkdirSync(out, { recursive: true });
       if (width < 900) {
         await page.locator('[data-menu-open]').click();
         if (!await page.locator('body').evaluate(el => el.classList.contains('menu-open'))) throw new Error(`Drawer failed at ${width}`);
-        await page.locator('[data-menu-close]').click();
+        await page.locator('.sidebar__close').click();
       }
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth);
       if (overflow > width + 1) throw new Error(`Overflow at ${width}: ${overflow}`);
