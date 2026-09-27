@@ -118,3 +118,26 @@ document.addEventListener('DOMContentLoaded',()=>{
  };
  document.querySelector('[data-manage-worship]')?.addEventListener('click',renderWorship);
 });
+
+document.addEventListener('DOMContentLoaded',()=>{
+ const tahfidzProfiles={
+  rizky:{name:'Rizky Maulana',meta:'VIII A · BK25014',progress:'86%',target:'Juz 30 selesai bulan ini',current:'Al-Mulk 1–12',history:[['27 Sep 2026','Setoran Baru','Al-Mulk 1–12','Lulus'],['24 Sep 2026','Murajaah','Al-Mulk 1–8','Lulus'],['20 Sep 2026','Setoran Baru','Al-Mulk 1–6','Lulus']]},
+  nabila:{name:'Nabila Azzahra',meta:'VII B · BK26003',progress:'68%',target:"Al-Waqi'ah selesai pekan ini",current:"Al-Waqi'ah 1–18",history:[['27 Sep 2026','Murajaah',"Al-Waqi'ah 1–18",'Perlu ulang'],['23 Sep 2026','Setoran Baru',"Al-Waqi'ah 1–12",'Lulus'],['19 Sep 2026','Murajaah','An-Naba 1–20','Lulus']]},
+  ahmad:{name:'Ahmad Fauzan',meta:'VII A · BK26001',progress:'77%',target:'An-Naba selesai pekan ini',current:'An-Naba 1–20',history:[['26 Sep 2026','Setoran Baru','An-Naba 1–20','Lulus'],['22 Sep 2026','Murajaah','An-Naba 1–15','Lulus'],['18 Sep 2026','Setoran Baru','An-Naba 1–10','Perlu ulang']]}
+ };
+ const ensureTahfidzDetail=()=>{
+  let wrap=document.querySelector('[data-tahfidz-modal]');if(wrap)return wrap;
+  wrap=document.createElement('div');wrap.className='form-modal';wrap.dataset.tahfidzModal='';wrap.hidden=true;
+  wrap.innerHTML='<div class="form-modal__backdrop" data-tahfidz-close></div><section class="form-modal__panel form-modal__panel--wide" role="dialog" aria-modal="true"><header class="form-modal__header"><div><span class="eyebrow">Detail Hafalan Santri</span><h2 data-tahfidz-name>Santri</h2><p class="modal-subtitle" data-tahfidz-meta></p></div><button class="icon-button" type="button" data-tahfidz-close aria-label="Tutup">×</button></header><div class="form-modal__body"><div class="tahfidz-detail-summary"><article><span>Progres</span><strong data-tahfidz-progress></strong><small>Juz 30</small></article><article><span>Hafalan terakhir</span><strong data-tahfidz-current></strong><small>Setoran terbaru</small></article><article><span>Target</span><strong data-tahfidz-target></strong><small>Target pembimbing</small></article></div><div class="tahfidz-tabs"><button class="is-active" type="button">Riwayat Hafalan</button><button type="button">Target</button><button type="button">Murajaah</button></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Tanggal</th><th>Jenis</th><th>Materi</th><th>Hasil</th></tr></thead><tbody data-tahfidz-history></tbody></table></div><div class="form-note">Santri hanya melihat progres. Setoran resmi diverifikasi dan disimpan oleh pembimbing/ustadz tahfidz.</div><footer class="form-modal__footer"><button class="button button--secondary" type="button" data-tahfidz-close>Tutup</button><button class="button button--primary" type="button" data-tahfidz-input>+ Input Setoran</button></footer></div></section>';
+  document.body.appendChild(wrap);
+  wrap.querySelectorAll('[data-tahfidz-close]').forEach(x=>x.addEventListener('click',()=>{wrap.hidden=true;document.body.classList.remove('modal-open')}));
+  wrap.querySelector('[data-tahfidz-input]').addEventListener('click',()=>{wrap.hidden=true;document.body.classList.remove('modal-open');document.querySelector('[data-form="tahfidz"]')?.click()});
+  return wrap;
+ };
+ document.querySelectorAll('[data-tahfidz-detail]').forEach(btn=>btn.addEventListener('click',()=>{
+  const d=tahfidzProfiles[btn.dataset.tahfidzDetail];if(!d)return;const m=ensureTahfidzDetail();
+  m.querySelector('[data-tahfidz-name]').textContent=d.name;m.querySelector('[data-tahfidz-meta]').textContent=d.meta;m.querySelector('[data-tahfidz-progress]').textContent=d.progress;m.querySelector('[data-tahfidz-current]').textContent=d.current;m.querySelector('[data-tahfidz-target]').textContent=d.target;
+  const body=m.querySelector('[data-tahfidz-history]');body.innerHTML='';d.history.forEach(r=>{const tr=document.createElement('tr');const tone=r[3]==='Lulus'?'success':'warning';tr.innerHTML='<td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td><span class="badge badge--'+tone+'">'+r[3]+'</span></td>';body.appendChild(tr)});
+  m.hidden=false;document.body.classList.add('modal-open');
+ }));
+});
