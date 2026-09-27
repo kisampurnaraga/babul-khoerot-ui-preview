@@ -79,7 +79,7 @@ fs.mkdirSync(out, { recursive: true });
     const headers = ['nis', 'nama_lengkap', 'jenis_kelamin', 'kelas', 'asrama', 'kamar', 'tahun_masuk', 'status'];
     await upload(headers, [['BK001', '', 'L', 'VII A', '', '', '2026', 'Aktif']]);
     await page.locator('.form-modal .form-note').getByText('Baris tidak valid', { exact: false }).waitFor();
-    await upload(headers, [['BK001', 'Santri Contoh', 'L', 'VII A', '', '', '2026', 'Aktif']]);
+    await upload(headers, [['BK001', 'Santri Contoh', 'L', 'VII A', 'Asrama Putra 1', '', '2026', 'Aktif']]);
     await page.locator('.form-modal .form-note').getByText('Siap diimport setelah backend terhubung', { exact: false }).waitFor();
     await page.getByRole('button', { name: 'Konfirmasi simulasi' }).click();
     await page.locator('.form-modal .form-note').getByText('Tidak ada data yang disimpan', { exact: false }).waitFor();
