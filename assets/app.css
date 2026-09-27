@@ -49,3 +49,14 @@
 .academic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.academic-card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:19px;box-shadow:0 2px 8px rgba(33,59,50,.025)}.academic-card.is-current{border-color:#b9e3d4;box-shadow:0 8px 24px rgba(7,91,69,.06)}.academic-card>div:first-child{display:flex;align-items:center;justify-content:space-between}.academic-card__label{font-size:9px;font-weight:700;color:var(--emerald-700);text-transform:uppercase;letter-spacing:.08em}.academic-card h2{font:700 18px 'Plus Jakarta Sans';margin:16px 0 5px}.academic-card p{font-size:10px;color:var(--muted);margin:0}.academic-card dl{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:17px 0 0}.academic-card dl div{background:#f8faf9;padding:10px;border-radius:9px}.academic-card dt{font-size:8px;color:#8a9691}.academic-card dd{margin:4px 0 0;font-size:9px;font-weight:700}
 @media(max-width:900px){.school-card-grid,.academic-grid{grid-template-columns:1fr}.schedule-board>article{grid-template-columns:95px 1fr auto}}
 @media(max-width:760px){.schedule-board>article{grid-template-columns:1fr;gap:6px}.schedule-board>article .badge{justify-self:start}.academic-card dl{grid-template-columns:1fr}}
+
+/* Room switcher polish */
+.room-switcher__menu{padding:7px}
+.room-switcher__menu a{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:9px;padding:9px 10px;border-radius:9px}
+.room-switcher__menu a.is-current{background:#f0faf6;color:var(--emerald-900)}
+.room-option__mark{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:#edf5f2;color:var(--emerald-900);font-size:11px;font-weight:700}
+.room-switcher__menu a.is-current .room-option__mark{background:#fff;border:1px solid #cfe8de}
+.room-switcher__menu strong,.room-switcher__menu small{display:block}
+.room-switcher__menu strong{font-size:10px}.room-switcher__menu small{font-size:8px;color:#7a8983;margin-top:2px}
+.room-option__check{font-size:11px;color:var(--emerald-700);font-weight:700}
+.nav-link>.icon{width:16px;height:16px;flex:none;stroke-width:1.7}
