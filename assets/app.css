@@ -72,3 +72,9 @@
 /* Tahfidz workflow */
 .tahfidz-students{margin-bottom:16px}.table-progress{min-width:150px}.table-progress>span{display:flex;justify-content:space-between;gap:8px;color:#65736e;font-size:9px;margin-bottom:6px}.table-progress b{color:var(--ink)}.tahfidz-lower{margin-top:0}.tahfidz-detail-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}.tahfidz-detail-summary article{padding:14px;border:1px solid var(--line);border-radius:11px;background:#f9fbfa}.tahfidz-detail-summary span,.tahfidz-detail-summary small{display:block}.tahfidz-detail-summary span{font-size:9px;color:var(--muted);font-weight:700}.tahfidz-detail-summary strong{display:block;font:700 15px 'Plus Jakarta Sans';margin:7px 0 4px}.tahfidz-detail-summary small{font-size:8px;color:#8a9691}.tahfidz-tabs{display:flex;gap:6px;margin-bottom:12px;border-bottom:1px solid var(--line)}.tahfidz-tabs button{border:0;background:transparent;padding:10px 12px;color:#6b7873;font-size:10px;font-weight:700;cursor:pointer;border-bottom:2px solid transparent}.tahfidz-tabs button.is-active{color:var(--emerald-700);border-color:var(--emerald-700)}
 @media(max-width:760px){.tahfidz-detail-summary{grid-template-columns:1fr}.tahfidz-tabs{overflow:auto}.tahfidz-tabs button{white-space:nowrap}}
+
+/* Attendance room-first refinement */
+.bulk-toolbar{grid-template-columns:minmax(220px,1fr) 180px 190px auto}
+.bulk-empty{padding:26px;border:1px dashed #cfdad5;border-radius:12px;background:#fafcfa;color:#71807a;font-size:11px;text-align:center}
+@media(max-width:900px){.bulk-toolbar{grid-template-columns:1fr 1fr}.bulk-toolbar .search-box{grid-column:1/-1}.bulk-toolbar .button{width:100%}}
+@media(max-width:640px){.bulk-toolbar{grid-template-columns:1fr}.bulk-toolbar .search-box{grid-column:auto}}
