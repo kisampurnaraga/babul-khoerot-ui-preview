@@ -69,7 +69,7 @@ fs.mkdirSync(out, { recursive: true });
       const bytes = await page.evaluate(({ headers, rows }) => {
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet([headers, ...rows]), 'Template');
-        return Array.from(XLSX.write(wb, { bookType: 'xlsx', type: 'array' }));
+        return Array.from(new Uint8Array(XLSX.write(wb, { bookType: 'xlsx', type: 'array' })));
       }, { headers, rows });
       await page.locator('.form-modal input[type=file]').setInputFiles({ name: 'data-contoh.xlsx', mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', buffer: Buffer.from(bytes) });
       await page.getByRole('button', { name: 'Validasi & pratinjau' }).click();
