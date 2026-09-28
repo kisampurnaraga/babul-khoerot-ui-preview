@@ -29,6 +29,40 @@ document.addEventListener('DOMContentLoaded', () => {
     else input.type=type;
     input.required=required; input.setAttribute('aria-label',label);wrap.append(input);form.append(wrap);return {wrap,input};
   };
+  const demoStudents=[
+    {nis:'BK26017',name:'Sinta Nur Aulia',className:'VII A',dorm:'Asrama Putri 1'},
+    {nis:'BK26018',name:'Aisyah Rahma',className:'VII A',dorm:'Asrama Putri 1'},
+    {nis:'BK26019',name:'Nabila Putri',className:'VII B',dorm:'Asrama Putri 1'},
+    {nis:'BK26020',name:'Zahra Khairunnisa',className:'VII B',dorm:'Asrama Putri 2'},
+    {nis:'BK26021',name:'Rafi Ahmad',className:'VII A',dorm:'Asrama Putra 1'},
+    {nis:'BK26022',name:'Fahri Ramadhan',className:'VII A',dorm:'Asrama Putra 1'},
+    {nis:'BK26023',name:'Muhammad Rizki',className:'VIII A',dorm:'Asrama Putra 2'},
+    {nis:'BK26024',name:'Alif Maulana',className:'VIII B',dorm:'Asrama Putra 2'}
+  ];
+  const appendStudentPicker=(form,label='Santri',required=true,initial='')=>{
+    const wrap=el('div','form-field student-picker');const title=el('span','',label+(required?' *':''));wrap.append(title);
+    const hidden=el('input');hidden.type='hidden';hidden.required=required;hidden.setAttribute('aria-label',label);
+    const trigger=el('button','student-picker__trigger');trigger.type='button';trigger.setAttribute('aria-expanded','false');
+    const triggerMain=el('span','student-picker__trigger-main','Pilih dari data '+label.toLowerCase());const triggerMeta=el('small','student-picker__trigger-meta','Cari berdasarkan nama atau NIS');
+    trigger.append(triggerMain,triggerMeta);
+    const panel=el('div','student-picker__panel');panel.hidden=true;
+    const search=el('input','student-picker__search');search.type='search';search.placeholder='Cari nama atau NIS';search.setAttribute('aria-label','Cari '+label.toLowerCase());
+    const list=el('div','student-picker__list');const empty=el('div','student-picker__empty','Data tidak ditemukan.');empty.hidden=true;
+    const render=(query='')=>{const q=query.trim().toLowerCase();list.replaceChildren();let count=0;
+      demoStudents.forEach(student=>{if(q && !((student.nis+' '+student.name).toLowerCase().includes(q)))return;count++;
+        const option=el('button','student-picker__option');option.type='button';option.dataset.value=student.nis;
+        const avatar=el('span','person-avatar',(student.name.split(' ')[0][0]+student.name.split(' ').at(-1)[0]).toUpperCase());
+        const copy=el('span','student-picker__option-copy');copy.append(el('strong','',student.name),el('small','',student.nis+' · '+student.className+' · '+student.dorm));
+        option.append(avatar,copy);option.addEventListener('click',()=>{hidden.value=student.nis;hidden.dataset.studentName=student.name;triggerMain.textContent=student.name;triggerMeta.textContent=student.nis+' · '+student.className+' · '+student.dorm;panel.hidden=true;trigger.setAttribute('aria-expanded','false');});
+        list.append(option);
+      });empty.hidden=count!==0;
+    };
+    trigger.addEventListener('click',()=>{panel.hidden=!panel.hidden;trigger.setAttribute('aria-expanded',String(!panel.hidden));if(!panel.hidden){render(search.value);setTimeout(()=>search.focus(),0);}});
+    search.addEventListener('input',()=>render(search.value));
+    panel.append(search,list,empty);wrap.append(hidden,trigger,panel);form.append(wrap);render();
+    if(initial){const selected=demoStudents.find(x=>x.name===initial||x.nis===initial);if(selected){hidden.value=selected.nis;hidden.dataset.studentName=selected.name;triggerMain.textContent=selected.name;triggerMeta.textContent=selected.nis+' · '+selected.className+' · '+selected.dorm;}}
+    return {wrap,input:hidden};
+  };
   let lastFocus=null, activeDialog=null;
   const closeDialog = () => {
     if(!activeDialog)return;
@@ -100,23 +134,23 @@ document.addEventListener('DOMContentLoaded', () => {
     santri:{title:'Tambah Santri',fields:[['Nama lengkap','text',true],['NIS','text',true],['Kelas','text',true],['Asrama / Kamar','text',true],['Status','select',true,'Aktif|Cuti|Nonaktif']]},
     kamar:{title:'Tambah Kamar',fields:[['Asrama','text',true],['Kode kamar','text',true],['Nama kamar','text',true],['Kapasitas','number',true]]},
     musyrif:{title:'Tambah Musyrif',fields:[['Nama','text',true],['Nomor staf','text',true],['Asrama','text',true],['Mulai tugas','date',true]]},
-    tahfidz:{title:'Input Setoran Tahfidz',fields:[['Santri','text',true],['Jenis Setoran','select',true,'Setoran Baru|Murajaah'],['Juz','number',true],['Surat','text',true],['Ayat awal','number',true],['Ayat akhir','number',true],['Hasil','select',true,'Lulus|Perlu Ulang|Belum Lancar'],['Catatan pembimbing','textarea',false]]},
-    ibadah:{title:'Catat Ibadah',fields:[['Kegiatan','worship',true],['Santri','text',true],['Status','select',true,'Selesai|Belum|Izin'],['Catatan','textarea',false]]},
+    tahfidz:{title:'Input Setoran Tahfidz',fields:[['Santri','student',true],['Jenis Setoran','select',true,'Setoran Baru|Murajaah'],['Juz','number',true],['Surat','text',true],['Ayat awal','number',true],['Ayat akhir','number',true],['Hasil','select',true,'Lulus|Perlu Ulang|Belum Lancar'],['Catatan pembimbing','textarea',false]]},
+    ibadah:{title:'Catat Ibadah',fields:[['Kegiatan','worship',true],['Santri','student',true],['Status','select',true,'Selesai|Belum|Izin'],['Catatan','textarea',false]]},
     aktivitas:{title:'Tambah Aktivitas Asrama',fields:[['Nama aktivitas','text',true],['Waktu','time',true],['Lokasi','text',true],['Penanggung jawab','text',true],['Catatan','textarea',false]]},
-    kesehatan:{title:'Catat Pemeriksaan',fields:[['Santri','text',true],['Informasi yang dapat dibagikan','textarea',true],['Kondisi','select',true,'Ringan|Dipantau|Istirahat|Rujukan'],['Tindak lanjut','textarea',false],['Catatan internal petugas','textarea',false]]},
-    pelanggaran:{title:'Catat Pelanggaran',fields:[['Santri','text',true],['Kategori','select',true,'Ringan|Sedang|Berat'],['Kejadian yang dapat dibagikan','textarea',true],['Status pembinaan','select',true,'Pembinaan|Selesai'],['Tindak lanjut','textarea',false],['Catatan internal petugas','textarea',false]]},
+    kesehatan:{title:'Catat Pemeriksaan',fields:[['Santri','student',true],['Informasi yang dapat dibagikan','textarea',true],['Kondisi','select',true,'Ringan|Dipantau|Istirahat|Rujukan'],['Tindak lanjut','textarea',false],['Catatan internal petugas','textarea',false]]},
+    pelanggaran:{title:'Catat Pelanggaran',fields:[['Santri','student',true],['Kategori','select',true,'Ringan|Sedang|Berat'],['Kejadian yang dapat dibagikan','textarea',true],['Status pembinaan','select',true,'Pembinaan|Selesai'],['Tindak lanjut','textarea',false],['Catatan internal petugas','textarea',false]]},
     siswa:{title:'Tambah Siswa',fields:[['Nama lengkap','text',true],['NIS','text',true],['Kelas','text',true],['Tahun masuk','number',true],['Status','select',true,'Aktif|Nonaktif']]},
     kelas:{title:'Tambah Kelas',fields:[['Kode kelas','text',true],['Nama kelas','text',true],['Wali kelas','text',true],['Kapasitas','number',true]]},
     'guru-staf':{title:'Tambah Guru / Staf',fields:[['Nama','text',true],['Nomor staf','text',true],['Jenis','select',true,'Guru|Staf/TU'],['Mata pelajaran','text',false],['Status','select',true,'Aktif|Nonaktif']]},
     mapel:{title:'Tambah Mata Pelajaran',fields:[['Kode','text',true],['Nama mata pelajaran','text',true],['Kategori','select',true,'Umum|Keagamaan'],['Kelas','text',false]]},
     jadwal:{title:'Atur Jadwal Pelajaran',fields:[['Hari','select',true,'Senin|Selasa|Rabu|Kamis|Jumat|Sabtu'],['Kelas','text',true],['Mata pelajaran','text',true],['Guru','text',true],['Waktu mulai','time',true],['Waktu selesai','time',true],['Ruang','text',false]]},
-    nilai:{title:'Input Nilai',fields:[['Kelas','text',true],['Mata pelajaran','text',true],['Siswa','text',true],['Nilai','number',true],['Status','select',true,'DRAFT|LOCKED']]},
+    nilai:{title:'Input Nilai',fields:[['Kelas','text',true],['Mata pelajaran','text',true],['Siswa','student',true],['Nilai','number',true],['Status','select',true,'DRAFT|LOCKED']]},
     'tahun-akademik':{title:'Tambah Tahun Akademik',fields:[['Kode','text',true],['Nama','text',true],['Tanggal mulai','date',true],['Tanggal selesai','date',true],['Status','select',true,'Aktif|Arsip']]}
   };
   const openForm=(key,student='')=>{
     const config=forms[key];if(!config)return;
     const panel=openDialog(config.title);const form=el('form','form-modal__body');const grid=el('div','form-grid');const inputs={};
-    config.fields.forEach(([label,type,required,choices])=>{const field=appendField(grid,label,type==='worship'?'select':type,type==='worship'?activeWorship():(choices?.split('|')||[]),required);inputs[label]=field.input;if(student&&label==='Santri')field.input.value=student;if(type==='number'){field.input.min='0';}});
+    config.fields.forEach(([label,type,required,choices])=>{const field=type==='student'?appendStudentPicker(grid,label,required,student&&['Santri','Siswa'].includes(label)?student:''):appendField(grid,label,type==='worship'?'select':type,type==='worship'?activeWorship():(choices?.split('|')||[]),required);inputs[label]=field.input;if(type==='number'){field.input.min='0';}});
     const note=el('div','form-note','UI demonstrasi. Penyimpanan backend belum terhubung.');note.setAttribute('role','status');note.setAttribute('aria-live','polite');const footer=el('footer','form-modal__footer');
     footer.append(btn('Batal','button button--secondary',closeDialog));
     const submit=el('button','button button--primary','Tinjau input');submit.type='submit';footer.append(submit);
@@ -381,4 +415,88 @@ document.addEventListener('DOMContentLoaded',()=> {
    close();
  });
  document.querySelectorAll('[data-admin-notify]').forEach(b=>b.addEventListener('click',()=>{b.textContent='Simulasi terkirim';b.disabled=true}));
+});
+
+
+document.addEventListener('DOMContentLoaded',()=> {
+  const billModal=document.querySelector('[data-bill-modal]');
+  if(billModal){
+    const openButtons=[...document.querySelectorAll('[data-admin-new-bill]')];
+    const closeButtons=[...billModal.querySelectorAll('[data-bill-close]')];
+    const search=billModal.querySelector('[data-bill-search]');
+    const rows=[...billModal.querySelectorAll('[data-bill-student]')];
+    const checks=[...billModal.querySelectorAll('[data-bill-student-check]')];
+    const count=billModal.querySelector('[data-bill-selected-count]');
+    const empty=billModal.querySelector('[data-bill-empty]');
+    const validation=billModal.querySelector('[data-bill-validation]');
+    const success=billModal.querySelector('[data-bill-success]');
+    const submit=billModal.querySelector('[data-bill-submit]');
+    const type=billModal.querySelector('[data-bill-type]');
+    const amount=billModal.querySelector('[data-bill-amount]');
+    const updateCount=()=>{
+      const total=checks.filter(c=>c.checked).length;
+      if(count) count.textContent=total+' santri';
+      rows.forEach(row=>row.classList.toggle('is-selected',!!row.querySelector('[data-bill-student-check]')?.checked));
+    };
+    const reset=()=>{
+      if(search) search.value='';
+      rows.forEach(row=>{row.hidden=false;const c=row.querySelector('[data-bill-student-check]');if(c)c.checked=false;row.classList.remove('is-selected')});
+      if(type)type.value='';
+      if(amount)amount.value='';
+      if(validation)validation.hidden=true;
+      if(success)success.hidden=true;
+      if(empty)empty.hidden=true;
+      updateCount();
+    };
+    const open=()=>{
+      reset();
+      billModal.hidden=false;
+      document.body.classList.add('modal-open');
+      setTimeout(()=>search?.focus(),0);
+    };
+    const close=()=>{billModal.hidden=true;document.body.classList.remove('modal-open')};
+    openButtons.forEach(b=>b.addEventListener('click',open));
+    closeButtons.forEach(b=>b.addEventListener('click',close));
+    checks.forEach(c=>c.addEventListener('change',updateCount));
+    search?.addEventListener('input',()=>{
+      const q=search.value.trim().toLowerCase();
+      let visible=0;
+      rows.forEach(row=>{const match=!q||(row.dataset.search||'').includes(q);row.hidden=!match;if(match)visible++});
+      if(empty)empty.hidden=visible!==0;
+    });
+    submit?.addEventListener('click',()=>{
+      const selected=checks.filter(c=>c.checked);
+      const valid=selected.length>0 && !!type?.value && !!amount?.value.trim();
+      if(validation)validation.hidden=valid;
+      if(success)success.hidden=true;
+      if(!valid)return;
+      if(success){
+        success.textContent='Simulasi tagihan siap untuk '+selected.length+' santri. Tidak ada data yang disimpan sebelum backend terhubung.';
+        success.hidden=false;
+      }
+    });
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!billModal.hidden)close()});
+  }
+
+  const onboarding=document.querySelector('[data-onboarding]');
+  if(onboarding){
+    const role=onboarding.dataset.onboardingRole||'staff';
+    const storageKey='bk-onboarding-hidden-'+role;
+    const openButton=document.querySelector('[data-onboarding-open]');
+    const closeButtons=[...onboarding.querySelectorAll('[data-onboarding-close]')];
+    const hideCheck=onboarding.querySelector('[data-onboarding-hide]');
+    const open=()=>{onboarding.hidden=false;document.body.classList.add('modal-open')};
+    const close=()=>{
+      if(hideCheck?.checked){
+        try{localStorage.setItem(storageKey,'1')}catch(_){}
+      }
+      onboarding.hidden=true;document.body.classList.remove('modal-open');
+    };
+    openButton?.addEventListener('click',open);
+    closeButtons.forEach(b=>b.addEventListener('click',close));
+    let hidden=false;
+    try{hidden=localStorage.getItem(storageKey)==='1'}catch(_){}
+    if(!hidden)setTimeout(open,180);
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!onboarding.hidden)close()});
+  }
 });
