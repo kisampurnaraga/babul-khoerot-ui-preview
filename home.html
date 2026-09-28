@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#075b45">
+<title>Beranda Pondok · SIM Babul Khoerot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css"><link rel="stylesheet" href="assets/roles.css"><link rel="stylesheet" href="assets/preview.css">
+</head>
+<body class="app-page" data-preview-home>
+<main class="entry-shell entry-shell--portal">
+<header class="entry-header">
+  <a class="brand" href="home.html"><span class="brand__mark">BK</span><span><strong>Babul Khoerot</strong><small>Sistem Informasi Manajemen</small></span></a>
+  <div class="preview-controls"><span class="preview-mode">Mode Preview</span><label>Peran:
+    <select data-preview-role data-preview-home-role>
+      <option value="admin">Admin</option><option value="mudir">Mudir</option><option value="ketatausahaan">Ketatausahaan</option><option value="guru-musyrif">Guru / Musyrif</option><option value="santri">Santri</option><option value="orang-tua">Orang Tua / Wali</option>
+    </select>
+  </label></div>
+</header>
+
+<section class="portal-hero">
+ <div class="portal-hero__copy"><span class="eyebrow">Beranda Pondok</span><h1>Assalamu'alaikum, Pengguna Preview</h1><p data-preview-home-copy>Lihat informasi pondok, lalu pilih ruang kerja sesuai peran aktif.</p></div>
+ <div class="portal-hero__ornament" aria-hidden="true">بَابُ الْخَيْرَات</div>
+</section>
+
+<section class="portal-role panel">
+ <div><span class="eyebrow">Konteks akses</span><h2>Peran aktif: <span data-preview-role-label>Admin</span></h2><p>Sidebar dan menu operasional baru tampil setelah Anda memilih salah satu room atau workspace.</p></div>
+</section>
+
+<section class="portal-section" aria-labelledby="room-title">
+ <div class="portal-section__heading"><div><span class="eyebrow">Pilih ruang kerja</span><h2 id="room-title">Masuk ke room</h2><p>Beranda ini mengikuti flow Figma: highlight pondok lebih dulu, baru masuk ke room.</p></div></div>
+ <div class="portal-room-grid">
+   <a class="portal-room-card" href="pesantren.html" data-home-room="pesantren"><span class="portal-room-card__icon">P</span><span class="portal-room-card__copy"><small>Kehidupan pondok</small><strong>Room Pesantren</strong><p>Asrama, absensi kegiatan, Tahfidz, ibadah, aktivitas, kesehatan, dan pembinaan.</p></span><span class="portal-room-card__arrow">→</span></a>
+   <a class="portal-room-card" href="sekolah.html" data-home-room="sekolah"><span class="portal-room-card__icon">S</span><span class="portal-room-card__copy"><small>Administrasi &amp; akademik</small><strong>Room Sekolah</strong><p>Akademik, jadwal, absensi kelas, nilai, dan informasi pembelajaran.</p></span><span class="portal-room-card__arrow">→</span></a>
+   <a class="portal-room-card portal-room-card--administration" href="screens/admin-administrasi.html" data-admin-entry><span class="portal-room-card__icon">A</span><span class="portal-room-card__copy"><small>Administrasi lintas room</small><strong>Administrasi Pondok</strong><p data-preview-admin-copy>Administrasi santri, tagihan, pembayaran, rekening, notifikasi wali, dan laporan.</p></span><span class="portal-room-card__arrow">→</span></a>
+ </div>
+</section>
+
+<section class="portal-information">
+ <article class="panel portal-news"><div class="panel__header"><div><span class="eyebrow">Informasi terbaru</span><h2>Berita &amp; Artikel Pondok</h2><p>Highlight informasi untuk seluruh warga Babul Khoerot.</p></div><span class="badge badge--info">Preview</span></div>
+ <div class="portal-news__list">
+   <a href="#"><span class="portal-news__thumb portal-news__thumb--one"></span><span><small>Kegiatan Pondok · 27 Sep 2026</small><strong>Semangat awal tahun: pembukaan program pembinaan</strong><p>Rangkaian orientasi dan penguatan budaya pondok.</p></span></a>
+   <a href="#"><span class="portal-news__thumb portal-news__thumb--two"></span><span><small>Artikel · Tahfidz</small><strong>Menjaga konsistensi murajaah di tengah jadwal belajar</strong><p>Tips membangun kebiasaan mengulang hafalan secara teratur.</p></span></a>
+   <a href="#"><span class="portal-news__thumb portal-news__thumb--three"></span><span><small>Pengumuman · Sekolah</small><strong>Agenda evaluasi pembelajaran dan pertemuan wali</strong><p>Informasi agenda akademik yang akan datang.</p></span></a>
+ </div></article>
+ <aside class="portal-side">
+   <article class="panel portal-highlight"><span class="eyebrow">Agenda terdekat</span><h2>Pekan ini di Babul Khoerot</h2><div class="portal-agenda"><div><time>Senin</time><span>Apel &amp; pengarahan pekanan</span></div><div><time>Rabu</time><span>Evaluasi Tahfidz</span></div><div><time>Sabtu</time><span>Pertemuan wali santri</span></div></div></article>
+   <article class="panel portal-highlight"><span class="eyebrow">Butuh bantuan?</span><h2>Panduan penggunaan SIM</h2><p>Buka panduan sesuai role sebelum menghubungi Admin.</p><a class="button button--secondary" href="bantuan.html">Buka Pusat Bantuan</a></article>
+ </aside>
+</section>
+<footer class="entry-footer"><span>SIM Babul Khoerot</span><span>Mode Preview · tidak menyimpan data</span></footer>
+</main>
+<script src="assets/app.js" defer></script><script src="assets/preview.js" defer></script>
+</body></html>
