@@ -60,7 +60,21 @@ fs.mkdirSync(out, { recursive: true });
 
     await page.goto(base + '/screens/ketatausahaan-administrasi.html');
     await page.getByText('Dashboard Administrasi').first().waitFor();
-    await page.locator('[data-admin-add-type]').click();
+    for (const [tab,title] of [
+      ['santri','Data Administrasi Santri'],
+      ['jenis','Jenis Pembayaran'],
+      ['metode','Metode & Rekening Pembayaran'],
+      ['tagihan','Tagihan Santri'],
+      ['pembayaran','Pembayaran'],
+      ['tunggakan','Tunggakan Pembayaran'],
+      ['notifikasi','Notifikasi Wali'],
+      ['laporan','Laporan Administrasi']
+    ]) {
+      await page.locator('[data-admin-tab="'+tab+'"]').click();
+      await page.getByRole('heading',{name:title,exact:true}).waitFor();
+    }
+    await page.locator('[data-admin-tab="jenis"]').click();
+    await page.locator('[data-admin-pane="jenis"] [data-admin-add-type]').click();
     await page.locator('[data-admin-master-modal]').waitFor({ state: 'visible' });
     await page.screenshot({ path: path.join(out, 'ketatausahaan-administrasi.png'), fullPage: true });
     await page.keyboard.press('Escape');
