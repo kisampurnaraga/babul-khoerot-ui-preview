@@ -16,14 +16,19 @@ fs.mkdirSync(out, { recursive: true });
     await page.getByText('Mode Preview').first().waitFor();
     await page.screenshot({ path: path.join(out, 'login-desktop.png'), fullPage: true });
     await page.locator('[data-submit-button]').click();
-    await page.waitForURL(base + '/pesantren.html');
-    await page.locator('main h1').first().waitFor();
+    await page.waitForURL(base + '/home.html');
+    await page.getByText('Berita & Artikel Pondok').first().waitFor();
+    await page.locator('[data-preview-home-role]').selectOption('ketatausahaan');
+    await page.getByText('Peran aktif:').first().waitFor();
+    if (!await page.getByText('Administrasi Pondok', { exact: true }).first().isVisible()) throw new Error('Administration entry missing on portal');
+    await page.screenshot({ path: path.join(out, 'portal-ketatausahaan.png'), fullPage: true });
+    await page.locator('[data-preview-home-role]').selectOption('admin');
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(base + '/index.html');
     await page.screenshot({ path: path.join(out, 'login-mobile.png'), fullPage: true });
     await page.setViewportSize({ width: 1440, height: 900 });
 
-    const roles = ['admin', 'mudir', 'guru-musyrif', 'santri', 'orang-tua'];
+    const roles = ['admin', 'mudir', 'ketatausahaan', 'guru-musyrif', 'santri', 'orang-tua'];
     for (const role of roles) {
       for (const room of ['pesantren', 'sekolah']) {
         const filename = role === 'admin' ? `${room}.html` : `screens/${role}-${room}.html`;
@@ -52,6 +57,24 @@ fs.mkdirSync(out, { recursive: true });
     await page.locator('[data-room-toggle]').click();
     await page.locator('[data-room-menu] a[href*="sekolah"]').first().click();
     await page.waitForURL(base + '/screens/guru-musyrif-sekolah.html');
+
+    await page.goto(base + '/screens/ketatausahaan-administrasi.html');
+    await page.getByText('Dashboard Administrasi').first().waitFor();
+    await page.locator('[data-admin-add-type]').click();
+    await page.locator('[data-admin-master-modal]').waitFor({ state: 'visible' });
+    await page.screenshot({ path: path.join(out, 'ketatausahaan-administrasi.png'), fullPage: true });
+    await page.keyboard.press('Escape');
+
+    await page.goto(base + '/screens/mudir-pesantren-laporan.html');
+    await page.getByText('Ringkasan & Laporan Santri').first().waitFor();
+    await page.locator('[data-report-period="30"]').click();
+    await page.locator('[data-report-apply]').click();
+    await page.getByText('Sinta Nur Aulia').first().waitFor();
+    await page.screenshot({ path: path.join(out, 'mudir-laporan-santri.png'), fullPage: true });
+
+    await page.goto(base + '/screens/orang-tua-administrasi.html');
+    await page.getByText('Pembayaran Anak').first().waitFor();
+    await page.getByText('7123 4567 890').first().waitFor();
 
     await page.goto(base + '/screens/orang-tua-pesantren.html');
     await page.getByText('Hubungan wali belum diverifikasi').first().waitFor();
@@ -100,6 +123,6 @@ fs.mkdirSync(out, { recursive: true });
     await page.setViewportSize({ width: 390, height: 844 });
     await page.screenshot({ path: path.join(out, 'help-mobile.png'), fullPage: true });
     if (errors.length) throw new Error('Browser errors: ' + errors.join('; '));
-    console.log('Static preview browser smoke PASS: 10 role/room dashboards, 5 viewports, selector, room switch, Wali, Excel states, attendance, Tahfidz, Help');
+    console.log('Static preview browser smoke PASS: portal, 12 role/room dashboards, Ketatausahaan administration, Mudir individual reports, Wali payments, 5 viewports, selector, room switch, Excel states, attendance, Tahfidz, Help');
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });
