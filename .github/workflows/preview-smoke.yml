@@ -15,6 +15,9 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Check static pages and browser interactions
         run: |
+          python3 tests/audit-static.py
+          node --check assets/app.js
+          node --check assets/preview.js
           python3 -m http.server 8765 > /tmp/bk-preview-server.log 2>&1 &
           node tests/preview-smoke.cjs
       - uses: actions/upload-artifact@v4

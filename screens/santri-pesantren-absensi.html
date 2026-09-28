@@ -12,7 +12,7 @@
 <div class="app-shell" data-app-shell>
     <aside class="sidebar" id="primary-navigation" data-sidebar>
         <div class="sidebar__top">
-            <a class="brand brand--light" href="../index.html"><span class="brand__mark">BK</span><span><strong>Babul Khoerot</strong><small>SIM Pesantren</small></span></a>
+            <a class="brand brand--light" href="../screens/santri-home.html"><span class="brand__mark">BK</span><span><strong>Babul Khoerot</strong><small>SIM Pesantren</small></span></a>
             <button type="button" class="icon-button sidebar__close" data-menu-close aria-label="Tutup navigasi"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"></path></svg>
 </button>
         </div>
@@ -65,7 +65,7 @@
  <span>Pembinaan</span>
                 </a>
                     </nav>
-        <a class="sidebar__support sidebar__support--link" href="../bantuan.html"><span class="sidebar__support-icon"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2.5-2.5 4.5M12 17h.01"></path></svg>
+                <a class="sidebar__support sidebar__support--link" href="../screens/santri-bantuan.html"><span class="sidebar__support-icon"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2.5-2.5 4.5M12 17h.01"></path></svg>
 </span><div><strong>Butuh bantuan?</strong><small>Buka pusat bantuan</small></div></a>
     </aside>
     <div class="sidebar-backdrop" data-menu-close></div>
@@ -73,12 +73,12 @@
     <div class="app-content">
         <header class="topbar">
             <div class="topbar__start"><button class="icon-button menu-button" type="button" data-menu-open aria-controls="primary-navigation" aria-expanded="false"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
-<span class="sr-only">Buka navigasi</span></button><div><p class="topbar__room">Room Pesantren</p><p class="topbar__date">Senin, 28 September 2026</p></div></div>
-            <div class="preview-controls"><span class="preview-mode">Mode Preview</span><label for="preview-role">Peran:<select id="preview-role" data-preview-role aria-label="Preview role" data-preview-room="pesantren" data-preview-prefix="../"><option value="admin">Admin</option><option value="mudir">Mudir</option><option value="guru-musyrif">Guru / Musyrif</option><option value="santri" selected>Santri</option><option value="orang-tua">Orang Tua / Wali</option></select></label></div><div class="topbar__actions">
+<span class="sr-only">Buka navigasi</span></button><div><p class="topbar__room">Room Pesantren</p><p class="topbar__date">Selasa, 29 September 2026</p></div></div>
+            <div class="preview-controls"><span class="preview-mode">Mode Preview · data fiktif</span><label>Peran preview:<select data-preview-role aria-label="Preview role" data-preview-prefix="../" data-preview-room="pesantren"><option value="admin">Admin</option><option value="mudir">Mudir</option><option value="ketatausahaan">Ketatausahaan / Tata Usaha</option><option value="guru-musyrif">Guru / Ustadz(ah) / Musyrif(ah)</option><option value="santri" selected>Santri / Siswa</option><option value="orang-tua">Orang Tua / Wali</option></select></label></div><div class="topbar__actions">
                 <button type="button" class="icon-button notification-button" aria-label="Notifikasi"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"></path></svg>
 <span></span></button>
-                <div class="profile"><span class="profile__avatar">SA</span><span class="profile__copy"><strong>Santri Contoh</strong><small>Santri</small></span></div>
-                <a class="button button--secondary" href="../index.html">Kembali ke Mode Preview</a></div>
+                                <div class="profile"><span class="profile__avatar">SA</span><span class="profile__copy"><strong>Santri Contoh</strong><small>Santri</small></span></div>
+                <a href="../index.html" class="icon-button" aria-label="Kembali ke login preview">↪</a></div>
         </header>
 
         <main class="dashboard" id="konten-utama">
@@ -98,7 +98,7 @@
     <section class="role-two-column"><article class="role-panel panel"><div class="role-panel__heading"><span class="role-panel__icon"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg>
 </span><span class="badge badge--info">Konteks pribadi</span></div><h2>Absensi Pesantren</h2><p>Kehadiran yang boleh dilihat oleh akun ini.</p>
             <div class="role-status-steps"><span class="badge badge--success">Hadir</span><span class="badge badge--warning">Izin</span><span class="badge badge--info">Sakit</span><span class="badge">Alfa</span></div>
-                    </article><aside class="role-panel panel"><h2>Bagaimana data ditampilkan?</h2><p>Hanya data terkait akun dan yang telah dipublikasikan.</p><a class="button button--secondary" href="../bantuan.html">Lihat panduan</a></aside></section>
+                    </article><aside class="role-panel panel"><h2>Bagaimana data ditampilkan?</h2><p>Hanya data terkait akun dan yang telah dipublikasikan.</p><a class="button button--secondary" href="../screens/santri-bantuan.html">Lihat panduan</a></aside></section>
 
 <section class="role-state-guide" aria-label="Pratinjau status antarmuka"><label for="role-state-select">Tinjau status UI</label><select id="role-state-select" data-state-select><option value="default">Data contoh</option><option value="loading">Memuat</option><option value="empty">Belum ada data</option><option value="error">Layanan belum tersedia</option><option value="validation">Periksa input</option><option value="success">Aksi UI selesai</option><option value="denied">Akses dibatasi</option><option value="offline">Offline</option></select><div class="role-state-message" data-state-message role="status" aria-live="polite" hidden></div></section>
                                 </main>

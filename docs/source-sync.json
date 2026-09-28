@@ -1,0 +1,704 @@
+{
+  "source": "47088abe608774c0c45a40a58b343590267efb5a",
+  "previousSource": "7205039b6cea2afaa94a8e3e1303d78ef7dbb579",
+  "previewBase": "05315e11be14d5be5981dd9d49979878a7ff68c6",
+  "commits": [
+    {
+      "sha": "bc5b90e5a352127fdc8dd8dc2b3485cb59f12a12",
+      "message": "feat: align post-login portal with Figma room-first flow"
+    },
+    {
+      "sha": "14a4cf1a347cbe4ab262d1cf8da4bfd03421dd33",
+      "message": "feat: add Mudir individual reporting flow"
+    },
+    {
+      "sha": "7b54b428542d625f6c176419af526d416009d93e",
+      "message": "style: add portal and Mudir report UI"
+    },
+    {
+      "sha": "f5a7252a5818de202277b117eb913586ed302372",
+      "message": "feat: add Mudir report period simulation"
+    },
+    {
+      "sha": "2fbcf56950041b2054a2ae254b40164612d9e753",
+      "message": "feat: seed Ketatausahaan role and administration permissions"
+    },
+    {
+      "sha": "f14933f38ae83b158c2b8b0831396899aa13048e",
+      "message": "chore: include Ketatausahaan in permission reconciliation"
+    },
+    {
+      "sha": "ea1b1177a3817bac6e83fc6156117da2aada0829",
+      "message": "chore: include Ketatausahaan in permission reconciliation"
+    },
+    {
+      "sha": "af9ab3942b2440e4bc6f6a6fc8835879118d5216",
+      "message": "feat: add administration workspace route"
+    },
+    {
+      "sha": "30b59a13714d6c80f70b5e91a55a30d577e825bd",
+      "message": "feat: add Ketatausahaan administration and payment workspace"
+    },
+    {
+      "sha": "37cf790fdeb4d09732047a7259adf18696c80134",
+      "message": "feat: expose administration workspace from pondok portal"
+    },
+    {
+      "sha": "86a0c0414089edc2c4084408d1193be8db4e41a9",
+      "message": "feat: tailor room navigation for Ketatausahaan"
+    },
+    {
+      "sha": "843419ba422e6afec8a34c2b96b57d526ec6edc5",
+      "message": "feat: add Ketatausahaan room context and handoff"
+    },
+    {
+      "sha": "96c6099fb8dd0b4b0aa091f0634fe5df9ed92e85",
+      "message": "style: add administration payment workspace UI"
+    },
+    {
+      "sha": "3b222d36e46b8bdc80df1e0a2ca9235a8c9b9187",
+      "message": "feat: add dynamic payment master UI simulation"
+    },
+    {
+      "sha": "33692da7f19782a687ba6cddeb041e2060f75e1c",
+      "message": "refactor: simplify administration role reconciliation"
+    },
+    {
+      "sha": "a3681af5dc2322bf5f8b98eebf89e3e9c3facc2c",
+      "message": "docs: add Ketatausahaan and payment help guidance"
+    },
+    {
+      "sha": "d2b1f7d1e8aa5805fac585938c5c44221966b165",
+      "message": "test: cover Ketatausahaan administration and payment visibility"
+    },
+    {
+      "sha": "87d625ca933510ade72a77137f6261fd3b914ef4",
+      "message": "test: seed Ketatausahaan for browser review"
+    },
+    {
+      "sha": "f7c85d7003baff0ddfcc81e36755dfd87d4310dc",
+      "message": "test: extend browser review for portal and Ketatausahaan"
+    },
+    {
+      "sha": "e1cace46d7593d38aa1896abb526f6d0764c4860",
+      "message": "feat: expose administration from room sidebar"
+    },
+    {
+      "sha": "d1b0a1988973bfbeeecf752ce4f15298542e330a",
+      "message": "test: align administration assertions with rendered copy"
+    },
+    {
+      "sha": "32ec3b75bb7a5d14c62f8e1744b4c8f6a8a55f38",
+      "message": "test: assert literal portal heading"
+    },
+    {
+      "sha": "daadc25bf682f5cbd5afee429d09dce8adc550fa",
+      "message": "test: keep browser login smoke within production throttle"
+    },
+    {
+      "sha": "56cb707afd931bf0c4426bf87535f2682d68d952",
+      "message": "test: assert literal payment method heading"
+    },
+    {
+      "sha": "db0464cf459e1254a46ee4effbb94ab00b4dae70",
+      "message": "Merge PR #10 — Portal, Mudir Reports & Ketatausahaan\n\nFrontend Refinement — Portal, Mudir Reports & Ketatausahaan"
+    },
+    {
+      "sha": "6c0a9c0e22e0aad60730cd2bedfb940d5dbfc42d",
+      "message": "feat: add searchable santri picker for new bills"
+    },
+    {
+      "sha": "73d7edc01711aa73e0673e50d2508b2260df8b19",
+      "message": "feat: add staff role onboarding guides"
+    },
+    {
+      "sha": "9b2d871cc01a0d4a7e091230a58eb61aff978210",
+      "message": "fix: use supported help icon for onboarding"
+    },
+    {
+      "sha": "ebdd09ee99ebc62681b82371f47bffb5ef865796",
+      "message": "feat: add bill picker and staff onboarding interactions"
+    },
+    {
+      "sha": "6cbb82c63409092bfc3f6df72714aa6da01d235c",
+      "message": "style: add bill picker and onboarding UI"
+    },
+    {
+      "sha": "19a5437c845f025a9bb617905731fb36d87453a4",
+      "message": "test: cover billing picker and staff onboarding"
+    },
+    {
+      "sha": "50952f5f2eadc19095c24e1332198485446d0f5d",
+      "message": "test: exercise onboarding and bill creation picker"
+    },
+    {
+      "sha": "3601137531c088ff4ea010864aa50d0d322bee4a",
+      "message": "fix: render billing modal only for billing writers"
+    },
+    {
+      "sha": "c2514a603747c37b4693560e14c543b503a850b8",
+      "message": "Merge PR #11 — Billing picker & staff onboarding\n\nFrontend — Billing Santri Picker & Staff Onboarding"
+    },
+    {
+      "sha": "224abb63226075b6b7c2a0834adc3e1abfa4b769",
+      "message": "fix: replace manual santri/siswa inputs with data pickers"
+    },
+    {
+      "sha": "92df4d46da1b4e0c7ba382d1f8816d55ed5f2b1c",
+      "message": "style: add shared santri/siswa picker UI"
+    },
+    {
+      "sha": "7c1c45d1e64900ae4b795dbac92aecf1a844cf39",
+      "message": "test: enforce santri picker in Tahfidz form"
+    },
+    {
+      "sha": "024cdb4ddd9932ae8a8f052446e113c274057554",
+      "message": "Merge PR #12 — Enforce Santri/Siswa pickers\n\nFrontend — Enforce Santri/Siswa Pickers in Operational Forms"
+    },
+    {
+      "sha": "f579f18c02d3cfe495533fe56edb7f802b18a245",
+      "message": "feat: add administration billing schema"
+    },
+    {
+      "sha": "63b2f2cde9eb1f858afcef6fe8226f4409b6c096",
+      "message": "feat: add administration domain models"
+    },
+    {
+      "sha": "47694bc6513851e49a7a6d3a31d35379ce237593",
+      "message": "feat: add administration domain models"
+    },
+    {
+      "sha": "034e270d155af1b0345639f624a77a7acb5d3450",
+      "message": "feat: add administration domain models"
+    },
+    {
+      "sha": "0d819c95f7bb1b260efdbab443fd48b00bc431c0",
+      "message": "feat: add administration domain models"
+    },
+    {
+      "sha": "56fa66bd48fb4d46e85ce7c306bdeb9633bcff8f",
+      "message": "feat: add administration domain models"
+    },
+    {
+      "sha": "1152e0c41371161055652120a6450619975aa2eb",
+      "message": "feat: add administration domain models"
+    },
+    {
+      "sha": "b08c46a5e1abf4549a05987ce827e64832eb6992",
+      "message": "feat: add administration domain models"
+    },
+    {
+      "sha": "3ea793f5768ca9ddb2736bd4082b24f1467f6ad4",
+      "message": "feat: add administration billing service boundary"
+    },
+    {
+      "sha": "960e499917a3ab807a7efadb3b412c545158ec20",
+      "message": "feat: add administration API controllers"
+    },
+    {
+      "sha": "b7367c4e8c4f9fb5f111d7b92c24a4803ce5e94e",
+      "message": "feat: add administration API controllers"
+    },
+    {
+      "sha": "7b3a7e7191ce570b4e5d1b0f553a664a30ca5280",
+      "message": "feat: expose administration and student picker endpoints"
+    },
+    {
+      "sha": "89155d2d963f49a8ac004f252d16afb4e2baf382",
+      "message": "feat: seed dynamic administration defaults"
+    },
+    {
+      "sha": "8effc07299cdb822afbe8a3fd8ba039ba43d40f3",
+      "message": "chore: seed administration defaults"
+    },
+    {
+      "sha": "224ffef392b3b78f5004e54c582ade9ece920b25",
+      "message": "test: cover administration billing backend"
+    },
+    {
+      "sha": "8e465c261d3b198180e4bd8771fc974b807fce29",
+      "message": "fix: use repository controller convention"
+    },
+    {
+      "sha": "791fbc55c5a5c800de3e0c10c102447d02c6f7c2",
+      "message": "fix: use repository controller convention"
+    },
+    {
+      "sha": "4bb953031413d9f1abd5d19eb17be40cf5afbaee",
+      "message": "fix: prevent administration payment over-verification"
+    },
+    {
+      "sha": "47ffbdd32d000a8d28906e5a4f6b219e2de4db15",
+      "message": "test: reject payment above remaining bill"
+    },
+    {
+      "sha": "4cc33f4c46769ac105917105ec419a17ab528f50",
+      "message": "feat: connect santri pickers to backend endpoint with preview fallback"
+    },
+    {
+      "sha": "a277214cb36d960dcd9135213069d831c1cf2593",
+      "message": "test: seed real students for backend picker review"
+    },
+    {
+      "sha": "87601c5f00be7e2b82b08d6a2c0aca93f75a8d53",
+      "message": "feat: expose CSRF token for administration API actions"
+    },
+    {
+      "sha": "b1b4cd394fabce9349de5ec09012c571a89e7339",
+      "message": "feat: connect billing modal to administration backend"
+    },
+    {
+      "sha": "ff7367ffcdf5d21262070e46009463e49eefc994",
+      "message": "fix: keep successful billing modal stable after save"
+    },
+    {
+      "sha": "52ca37172e8d35f0fcb4393d3f4523f46b1e35a1",
+      "message": "test: select dynamic first payment type in billing review"
+    },
+    {
+      "sha": "3f49fdf535dc755fab8957af98be15cad812f98d",
+      "message": "feat: serve administration page from backend records"
+    },
+    {
+      "sha": "9a1301db62c182d3cf66cf9b3251a2989200b2d2",
+      "message": "feat: render administration page through backend controller"
+    },
+    {
+      "sha": "1ec79cb4a79ae0bf2e356f2b79fdd16ed8b1595d",
+      "message": "feat: bind administration tables to backend records"
+    },
+    {
+      "sha": "714bc1af39b28034044aaa30b064dde934d8ee76",
+      "message": "fix: remove hardcoded bank details from live administration UI"
+    },
+    {
+      "sha": "ef60b8cbd6bf9116c7b17725d99484902c66b932",
+      "message": "test: align administration UI assertions with live backend data"
+    },
+    {
+      "sha": "64857ec7f9948167765bb30ae3de3578d93e6c2c",
+      "message": "fix: prevent duplicate student billing for same period"
+    },
+    {
+      "sha": "b1c598bcffed034e8927dbfb469dc9e4f51ea0d0",
+      "message": "test: reject duplicate billing period"
+    },
+    {
+      "sha": "e1ff0e73dd2a72484c321ef309537b182ad02222",
+      "message": "fix: treat due date as overdue only after date passes"
+    },
+    {
+      "sha": "fb5a3f30ba7377879b44099b43e935e1e7b7262e",
+      "message": "feat: connect payment verification and reminders to backend"
+    },
+    {
+      "sha": "fd4993b9745696dc485658bee91cddeb505df7d2",
+      "message": "feat: render administration dashboard from backend totals"
+    },
+    {
+      "sha": "fcdfb2cd7ad080c0d320116786c9533fce563420",
+      "message": "fix: gate billing actions until backend picker data is ready"
+    },
+    {
+      "sha": "7dfc5983eb2a2e1ef3c9faf17581383e7f89b769",
+      "message": "test: wait for live billing picker backend data"
+    },
+    {
+      "sha": "26c925af1b90f1c02e0d382d1b66d6adb2312c46",
+      "message": "fix: hide inactive payment masters from read-only roles"
+    },
+    {
+      "sha": "20f6ae650d7d7bd5b9e93945e20b65622076f2e7",
+      "message": "test: hide inactive payment masters from read-only roles"
+    },
+    {
+      "sha": "539c071c0cd78a35238e9e558876792d379b4775",
+      "message": "test: wait for filtered Sinta option in live picker"
+    },
+    {
+      "sha": "df63bb02746dbe0df2f7fa3a6b7386377fb98662",
+      "message": "feat: provide administration notifications and student summaries"
+    },
+    {
+      "sha": "0c943dd3e96614a27416181b959119082091e8e3",
+      "message": "feat: replace remaining administration demo data with backend records"
+    },
+    {
+      "sha": "a29d34ffa3c3977470eb385d94741eadb0c5cbe2",
+      "message": "Merge PR #13 — Administration, Billing & Payment Core\n\nBackend — Administration, Billing & Payment Core"
+    },
+    {
+      "sha": "5c4d3b8fe64941f9af3c16f6143132aaede6af89",
+      "message": "feat: extend Pesantren attendance and Tahfidz schema"
+    },
+    {
+      "sha": "afe80a78f20b19493bd9648d08c223a54e821bbf",
+      "message": "feat: add persistent worship activity master model"
+    },
+    {
+      "sha": "e1e0ab481911ddfdbb9649e1c33a7461a725baab",
+      "message": "feat: link Pesantren records to worship activity master"
+    },
+    {
+      "sha": "f2134aa255165e6ec40c09d23e0fbe1837e3bb24",
+      "message": "feat: link Pesantren records to worship activity master"
+    },
+    {
+      "sha": "0ec5176c9446659090c284055e3ef04360cc5b20",
+      "message": "feat: align Pesantren record validation with approved attendance and Tahfidz UI"
+    },
+    {
+      "sha": "97ba14a8baa3fb025b7d38d0cad995885ef98a1e",
+      "message": "feat: add persistent worship master and atomic batch attendance service"
+    },
+    {
+      "sha": "0cc8c6407946ff4539674f376f660c2cee27297c",
+      "message": "feat: add Pesantren operational endpoints"
+    },
+    {
+      "sha": "a9a54d5dc3ec6c015d37a90aa73a21ff9007a744",
+      "message": "feat: register worship master and batch attendance routes"
+    },
+    {
+      "sha": "abbbd76233a8d6373c33a8eb1276ee85dd23c24e",
+      "message": "feat: seed persistent worship activity master"
+    },
+    {
+      "sha": "e43cacf795c408a95f810fb84dd4d647ec4b4390",
+      "message": "feat: seed Pesantren operational masters"
+    },
+    {
+      "sha": "e32f5b0866fae6500b0c990699e18fdce55bb12d",
+      "message": "test: cover worship master, multi-activity batch attendance and structured Tahfidz"
+    },
+    {
+      "sha": "bcde824f527e30bdfb0655c6884c09ef3b519ba3",
+      "message": "feat: expose assignment-scoped attendance roster"
+    },
+    {
+      "sha": "f2e25dead4ff800f2df762e479250171fe3a6684",
+      "message": "feat: add assignment-scoped attendance roster route"
+    },
+    {
+      "sha": "62398ae4e50ca17eb0eb75038ccc450b1e762dfe",
+      "message": "feat: add school attendance and grade transaction schema"
+    },
+    {
+      "sha": "9fa095942fc0befcab25748f4a30d25064aa96bc",
+      "message": "feat: add School operational model"
+    },
+    {
+      "sha": "883c2a8ad03aa0137e8d284eadfa7fcab7ecb1f1",
+      "message": "feat: add School operational model"
+    },
+    {
+      "sha": "4131e3d52257deb7495dee02ed9dc319051d8e66",
+      "message": "feat: add School operational model"
+    },
+    {
+      "sha": "798862c1fb970261b9f702efa614997a0aedcd85",
+      "message": "feat: add School operational model"
+    },
+    {
+      "sha": "6caf09b1f759e495a4a98ea7c54ae614fd034fc3",
+      "message": "feat: add School operational permissions"
+    },
+    {
+      "sha": "a61f333b69e778b4a0500f22580cf049ec459071",
+      "message": "feat: seed School operational permissions"
+    },
+    {
+      "sha": "53ec998cb48d1b495ea62cfe1756ee6adfe7b280",
+      "message": "feat: add assignment-scoped school attendance and grade service"
+    },
+    {
+      "sha": "91f4b8190fcf01504b4d3ba2403b1713fd2adfa6",
+      "message": "feat: add School operational API controller"
+    },
+    {
+      "sha": "548876e29b8758c724891a9c392618737fb9b75a",
+      "message": "fix: scope School attendance visibility directly"
+    },
+    {
+      "sha": "cc6aa9860427fe1cb141e8d49440560c5264b9c2",
+      "message": "feat: register School attendance and grade routes"
+    },
+    {
+      "sha": "5307d33bcda079bdf74685e0bbbe5bd5e4ebf99b",
+      "message": "test: cover School attendance and grade authorization lifecycle"
+    },
+    {
+      "sha": "f7b6e2599b419fe878d3ea16900ee1099e75432d",
+      "message": "test: keep generated Pesantren NIS unique across rooms"
+    },
+    {
+      "sha": "dd5d2d7d562a1b43b5e8474cfd33c1903b18f8dd",
+      "message": "test: keep generated Pesantren NIS unique across rooms"
+    },
+    {
+      "sha": "80125ab77f2eae326592af4f720ab36035611810",
+      "message": "test: clean guardian visibility case"
+    },
+    {
+      "sha": "2ce988c74d5cf6afb89ef1a8067063dc800c1783",
+      "message": "Merge PR #15 — Pesantren Operational Core\n\nBackend Phase 2 — Pesantren Operational Core"
+    },
+    {
+      "sha": "272fb0719c768aacd70101acd019120ffa6f4eea",
+      "message": "test: keep generated School NIS unique across contexts"
+    },
+    {
+      "sha": "a36994d5e1b4f3f44a8f33aa6b0dd353a569f882",
+      "message": "Merge PR #16 — School Attendance & Grade Core\n\nBackend Phase 3 — School Attendance & Grade Core"
+    },
+    {
+      "sha": "85375e1b4216fa32f06e87b49b85277736d128ae",
+      "message": "fix(billing): validate active students and payment types"
+    },
+    {
+      "sha": "fca3646a757e704c1c0fff7f9b3973611a9fb149",
+      "message": "fix(billing): remove hardcoded students from bill modal"
+    },
+    {
+      "sha": "8d6bc8f48f2485c1ba7dcd91e6507bc8839b1077",
+      "message": "fix(billing): preserve student selections across search"
+    },
+    {
+      "sha": "45481098706557e674eafc51592febfe5b55e33c",
+      "message": "test(billing): expect database-backed student picker"
+    },
+    {
+      "sha": "8404d043ae71ca5f9488479406a191c1eff82e49",
+      "message": "test(billing): cover inactive student and type validation"
+    },
+    {
+      "sha": "c544e2d2d6374f63e98b22b3fdd90244f9299faa",
+      "message": "Merge pull request #18 from kisampurnaraga/feat/batch1-billing-picker-hardening\n\nBatch 1 — Billing Student Picker Hardening"
+    },
+    {
+      "sha": "4fbee9e30f02760d796ad37fd477c935dcb4ce31",
+      "message": "fix(forms): forbid demo student fallback in live app"
+    },
+    {
+      "sha": "f2aef374c813d485c2ffd4d064b1ee124cd84fc1",
+      "message": "test(forms): assert no free-text santri input"
+    },
+    {
+      "sha": "ab159a295fb1b7cdf250fc138e6952511203013b",
+      "message": "Merge pull request #19 from kisampurnaraga/feat/batch2-enforce-live-student-pickers\n\nBatch 2 — Enforce Database Student Pickers"
+    },
+    {
+      "sha": "2dbe77cd4d79fe7726ed5e0336b2e62648aebbbb",
+      "message": "fix(payment-types): normalize and validate master data"
+    },
+    {
+      "sha": "6b77b9189cb947b61bbc81abcdeefcf52aae3ac9",
+      "message": "feat(payment-types): expose default due day and live master UI"
+    },
+    {
+      "sha": "7b4da0ce3baac90f57f52f1fdd02056c98b61940",
+      "message": "feat(payment-types): persist master changes and apply billing defaults"
+    },
+    {
+      "sha": "af6e4cb75178244862e6b3059289256172bf9043",
+      "message": "test(payment-types): cover live master defaults and validation"
+    },
+    {
+      "sha": "df72b0447adb76ee7f59d0a4a1fa8c2187b85229",
+      "message": "fix(payment-types): preserve status when editing master"
+    },
+    {
+      "sha": "ee122477d975a571b78743d6b9627e43a6ba5ecb",
+      "message": "Merge pull request #20 from kisampurnaraga/feat/batch3-payment-types\n\nBatch 3 — Payment Type Master Backend Sync"
+    },
+    {
+      "sha": "30f316d71bb78227563d29bc4c7beb105f469e7a",
+      "message": "fix(payment-methods): validate and normalize account configuration"
+    },
+    {
+      "sha": "abd495ec7d04766819184ce3ad7548b6208cfa13",
+      "message": "feat(payment-methods): expose persisted method fields to editor"
+    },
+    {
+      "sha": "125f833c919abc6443f37ffa8039e62ceff652ad",
+      "message": "feat(payment-methods): persist method and account editor"
+    },
+    {
+      "sha": "843e24fdbffbd4ab8cceae38d34e707ce40a2132",
+      "message": "test(payment-methods): cover account persistence and validation"
+    },
+    {
+      "sha": "46a760c7fdd655ecba3c4bed936dd2a03c3a7969",
+      "message": "test(payment-methods): verify active account appears to guardian"
+    },
+    {
+      "sha": "6810154302d0c9f287bcd1dca8940bbfb558b8ed",
+      "message": "Merge pull request #21 from kisampurnaraga/feat/batch4-payment-methods\n\nBatch 4 — Payment Methods & Bank Accounts Backend Sync"
+    },
+    {
+      "sha": "0d0fdeb93cf85a5ae973eec51722eb1aede02628",
+      "message": "fix(payments): reserve pending amounts and reject duplicate references"
+    },
+    {
+      "sha": "8a8d0d7c55ef5596d6e04df712a218e27fa49a59",
+      "message": "fix(payments): require active method at API boundary"
+    },
+    {
+      "sha": "a7372cd7d65af107d8c55002eabfe81127f7f067",
+      "message": "feat(payments): enforce per-bill external reference uniqueness"
+    },
+    {
+      "sha": "6f569921bdc8959eb28d2b7791c157aaef97b2fd",
+      "message": "test(payments): cover reservation idempotency and active methods"
+    },
+    {
+      "sha": "5c35c1833b35f61b41cc33afd7ee99fee4f3cd17",
+      "message": "Merge pull request #22 from kisampurnaraga/feat/batch5-payment-core\n\nBatch 5 — Payment Core Hardening"
+    },
+    {
+      "sha": "6a70eefaa915d94e98076db3edd9da52960e0920",
+      "message": "feat(payments): add end-to-end bill payment UI"
+    },
+    {
+      "sha": "07252ab6009fc14d787311fd51b753f047c0b81f",
+      "message": "feat(payments): connect bill payment and approval actions"
+    },
+    {
+      "sha": "9e16583708ff07d62a961f081a412b35c92dd37e",
+      "message": "test(payments): cover end-to-end payment verification flow"
+    },
+    {
+      "sha": "9b6cb960810dc1aed537288f167b5c5601521bd5",
+      "message": "test(payments): review payment modal flow"
+    },
+    {
+      "sha": "29f2c4a1864921f29a042a4a22890fc7986e713d",
+      "message": "test(payments): decouple UI smoke from eligible bill fixture"
+    },
+    {
+      "sha": "dd59707be210cf4c62a9d62035fe721921af974a",
+      "message": "Merge pull request #23 from kisampurnaraga/feat/batch6-payment-flow\n\nBatch 6 — End-to-End Santri Payment Flow"
+    },
+    {
+      "sha": "ee9add16b0bdc37b64cae34e0c682a03141b24b3",
+      "message": "feat(payments): add scoped payment history filters and audit events"
+    },
+    {
+      "sha": "1c7c77557190e163d96cbd607f0bf6c1a73423b7",
+      "message": "feat(payments): add history filters transaction detail and audit trail"
+    },
+    {
+      "sha": "0789002da7e024b4aa6d9ff30fb3e86fd5ecdc32",
+      "message": "feat(payments): wire payment detail modal"
+    },
+    {
+      "sha": "f02ff30088dd618aca8fc2cac539c67312dab6ce",
+      "message": "test(payments): cover history filters detail and audit scope"
+    },
+    {
+      "sha": "bacabb2a600b2aee916578c04763dc57832d3ce9",
+      "message": "test(payments): review payment history and detail"
+    },
+    {
+      "sha": "9d007187cbd346eeaa202e73c2277c94018239ce",
+      "message": "test(payments): assert filtered transaction instead of filter option"
+    },
+    {
+      "sha": "af03391d70ee58bd95d1d97e28970105652d1d7a",
+      "message": "Merge pull request #24 from kisampurnaraga/feat/batch7-payment-history\n\nBatch 7 — Payment History, Filters & Audit Detail"
+    },
+    {
+      "sha": "6fbcadffab954a8ff21e6ef072048313ebb871ed",
+      "message": "feat(students): allow optional NISN on student master"
+    },
+    {
+      "sha": "5e9e8981429834afca9c80f38552ac00db9aca4d",
+      "message": "feat(students): expose and search optional NISN in picker"
+    },
+    {
+      "sha": "dd7aaa77f1a37997c90e7fa9bdd2e94aac91fd10",
+      "message": "feat(students): add optional NISN to forms and Excel templates"
+    },
+    {
+      "sha": "120acfb598be3b84570761d653304d3d955ab145",
+      "message": "feat(students): add nullable unique NISN"
+    },
+    {
+      "sha": "f10835785deda848ab61561f069e7dcb0cc93983",
+      "message": "test(students): cover optional unique NISN and picker search"
+    },
+    {
+      "sha": "b43727e0b48cb57ab399dfbf944dd25b373ac1d1",
+      "message": "test(students): verify NISN in import template"
+    },
+    {
+      "sha": "b609c984d4a35783c24eb07899fb30b415f6857f",
+      "message": "Merge pull request #25 from kisampurnaraga/feat/batch7-5a-nisn\n\nBatch 7.5A — Optional NISN & Import Template"
+    },
+    {
+      "sha": "594dd018b311cf2243adfd7f9e7ed747f57910cc",
+      "message": "feat(grades): define exam stages and class grade roster"
+    },
+    {
+      "sha": "a44db965e3e1ba2564e36c8bcfd45b946c453c91",
+      "message": "feat(grades): add roster and batch score endpoints"
+    },
+    {
+      "sha": "9616b61c2a7138d731235dd95874f806c06926a6",
+      "message": "feat(grades): route monthly exam roster and batch entry"
+    },
+    {
+      "sha": "3799c9eb1d00019f313d4b38fccf11fa55274d68",
+      "message": "feat(grades): expose official semester assessment stages in UI"
+    },
+    {
+      "sha": "73fd6b9bda977de5670953b9564e899462513dac",
+      "message": "feat(grades): document UB1 UB2 PTS UB3 PAS PAT workflow"
+    },
+    {
+      "sha": "c246f90741e85cac12551b072434282e84ef5aed",
+      "message": "test(grades): cover monthly exam roster batch and type whitelist"
+    },
+    {
+      "sha": "c25b130952eea05d64def57348a60b3119d205af",
+      "message": "test(grades): expose semester assessment stages in school UI"
+    },
+    {
+      "sha": "fe64980b810b6f89d84abefec06f448f1e30d37e",
+      "message": "Merge pull request #26 from kisampurnaraga/feat/batch7-5b-monthly-exams\n\nBatch 7.5B — Monthly Exam Grade Flow"
+    },
+    {
+      "sha": "36e0058b5e8f6544bff255c9ed9aa14a8f811694",
+      "message": "feat(onboarding): align portal onboarding with final role scopes"
+    },
+    {
+      "sha": "9903eabf595960e03207b86b6976810714d098b1",
+      "message": "docs(help): update role guides for NISN payments and monthly exams"
+    },
+    {
+      "sha": "39df484db3aa928bb56fd8f844d8db20a256eb77",
+      "message": "test(onboarding): cover all roles and latest workflows"
+    },
+    {
+      "sha": "12e1be2d38005025ee67aa40748e1ab0ae1cd9b8",
+      "message": "test(onboarding): review guardian onboarding in browser smoke"
+    },
+    {
+      "sha": "25535284b47c022df93f505669fad0e22d56b36f",
+      "message": "Merge pull request #27 from kisampurnaraga/feat/batch8-role-onboarding\n\nBatch 8 — Role-aware Onboarding"
+    },
+    {
+      "sha": "47088abe608774c0c45a40a58b343590267efb5a",
+      "message": "Fix Batch 9 authorization gaps and add regression audit"
+    }
+  ],
+  "frontendFiles": [
+    "public/css/roles.css",
+    "public/js/app.js",
+    "resources/views/administration.blade.php",
+    "resources/views/help.blade.php",
+    "resources/views/home.blade.php",
+    "resources/views/room-role.blade.php",
+    "resources/views/room.blade.php"
+  ]
+}

@@ -1,62 +1,136 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#075b45">
-<title>Beranda Pondok · SIM Babul Khoerot</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css"><link rel="stylesheet" href="assets/roles.css"><link rel="stylesheet" href="assets/preview.css">
-</head>
-<body class="app-page" data-preview-home>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#075b45">
+    <title>Beranda Pondok · SIM Babul Khoerot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/app.css">
+    <link rel="stylesheet" href="assets/roles.css">
+<link rel="stylesheet" href="assets/preview.css"></head>
+<body class="app-page">
 <main class="entry-shell entry-shell--portal">
-<header class="entry-header">
-  <a class="brand" href="home.html"><span class="brand__mark">BK</span><span><strong>Babul Khoerot</strong><small>Sistem Informasi Manajemen</small></span></a>
-  <div class="preview-controls"><span class="preview-mode">Mode Preview</span><button class="button button--secondary" type="button" data-onboarding-open>Panduan cepat</button><label>Peran:
-    <select data-preview-role data-preview-home-role>
-      <option value="admin">Admin</option><option value="mudir">Mudir</option><option value="ketatausahaan">Ketatausahaan</option><option value="guru-musyrif">Guru / Musyrif</option><option value="santri">Santri</option><option value="orang-tua">Orang Tua / Wali</option>
-    </select>
-  </label></div>
-</header>
+    <header class="entry-header">
+        <a class="brand" href="home.html"><span class="brand__mark">BK</span><span><strong>Babul Khoerot</strong><small>Sistem Informasi Manajemen</small></span></a>
+        <div class="entry-header__actions">
+            <span class="entry-role-pill"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M12 22s8-3.8 8-10V5l-8-3-8 3v7c0 6.2 8 10 8 10Z"></path><path d="m9 12 2 2 4-4"></path></svg>
+ Admin</span>
+            <button class="icon-button" type="button" data-onboarding-open aria-label="Panduan cepat Admin" title="Panduan cepat"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2.5-2.5 4.5M12 17h.01"></path></svg>
+</button>            <a class="icon-button" href="bantuan.html" aria-label="Pusat Bantuan" title="Pusat Bantuan"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2.5-2.5 4.5M12 17h.01"></path></svg>
+</a>
+            <a href="index.html" class="icon-button" aria-label="Kembali ke login preview">↪</a></div>
+    </header>
 
-<section class="portal-hero">
- <div class="portal-hero__copy"><span class="eyebrow">Beranda Pondok</span><h1>Assalamu'alaikum, Pengguna Preview</h1><p data-preview-home-copy>Lihat informasi pondok, lalu pilih ruang kerja sesuai peran aktif.</p></div>
- <div class="portal-hero__ornament" aria-hidden="true">بَابُ الْخَيْرَات</div>
-</section>
+    <section class="portal-hero">
+        <div class="portal-hero__copy">
+            <span class="eyebrow">Beranda Pondok</span>
+            <h1>Assalamu'alaikum, Admin Contoh</h1>
+            <p>Pilih peran aktif, lihat informasi pondok, lalu masuk ke Room Sekolah atau Pesantren.</p>
+        </div>
+        <div class="portal-hero__ornament" aria-hidden="true">بَابُ الْخَيْرَات</div>
+    </section>
 
-<section class="portal-role panel">
- <div><span class="eyebrow">Konteks akses</span><h2>Peran aktif: <span data-preview-role-label>Admin</span></h2><p>Sidebar dan menu operasional baru tampil setelah Anda memilih salah satu room atau workspace.</p></div>
-</section>
+    <section class="portal-role panel" aria-label="Peran aktif">
+        <div>
+            <span class="eyebrow">Konteks akses</span>
+            <h2>Peran aktif: Admin</h2>
+            <p>Menu di dalam room hanya muncul sesuai peran aktif dan permission akun.</p>
+        </div>
+        <div class="preview-controls"><span class="preview-mode">Mode Preview · data fiktif</span><label>Peran preview:<select data-preview-role aria-label="Preview role" data-preview-prefix="" data-preview-room="pesantren" data-preview-home=""><option value="admin" selected>Admin</option><option value="mudir">Mudir</option><option value="ketatausahaan">Ketatausahaan / Tata Usaha</option><option value="guru-musyrif">Guru / Ustadz(ah) / Musyrif(ah)</option><option value="santri">Santri / Siswa</option><option value="orang-tua">Orang Tua / Wali</option></select></label></div></section>
 
-<section class="portal-section" aria-labelledby="room-title">
- <div class="portal-section__heading"><div><span class="eyebrow">Pilih ruang kerja</span><h2 id="room-title">Masuk ke room</h2><p>Beranda ini mengikuti flow Figma: highlight pondok lebih dulu, baru masuk ke room.</p></div></div>
- <div class="portal-room-grid">
-   <a class="portal-room-card" href="pesantren.html" data-home-room="pesantren"><span class="portal-room-card__icon">P</span><span class="portal-room-card__copy"><small>Kehidupan pondok</small><strong>Room Pesantren</strong><p>Asrama, absensi kegiatan, Tahfidz, ibadah, aktivitas, kesehatan, dan pembinaan.</p></span><span class="portal-room-card__arrow">→</span></a>
-   <a class="portal-room-card" href="sekolah.html" data-home-room="sekolah"><span class="portal-room-card__icon">S</span><span class="portal-room-card__copy"><small>Administrasi &amp; akademik</small><strong>Room Sekolah</strong><p>Akademik, jadwal, absensi kelas, nilai, dan informasi pembelajaran.</p></span><span class="portal-room-card__arrow">→</span></a>
-   <a class="portal-room-card portal-room-card--administration" href="screens/admin-administrasi.html" data-admin-entry><span class="portal-room-card__icon">A</span><span class="portal-room-card__copy"><small>Administrasi lintas room</small><strong>Administrasi Pondok</strong><p data-preview-admin-copy>Administrasi santri, tagihan, pembayaran, rekening, notifikasi wali, dan laporan.</p></span><span class="portal-room-card__arrow">→</span></a>
- </div>
-</section>
+    <section class="portal-section" aria-labelledby="room-title">
+        <div class="portal-section__heading">
+            <div><span class="eyebrow">Pilih ruang kerja</span><h2 id="room-title">Masuk ke room</h2><p>Sidebar dan menu operasional baru tampil setelah Anda memilih salah satu room.</p></div>
+        </div>
+        <div class="portal-room-grid">
+                                                            <a class="portal-room-card" href="sekolah.html">
+                        <span class="portal-room-card__icon"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13Z"></path><path d="M8 7h8"></path></svg>
+</span>
+                        <span class="portal-room-card__copy"><small>Administrasi &amp; akademik</small><strong>Room Sekolah</strong><p>Akademik, jadwal, absensi kelas, nilai, dan informasi pembelajaran.</p></span>
+                        <span class="portal-room-card__arrow"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg>
+</span>
+                    </a>
+                                                                <a class="portal-room-card" href="pesantren.html">
+                        <span class="portal-room-card__icon"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3Z"></path></svg>
+</span>
+                        <span class="portal-room-card__copy"><small>Kehidupan pondok</small><strong>Room Pesantren</strong><p>Asrama, absensi kegiatan, Tahfidz, ibadah, aktivitas, kesehatan, dan pembinaan.</p></span>
+                        <span class="portal-room-card__arrow"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg>
+</span>
+                    </a>
+                                                        <a class="portal-room-card portal-room-card--administration" href="screens/admin-administrasi.html">
+                    <span class="portal-room-card__icon"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M10 2h4l.6 2.1 1.9.8 1.9-1 2.8 2.8-1 1.9.8 1.9 2.1.6v4l-2.1.6-.8 1.9 1 1.9-2.8 2.8-1.9-1-1.9.8L14 22h-4l-.6-2.1-1.9-.8-1.9 1-2.8-2.8 1-1.9-.8-1.9L1 14v-4l2.1-.6.8-1.9-1-1.9 2.8-2.8 1.9 1 1.9-.8Z"></path></svg>
+</span>
+                    <span class="portal-room-card__copy"><small>Administrasi lintas room</small><strong>Administrasi Pondok</strong><p>Administrasi santri, master jenis pembayaran, rekening, tagihan, transaksi, notifikasi, dan laporan.</p></span>
+                    <span class="portal-room-card__arrow"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg>
+</span>
+                </a>
+                                </div>
+    </section>
 
-<section class="portal-information">
- <article class="panel portal-news"><div class="panel__header"><div><span class="eyebrow">Informasi terbaru</span><h2>Berita &amp; Artikel Pondok</h2><p>Highlight informasi untuk seluruh warga Babul Khoerot.</p></div><span class="badge badge--info">Preview</span></div>
- <div class="portal-news__list">
-   <a href="#"><span class="portal-news__thumb portal-news__thumb--one"></span><span><small>Kegiatan Pondok · 27 Sep 2026</small><strong>Semangat awal tahun: pembukaan program pembinaan</strong><p>Rangkaian orientasi dan penguatan budaya pondok.</p></span></a>
-   <a href="#"><span class="portal-news__thumb portal-news__thumb--two"></span><span><small>Artikel · Tahfidz</small><strong>Menjaga konsistensi murajaah di tengah jadwal belajar</strong><p>Tips membangun kebiasaan mengulang hafalan secara teratur.</p></span></a>
-   <a href="#"><span class="portal-news__thumb portal-news__thumb--three"></span><span><small>Pengumuman · Sekolah</small><strong>Agenda evaluasi pembelajaran dan pertemuan wali</strong><p>Informasi agenda akademik yang akan datang.</p></span></a>
- </div></article>
- <aside class="portal-side">
-   <article class="panel portal-highlight"><span class="eyebrow">Agenda terdekat</span><h2>Pekan ini di Babul Khoerot</h2><div class="portal-agenda"><div><time>Senin</time><span>Apel &amp; pengarahan pekanan</span></div><div><time>Rabu</time><span>Evaluasi Tahfidz</span></div><div><time>Sabtu</time><span>Pertemuan wali santri</span></div></div></article>
-   <article class="panel portal-highlight"><span class="eyebrow">Butuh bantuan?</span><h2>Panduan penggunaan SIM</h2><p>Buka panduan sesuai role sebelum menghubungi Admin.</p><a class="button button--secondary" href="bantuan.html">Buka Pusat Bantuan</a></article>
- </aside>
-</section>
-<div class="onboarding-modal" data-onboarding hidden>
-  <div class="onboarding-modal__backdrop" data-onboarding-close></div>
-  <section class="onboarding-modal__panel" role="dialog" aria-modal="true" aria-labelledby="preview-onboarding-title">
-    <div class="onboarding-modal__header"><div><span class="eyebrow">Panduan Cepat</span><h2 id="preview-onboarding-title" data-onboarding-title>Panduan Role</h2><p data-onboarding-intro></p></div><button class="icon-button" type="button" data-onboarding-close>×</button></div>
-    <div class="onboarding-steps" data-onboarding-steps></div>
-    <div class="onboarding-actions"><label class="check-control"><input type="checkbox" data-onboarding-hide><span>Jangan tampilkan otomatis lagi di perangkat ini</span></label><div><a class="button button--secondary" href="bantuan.html">Panduan lengkap</a><button class="button button--primary" type="button" data-onboarding-close>Mulai gunakan SIM</button></div></div>
-  </section>
-</div>
-<footer class="entry-footer"><span>SIM Babul Khoerot</span><span>Mode Preview · tidak menyimpan data</span></footer>
+    <section class="portal-information">
+        <article class="panel portal-news">
+            <div class="panel__header"><div><span class="eyebrow">Informasi terbaru</span><h2>Berita &amp; Artikel Pondok</h2><p>Highlight informasi untuk seluruh warga Babul Khoerot.</p></div><span class="badge badge--info">Contoh UI</span></div>
+            <div class="portal-news__list">
+                <a href="#" aria-label="Baca berita kegiatan awal tahun"><span class="portal-news__thumb portal-news__thumb--one"></span><span><small>Kegiatan Pondok · 27 Sep 2026</small><strong>Semangat awal tahun: santri mengikuti pembukaan program pembinaan</strong><p>Rangkaian kegiatan pembukaan, orientasi, dan penguatan budaya pondok.</p></span></a>
+                <a href="#" aria-label="Baca artikel tahfidz"><span class="portal-news__thumb portal-news__thumb--two"></span><span><small>Artikel · Tahfidz</small><strong>Menjaga konsistensi murajaah di tengah jadwal belajar</strong><p>Tips membangun kebiasaan mengulang hafalan secara teratur dan realistis.</p></span></a>
+                <a href="#" aria-label="Baca pengumuman sekolah"><span class="portal-news__thumb portal-news__thumb--three"></span><span><small>Pengumuman · Sekolah</small><strong>Agenda evaluasi pembelajaran dan pertemuan wali</strong><p>Informasi agenda akademik yang akan datang untuk guru, santri, dan wali.</p></span></a>
+            </div>
+        </article>
+        <aside class="portal-side">
+            <article class="panel portal-highlight">
+                <span class="role-panel__icon"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg>
+</span>
+                <span class="eyebrow">Agenda terdekat</span>
+                <h2>Pekan ini di Babul Khoerot</h2>
+                <div class="portal-agenda"><div><time>Senin</time><span>Apel &amp; pengarahan pekanan</span></div><div><time>Rabu</time><span>Evaluasi Tahfidz</span></div><div><time>Sabtu</time><span>Pertemuan wali santri</span></div></div>
+            </article>
+            <article class="panel portal-highlight">
+                <span class="role-panel__icon"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2.5-2.5 4.5M12 17h.01"></path></svg>
+</span>
+                <span class="eyebrow">Butuh bantuan?</span>
+                <h2>Panduan penggunaan SIM</h2>
+                <p>Buka panduan sesuai role sebelum menghubungi Admin.</p>
+                <a class="button button--secondary" href="bantuan.html">Buka Pusat Bantuan</a>
+            </article>
+        </aside>
+    </section>
+
+        <div class="onboarding-modal" data-onboarding data-onboarding-role="admin" hidden>
+        <div class="onboarding-modal__backdrop" data-onboarding-close></div>
+        <section class="onboarding-modal__panel" role="dialog" aria-modal="true" aria-labelledby="onboarding-title">
+            <div class="onboarding-modal__header">
+                <div><span class="eyebrow">Panduan Cepat</span><h2 id="onboarding-title">Onboarding Admin</h2><p>Admin mengelola konfigurasi, master data, hak akses, supervisi, dan koreksi terotorisasi di seluruh sistem.</p></div>
+                <button class="icon-button" type="button" data-onboarding-close aria-label="Tutup"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+</button>
+            </div>
+            <div class="onboarding-steps">
+                                    <article class="onboarding-step">
+                        <span class="onboarding-step__number">1</span>
+                        <div><strong>Pilih konteks kerja</strong><p>Masuk ke Room Sekolah, Room Pesantren, atau Administrasi Pondok sesuai pekerjaan yang akan dilakukan.</p></div>
+                    </article>
+                                    <article class="onboarding-step">
+                        <span class="onboarding-step__number">2</span>
+                        <div><strong>Jaga master identitas tetap konsisten</strong><p>NIS tetap identitas internal utama. NISN bersifat opsional; jika diisi harus unik. Gunakan template import resmi dan jangan mengetik ulang identitas santri pada transaksi operasional.</p></div>
+                    </article>
+                                    <article class="onboarding-step">
+                        <span class="onboarding-step__number">3</span>
+                        <div><strong>Supervisi akademik dan pesantren</strong><p>Pantau kelas, asrama, penugasan, absensi, Tahfidz, ibadah, kesehatan, pembinaan, serta akademik tanpa melewati batas audit.</p></div>
+                    </article>
+                                    <article class="onboarding-step">
+                        <span class="onboarding-step__number">4</span>
+                        <div><strong>Kelola pengecualian dengan audit</strong><p>Koreksi nilai LOCKED, perubahan konfigurasi, dan tindakan penting harus melalui permission yang tepat dan tercatat di audit trail.</p></div>
+                    </article>
+                            </div>
+            <div class="onboarding-actions">
+                <label class="check-control" title="Preferensi tidak disimpan dalam preview"><input type="checkbox" data-onboarding-hide disabled><span>Jangan tampilkan otomatis lagi di perangkat ini</span></label>
+                <div><a class="button button--secondary" href="bantuan.html">Panduan lengkap</a><button class="button button--primary" type="button" data-onboarding-close>Mulai gunakan SIM</button></div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="entry-footer"><span>SIM Babul Khoerot</span><span>Beranda pondok · informasi pada halaman ini masih contoh frontend</span></footer>
 </main>
-<script src="assets/app.js" defer></script><script src="assets/preview.js" defer></script>
-</body></html>
+<script src="assets/app.js" defer></script>
+<script src="assets/preview.js" defer></script></body>
+</html>

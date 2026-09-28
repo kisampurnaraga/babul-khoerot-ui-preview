@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#075b45"><title>Tagihan Aktif · SIM Babul Khoerot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/app.css"><link rel="stylesheet" href="../assets/roles.css">
+<link rel="stylesheet" href="../assets/preview.css"></head>
+<body class="app-page">
+<div class="app-shell">
+    <aside class="sidebar" id="primary-navigation" data-sidebar>
+        <div class="sidebar__top"><a class="brand brand--light" href="../screens/orang-tua-home.html"><span class="brand__mark">BK</span><span><strong>Babul Khoerot</strong><small>Administrasi</small></span></a><button type="button" class="icon-button sidebar__close" data-menu-close aria-label="Tutup navigasi"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+</button></div>
+        <nav class="sidebar__nav" aria-label="Navigasi administrasi">
+            <span class="nav-heading">Administrasi Pondok</span>
+                            <a href="../screens/orang-tua-administrasi.html" class="nav-link"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>
+<span>Pembayaran Anak</span></a>
+                            <a href="../screens/orang-tua-administrasi-tagihan.html" class="nav-link is-active"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M10.3 3.7 2.2 18a2 2 0 0 0 1.8 3h16a2 2 0 0 0 1.8-3L13.7 3.7a2 2 0 0 0-3.4 0Z"></path><path d="M12 9v4M12 17h.01"></path></svg>
+<span>Tagihan Aktif</span></a>
+                            <a href="../screens/orang-tua-administrasi-pembayaran.html" class="nav-link"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg>
+<span>Riwayat Pembayaran</span></a>
+                            <a href="../screens/orang-tua-administrasi-metode.html" class="nav-link"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13Z"></path><path d="M8 7h8"></path></svg>
+<span>Cara Pembayaran</span></a>
+                    </nav>
+        <a class="sidebar__support sidebar__support--link" href="../screens/orang-tua-bantuan.html"><span class="sidebar__support-icon"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2.5-2.5 4.5M12 17h.01"></path></svg>
+</span><div><strong>Butuh bantuan?</strong><small>Panduan administrasi</small></div></a>
+    </aside>
+    <div class="sidebar-backdrop" data-menu-close></div>
+
+    <div class="app-content">
+        <header class="topbar">
+            <div class="topbar__start"><button class="icon-button menu-button" type="button" data-menu-open aria-controls="primary-navigation" aria-expanded="false"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+<span class="sr-only">Buka navigasi</span></button><div><p class="topbar__room">Administrasi Pondok</p><p class="topbar__date">Selasa, 29 September 2026</p></div></div>
+            <div class="preview-controls"><span class="preview-mode">Mode Preview · data fiktif</span><label>Peran preview:<select data-preview-role aria-label="Preview role" data-preview-prefix="../" data-preview-room="pesantren"><option value="admin">Admin</option><option value="mudir">Mudir</option><option value="ketatausahaan">Ketatausahaan / Tata Usaha</option><option value="guru-musyrif">Guru / Ustadz(ah) / Musyrif(ah)</option><option value="santri">Santri / Siswa</option><option value="orang-tua" selected>Orang Tua / Wali</option></select></label></div><div class="topbar__actions"><a class="button button--secondary admin-back-home" href="../screens/orang-tua-home.html">Beranda Pondok</a><div class="profile"><span class="profile__avatar">OR</span><span class="profile__copy"><strong>Orang Tua Contoh</strong><small>Orang Tua / Wali</small></span></div></div>
+        </header>
+
+        <main class="dashboard" id="konten-utama">
+            <div class="form-note">Mode Preview — seluruh identitas, tagihan, referensi, dan audit trail adalah contoh. Tidak ada pembayaran atau penyimpanan nyata.</div><div class="role-context"><span class="role-context__badge"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M12 22s8-3.8 8-10V5l-8-3-8 3v7c0 6.2 8 10 8 10Z"></path><path d="m9 12 2 2 4-4"></path></svg>
+ Orang Tua / Wali</span><span>Administrasi Pondok</span><span class="role-context__demo">Mode Preview · data fiktif, tanpa backend</span></div>
+
+                            <div class="child-context panel"><div><span class="eyebrow">Konteks keluarga</span><strong>Sinta Nur Aulia</strong><small>Contoh anak terverifikasi untuk preview pembayaran.</small></div><label for="admin-child">Pilih anak</label><select id="admin-child"><option>Sinta Nur Aulia</option><option>Rafi Ahmad</option></select></div>
+
+                            <div class="page-heading page-heading--module"><div><span class="eyebrow">Pembayaran Anak</span><h1>Tagihan Aktif</h1><p>Lihat nominal, jatuh tempo, status, dan rekening pembayaran.</p></div></div>
+                <section class="panel"><div class="panel__header"><div><h2>Daftar tagihan</h2><p>Pilih santri/tagihan yang akan dibayar.</p></div><label class="form-field bill-search"><span>Cari santri / NIS</span><input type="search" placeholder="Ketik nama atau NIS..." data-payment-bill-search autocomplete="off"></label></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Santri</th><th>Jenis</th><th>Periode</th><th>Jatuh Tempo</th><th>Tagihan</th><th>Dibayar</th><th>Sisa</th><th>Status</th><th>Aksi</th></tr></thead><tbody data-payment-bill-table>
+                                                                    <tr data-payment-bill-row data-search="bk26017 sinta nur aulia"><td><strong>Sinta Nur Aulia</strong><br><small>BK26017</small></td><td>SPP / Syahriah</td><td>September 2026 — contoh 3</td><td>10 Okt 2026</td><td>Rp500.000</td><td>Rp0</td><td>Rp500.000</td><td><span class="badge badge--warning">Belum Bayar</span></td><td><button class="table-action" type="button" data-open-payment data-bill-id="3" data-student-name="Sinta Nur Aulia" data-student-nis="BK26017" data-bill-label="SPP / Syahriah · September 2026 — contoh 3" data-remaining="500000">Bayar</button></td></tr>
+                                                                    <tr data-payment-bill-row data-search="bk26017 sinta nur aulia"><td><strong>Sinta Nur Aulia</strong><br><small>BK26017</small></td><td>SPP / Syahriah</td><td>September 2026 — contoh 2</td><td>10 Okt 2026</td><td>Rp500.000</td><td>Rp0</td><td>Rp500.000</td><td><span class="badge badge--warning">Belum Bayar</span></td><td><button class="table-action" type="button" data-open-payment data-bill-id="2" data-student-name="Sinta Nur Aulia" data-student-nis="BK26017" data-bill-label="SPP / Syahriah · September 2026 — contoh 2" data-remaining="500000">Bayar</button></td></tr>
+                                                                    <tr data-payment-bill-row data-search="bk26017 sinta nur aulia"><td><strong>Sinta Nur Aulia</strong><br><small>BK26017</small></td><td>SPP / Syahriah</td><td>September 2026 — contoh 1</td><td>10 Okt 2026</td><td>Rp500.000</td><td>Rp100.000</td><td>Rp400.000</td><td><span class="badge badge--info">Cicilan</span></td><td><button class="table-action" type="button" data-open-payment data-bill-id="1" data-student-name="Sinta Nur Aulia" data-student-nis="BK26017" data-bill-label="SPP / Syahriah · September 2026 — contoh 1" data-remaining="400000">Bayar</button></td></tr>
+                                    </tbody></table></div></section>
+                <section class="panel guardian-payment-instruction"><div><span class="eyebrow">Cara Pembayaran</span><h2>Metode pembayaran resmi pondok</h2><p><strong>Tunai — contoh preview</strong><br>Loket TU (simulasi) </p><p><strong>Tunai ke Tata Usaha</strong><br>Loket Administrasi Pondok </p><small>Klik “Bayar” pada tagihan. Pembayaran masuk status Menunggu Verifikasi sebelum mengurangi saldo tagihan.</small></div></section>
+                    </main>
+    </div>
+</div>
+
+
+<div class="form-modal" data-payment-modal hidden>
+    <div class="form-modal__backdrop" data-payment-close></div>
+    <section class="form-modal__panel" role="dialog" aria-modal="true" aria-labelledby="payment-modal-title">
+        <div class="form-modal__header">
+            <div><span class="eyebrow">Pembayaran Tagihan</span><h2 id="payment-modal-title">Catat pembayaran</h2><p data-payment-summary>Pilih tagihan dari daftar.</p></div>
+            <button class="icon-button" type="button" data-payment-close aria-label="Tutup"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+</button>
+        </div>
+        <div class="form-modal__body">
+            <div class="form-grid">
+                <label class="form-field"><span>Santri</span><input type="text" data-payment-student readonly></label>
+                <label class="form-field"><span>Sisa Tagihan</span><input type="text" data-payment-remaining-display readonly></label>
+                <label class="form-field"><span>Metode Pembayaran</span><select data-payment-method required><option value="">Pilih metode</option><option value="2">Tunai — contoh preview · Loket TU (simulasi)</option><option value="1">Tunai ke Tata Usaha · Loket Administrasi Pondok</option></select></label>
+                <label class="form-field"><span>Nominal</span><input type="number" min="1" step="1" data-payment-amount required></label>
+                <label class="form-field"><span>Tanggal/Waktu Bayar</span><input type="datetime-local" data-payment-paid-at required></label>
+                <label class="form-field"><span>Referensi Transaksi (opsional)</span><input type="text" maxlength="191" data-payment-reference placeholder="Contoh: TRX-BSI-12345"></label>
+                <label class="form-field form-field--wide"><span>Catatan (opsional)</span><input type="text" maxlength="2000" data-payment-notes placeholder="Keterangan pembayaran"></label>
+            </div>
+            <div class="form-note">Dalam aplikasi produksi, pembayaran berstatus <strong>Menunggu Verifikasi</strong>. Saldo tagihan baru berkurang setelah TU/Admin memverifikasi.</div>
+            <div class="form-note is-error" data-payment-error hidden></div>
+            <div class="form-note is-success" data-payment-success hidden></div>
+            <div class="form-modal__footer"><button class="button button--secondary" type="button" data-payment-close>Batal</button><button class="button button--primary" type="button" data-payment-submit>Tinjau simulasi</button></div>
+        </div>
+    </section>
+</div>
+
+
+<div class="form-modal" data-admin-master-modal hidden>
+    <div class="form-modal__backdrop" data-admin-modal-close></div>
+    <section class="form-modal__panel" role="dialog" aria-modal="true" aria-labelledby="admin-master-title">
+        <div class="form-modal__header"><div><span class="eyebrow" data-admin-modal-eyebrow>Master Administrasi</span><h2 id="admin-master-title" data-admin-modal-title>Tambah data</h2></div><button class="icon-button" type="button" data-admin-modal-close aria-label="Tutup"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+</button></div>
+        <div class="form-modal__body"><div class="form-grid" data-admin-modal-fields></div><div class="form-note" data-admin-modal-note>Simulasi master administrasi. Tidak ada perubahan disimpan.</div><div class="form-note is-error" data-admin-modal-error hidden></div><div class="form-modal__footer"><button class="button button--secondary" type="button" data-admin-modal-close>Batal</button><button class="button button--primary" type="button" data-admin-modal-save>Tinjau simulasi</button></div></div>
+    </section>
+</div>
+
+<script src="../assets/app.js" defer></script>
+<script src="../assets/preview.js" defer></script></body></html>

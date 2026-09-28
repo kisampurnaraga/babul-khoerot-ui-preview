@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#075b45"><title>Riwayat Pembayaran · SIM Babul Khoerot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/app.css"><link rel="stylesheet" href="../assets/roles.css">
+<link rel="stylesheet" href="../assets/preview.css"></head>
+<body class="app-page">
+<div class="app-shell">
+    <aside class="sidebar" id="primary-navigation" data-sidebar>
+        <div class="sidebar__top"><a class="brand brand--light" href="../screens/orang-tua-home.html"><span class="brand__mark">BK</span><span><strong>Babul Khoerot</strong><small>Administrasi</small></span></a><button type="button" class="icon-button sidebar__close" data-menu-close aria-label="Tutup navigasi"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+</button></div>
+        <nav class="sidebar__nav" aria-label="Navigasi administrasi">
+            <span class="nav-heading">Administrasi Pondok</span>
+                            <a href="../screens/orang-tua-administrasi.html" class="nav-link"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>
+<span>Pembayaran Anak</span></a>
+                            <a href="../screens/orang-tua-administrasi-tagihan.html" class="nav-link"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M10.3 3.7 2.2 18a2 2 0 0 0 1.8 3h16a2 2 0 0 0 1.8-3L13.7 3.7a2 2 0 0 0-3.4 0Z"></path><path d="M12 9v4M12 17h.01"></path></svg>
+<span>Tagihan Aktif</span></a>
+                            <a href="../screens/orang-tua-administrasi-pembayaran.html" class="nav-link is-active"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg>
+<span>Riwayat Pembayaran</span></a>
+                            <a href="../screens/orang-tua-administrasi-metode.html" class="nav-link"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13Z"></path><path d="M8 7h8"></path></svg>
+<span>Cara Pembayaran</span></a>
+                    </nav>
+        <a class="sidebar__support sidebar__support--link" href="../screens/orang-tua-bantuan.html"><span class="sidebar__support-icon"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2.5-2.5 4.5M12 17h.01"></path></svg>
+</span><div><strong>Butuh bantuan?</strong><small>Panduan administrasi</small></div></a>
+    </aside>
+    <div class="sidebar-backdrop" data-menu-close></div>
+
+    <div class="app-content">
+        <header class="topbar">
+            <div class="topbar__start"><button class="icon-button menu-button" type="button" data-menu-open aria-controls="primary-navigation" aria-expanded="false"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+<span class="sr-only">Buka navigasi</span></button><div><p class="topbar__room">Administrasi Pondok</p><p class="topbar__date">Selasa, 29 September 2026</p></div></div>
+            <div class="preview-controls"><span class="preview-mode">Mode Preview · data fiktif</span><label>Peran preview:<select data-preview-role aria-label="Preview role" data-preview-prefix="../" data-preview-room="pesantren"><option value="admin">Admin</option><option value="mudir">Mudir</option><option value="ketatausahaan">Ketatausahaan / Tata Usaha</option><option value="guru-musyrif">Guru / Ustadz(ah) / Musyrif(ah)</option><option value="santri">Santri / Siswa</option><option value="orang-tua" selected>Orang Tua / Wali</option></select></label></div><div class="topbar__actions"><a class="button button--secondary admin-back-home" href="../screens/orang-tua-home.html">Beranda Pondok</a><div class="profile"><span class="profile__avatar">OR</span><span class="profile__copy"><strong>Orang Tua Contoh</strong><small>Orang Tua / Wali</small></span></div></div>
+        </header>
+
+        <main class="dashboard" id="konten-utama">
+            <div class="form-note">Mode Preview — seluruh identitas, tagihan, referensi, dan audit trail adalah contoh. Tidak ada pembayaran atau penyimpanan nyata.</div><div class="role-context"><span class="role-context__badge"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M12 22s8-3.8 8-10V5l-8-3-8 3v7c0 6.2 8 10 8 10Z"></path><path d="m9 12 2 2 4-4"></path></svg>
+ Orang Tua / Wali</span><span>Administrasi Pondok</span><span class="role-context__demo">Mode Preview · data fiktif, tanpa backend</span></div>
+
+                            <div class="child-context panel"><div><span class="eyebrow">Konteks keluarga</span><strong>Sinta Nur Aulia</strong><small>Contoh anak terverifikasi untuk preview pembayaran.</small></div><label for="admin-child">Pilih anak</label><select id="admin-child"><option>Sinta Nur Aulia</option><option>Rafi Ahmad</option></select></div>
+
+                            <div class="page-heading page-heading--module"><div><span class="eyebrow">Riwayat Transaksi</span><h1>Riwayat Pembayaran</h1><p>Riwayat pembayaran anak sesuai akses wali terverifikasi.</p></div></div>
+                <section class="panel">
+                    <form method="get" action="" class="admin-filter-grid" data-payment-history-filter data-static-filter="">
+                        <input type="hidden" name="tab" value="pembayaran">
+                        <label class="form-field"><span>Santri</span><select name="payment_student_id"><option value="">Semua santri</option></select></label>
+                        <label class="form-field"><span>Jenis Pembayaran</span><select name="payment_type_id"><option value="">Semua jenis</option><option value="1">SPP / Syahriah</option><option value="2">Daftar Ulang</option><option value="3">Uang Makan</option><option value="4">Kegiatan</option><option value="5">Seragam</option><option value="6">Kitab</option><option value="7">Asrama</option><option value="8">Tagihan Khusus</option></select></label>
+                        <label class="form-field"><span>Status</span><select name="payment_status"><option value="">Semua status</option><option value="PENDING">Menunggu Verifikasi</option><option value="VERIFIED">Terverifikasi</option><option value="REJECTED">Ditolak</option></select></label>
+                        <label class="form-field"><span>Dari Tanggal</span><input type="date" name="payment_date_from" value=""></label>
+                        <label class="form-field"><span>Sampai Tanggal</span><input type="date" name="payment_date_to" value=""></label>
+                        <div class="form-field"><span> </span><div class="role-actions"><button class="button button--primary" type="submit">Terapkan Filter</button><a class="button button--secondary" href="../screens/orang-tua-administrasi-pembayaran.html">Reset</a></div></div>
+                    </form>
+                </section>
+                <section class="panel"><div class="table-wrap"><table class="data-table"><thead><tr><th>Tanggal</th><th>Santri</th><th>Tagihan</th><th>Referensi</th><th>Metode</th><th>Nominal</th><th>Status</th><th>Detail</th></tr></thead><tbody>
+                                            <tr><td>28 Sep 2026 09:00</td><td><strong>Sinta Nur Aulia</strong><br><small>BK26017</small></td><td>SPP / Syahriah · September 2026 — contoh 3</td><td>DEMO-REF-3</td><td>Tunai — contoh preview</td><td>Rp100.000</td><td><span class="badge badge--warning">Ditolak</span></td><td><button class="table-action" type="button" data-payment-detail data-payment-id="3">Lihat Detail</button></td></tr>
+                                            <tr><td>28 Sep 2026 09:00</td><td><strong>Sinta Nur Aulia</strong><br><small>BK26017</small></td><td>SPP / Syahriah · September 2026 — contoh 2</td><td>DEMO-REF-2</td><td>Tunai — contoh preview</td><td>Rp100.000</td><td><span class="badge badge--info">Menunggu Verifikasi</span></td><td><button class="table-action" type="button" data-payment-detail data-payment-id="2">Lihat Detail</button></td></tr>
+                                            <tr><td>28 Sep 2026 09:00</td><td><strong>Sinta Nur Aulia</strong><br><small>BK26017</small></td><td>SPP / Syahriah · September 2026 — contoh 1</td><td>DEMO-REF-1</td><td>Tunai — contoh preview</td><td>Rp100.000</td><td><span class="badge badge--success">Terverifikasi</span></td><td><button class="table-action" type="button" data-payment-detail data-payment-id="1">Lihat Detail</button></td></tr>
+                                    </tbody></table></div></section>
+
+                    </main>
+    </div>
+</div>
+
+
+<div class="form-modal" data-payment-modal hidden>
+    <div class="form-modal__backdrop" data-payment-close></div>
+    <section class="form-modal__panel" role="dialog" aria-modal="true" aria-labelledby="payment-modal-title">
+        <div class="form-modal__header">
+            <div><span class="eyebrow">Pembayaran Tagihan</span><h2 id="payment-modal-title">Catat pembayaran</h2><p data-payment-summary>Pilih tagihan dari daftar.</p></div>
+            <button class="icon-button" type="button" data-payment-close aria-label="Tutup"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+</button>
+        </div>
+        <div class="form-modal__body">
+            <div class="form-grid">
+                <label class="form-field"><span>Santri</span><input type="text" data-payment-student readonly></label>
+                <label class="form-field"><span>Sisa Tagihan</span><input type="text" data-payment-remaining-display readonly></label>
+                <label class="form-field"><span>Metode Pembayaran</span><select data-payment-method required><option value="">Pilih metode</option><option value="2">Tunai — contoh preview · Loket TU (simulasi)</option><option value="1">Tunai ke Tata Usaha · Loket Administrasi Pondok</option></select></label>
+                <label class="form-field"><span>Nominal</span><input type="number" min="1" step="1" data-payment-amount required></label>
+                <label class="form-field"><span>Tanggal/Waktu Bayar</span><input type="datetime-local" data-payment-paid-at required></label>
+                <label class="form-field"><span>Referensi Transaksi (opsional)</span><input type="text" maxlength="191" data-payment-reference placeholder="Contoh: TRX-BSI-12345"></label>
+                <label class="form-field form-field--wide"><span>Catatan (opsional)</span><input type="text" maxlength="2000" data-payment-notes placeholder="Keterangan pembayaran"></label>
+            </div>
+            <div class="form-note">Dalam aplikasi produksi, pembayaran berstatus <strong>Menunggu Verifikasi</strong>. Saldo tagihan baru berkurang setelah TU/Admin memverifikasi.</div>
+            <div class="form-note is-error" data-payment-error hidden></div>
+            <div class="form-note is-success" data-payment-success hidden></div>
+            <div class="form-modal__footer"><button class="button button--secondary" type="button" data-payment-close>Batal</button><button class="button button--primary" type="button" data-payment-submit>Tinjau simulasi</button></div>
+        </div>
+    </section>
+</div>
+
+<div class="form-modal" data-payment-detail-modal="3" hidden>
+    <div class="form-modal__backdrop" data-payment-detail-close></div>
+    <section class="form-modal__panel" role="dialog" aria-modal="true" aria-labelledby="payment-detail-title-3">
+        <div class="form-modal__header"><div><span class="eyebrow">Detail Pembayaran</span><h2 id="payment-detail-title-3">Sinta Nur Aulia · Rp100.000</h2><p>SPP / Syahriah · September 2026 — contoh 3</p></div><button class="icon-button" type="button" data-payment-detail-close aria-label="Tutup"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+</button></div>
+        <div class="form-modal__body">
+            <div class="role-two-column">
+                <article class="panel role-panel"><h3>Transaksi</h3><p><strong>Reference internal</strong><br>DEMO-PAY-3</p><p><strong>Referensi eksternal</strong><br>DEMO-REF-3</p><p><strong>Metode</strong><br>Tunai — contoh preview · Loket TU (simulasi)</p><p><strong>Tanggal bayar</strong><br>28 September 2026 09:00</p><p><strong>Status</strong><br>Ditolak</p></article>
+                <article class="panel role-panel"><h3>Pelaku &amp; Catatan</h3><p><strong>Dikirim oleh</strong><br>Orang Tua Contoh</p><p><strong>Diverifikasi oleh</strong><br>Ketatausahaan Contoh</p><p><strong>Waktu verifikasi</strong><br>29 September 2026 05:27</p><p><strong>Catatan</strong><br>Transaksi fiktif untuk review UI</p></article>
+            </div>
+            <article class="panel role-panel"><h3>Audit Trail</h3><div class="role-list"><div><strong>payment · rejected</strong><small>29 Sep 2026 05:27 · ketatausahaan</small></div></div></article>
+            <div class="form-modal__footer"><button class="button button--secondary" type="button" data-payment-detail-close>Tutup</button></div>
+        </div>
+    </section>
+</div>
+<div class="form-modal" data-payment-detail-modal="2" hidden>
+    <div class="form-modal__backdrop" data-payment-detail-close></div>
+    <section class="form-modal__panel" role="dialog" aria-modal="true" aria-labelledby="payment-detail-title-2">
+        <div class="form-modal__header"><div><span class="eyebrow">Detail Pembayaran</span><h2 id="payment-detail-title-2">Sinta Nur Aulia · Rp100.000</h2><p>SPP / Syahriah · September 2026 — contoh 2</p></div><button class="icon-button" type="button" data-payment-detail-close aria-label="Tutup"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+</button></div>
+        <div class="form-modal__body">
+            <div class="role-two-column">
+                <article class="panel role-panel"><h3>Transaksi</h3><p><strong>Reference internal</strong><br>DEMO-PAY-2</p><p><strong>Referensi eksternal</strong><br>DEMO-REF-2</p><p><strong>Metode</strong><br>Tunai — contoh preview · Loket TU (simulasi)</p><p><strong>Tanggal bayar</strong><br>28 September 2026 09:00</p><p><strong>Status</strong><br>Menunggu Verifikasi</p></article>
+                <article class="panel role-panel"><h3>Pelaku &amp; Catatan</h3><p><strong>Dikirim oleh</strong><br>Orang Tua Contoh</p><p><strong>Diverifikasi oleh</strong><br>Belum diverifikasi</p><p><strong>Waktu verifikasi</strong><br>—</p><p><strong>Catatan</strong><br>Transaksi fiktif untuk review UI</p></article>
+            </div>
+            <article class="panel role-panel"><h3>Audit Trail</h3><div class="role-list"><div><strong>payment · pending</strong><small>29 Sep 2026 05:27 · ketatausahaan</small></div></div></article>
+            <div class="form-modal__footer"><button class="button button--secondary" type="button" data-payment-detail-close>Tutup</button></div>
+        </div>
+    </section>
+</div>
+<div class="form-modal" data-payment-detail-modal="1" hidden>
+    <div class="form-modal__backdrop" data-payment-detail-close></div>
+    <section class="form-modal__panel" role="dialog" aria-modal="true" aria-labelledby="payment-detail-title-1">
+        <div class="form-modal__header"><div><span class="eyebrow">Detail Pembayaran</span><h2 id="payment-detail-title-1">Sinta Nur Aulia · Rp100.000</h2><p>SPP / Syahriah · September 2026 — contoh 1</p></div><button class="icon-button" type="button" data-payment-detail-close aria-label="Tutup"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+</button></div>
+        <div class="form-modal__body">
+            <div class="role-two-column">
+                <article class="panel role-panel"><h3>Transaksi</h3><p><strong>Reference internal</strong><br>DEMO-PAY-1</p><p><strong>Referensi eksternal</strong><br>DEMO-REF-1</p><p><strong>Metode</strong><br>Tunai — contoh preview · Loket TU (simulasi)</p><p><strong>Tanggal bayar</strong><br>28 September 2026 09:00</p><p><strong>Status</strong><br>Terverifikasi</p></article>
+                <article class="panel role-panel"><h3>Pelaku &amp; Catatan</h3><p><strong>Dikirim oleh</strong><br>Orang Tua Contoh</p><p><strong>Diverifikasi oleh</strong><br>Ketatausahaan Contoh</p><p><strong>Waktu verifikasi</strong><br>29 September 2026 05:27</p><p><strong>Catatan</strong><br>Transaksi fiktif untuk review UI</p></article>
+            </div>
+            <article class="panel role-panel"><h3>Audit Trail</h3><div class="role-list"><div><strong>payment · verified</strong><small>29 Sep 2026 05:27 · ketatausahaan</small></div></div></article>
+            <div class="form-modal__footer"><button class="button button--secondary" type="button" data-payment-detail-close>Tutup</button></div>
+        </div>
+    </section>
+</div>
+
+<div class="form-modal" data-admin-master-modal hidden>
+    <div class="form-modal__backdrop" data-admin-modal-close></div>
+    <section class="form-modal__panel" role="dialog" aria-modal="true" aria-labelledby="admin-master-title">
+        <div class="form-modal__header"><div><span class="eyebrow" data-admin-modal-eyebrow>Master Administrasi</span><h2 id="admin-master-title" data-admin-modal-title>Tambah data</h2></div><button class="icon-button" type="button" data-admin-modal-close aria-label="Tutup"><svg class="icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+</button></div>
+        <div class="form-modal__body"><div class="form-grid" data-admin-modal-fields></div><div class="form-note" data-admin-modal-note>Simulasi master administrasi. Tidak ada perubahan disimpan.</div><div class="form-note is-error" data-admin-modal-error hidden></div><div class="form-modal__footer"><button class="button button--secondary" type="button" data-admin-modal-close>Batal</button><button class="button button--primary" type="button" data-admin-modal-save>Tinjau simulasi</button></div></div>
+    </section>
+</div>
+
+<script src="../assets/app.js" defer></script>
+<script src="../assets/preview.js" defer></script></body></html>

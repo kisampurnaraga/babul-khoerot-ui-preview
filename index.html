@@ -36,14 +36,14 @@
         </div><p class="login-mobile-headline">Sekolah dan pesantren dalam satu ruang digital.</p>
         <div class="login-card">
             <span class="login-security-pill">Akses aman SIM Babul Khoerot</span>
-            <p class="preview-login-note"><strong>Mode Preview</strong> · Tidak ada autentikasi atau penyimpanan data. Tombol di bawah membuka Beranda Pondok sebelum memilih ruang kerja.</p><h2 id="login-heading">Selamat datang kembali</h2>
+            <p class="preview-login-note"><strong>Mode Preview</strong> · Tanpa autentikasi. Jangan masukkan kredensial asli. Seluruh data fiktif; tidak ada data disimpan.</p><h2 id="login-heading">Selamat datang kembali</h2>
             <p class="muted">Masuk menggunakan akun yang telah diberikan administrator.</p>
 
-            
-            <form method="get" action="home.html" class="auth-form" data-submit-form novalidate="">
+
+            <form method="get" action="home.html" class="auth-form" data-submit-form novalidate="" data-static-login="">
                 <div class="field">
     <label for="email">Email</label>
-    <input id="email" type="email" value="" placeholder="nama@babulkhoerot.sch.id" autocomplete="off" class="" aria-invalid="false">
+    <input id="email" type="email" value="" placeholder="nama@babulkhoerot.sch.id" autocomplete="username" class="" aria-invalid="false">
     </div>
 
                 <div class="field">
@@ -52,21 +52,21 @@
 
                     </div>
                     <div class="password-control">
-                        <input id="password" type="password" autocomplete="off" placeholder="Masukkan kata sandi" aria-describedby="password-help">
+                        <input id="password" type="password" autocomplete="current-password" placeholder="Masukkan kata sandi" aria-describedby="password-help">
                         <button type="button" class="password-toggle" data-password-toggle aria-label="Tampilkan kata sandi" aria-pressed="false">
-                            <svg class="icon" aria-hidden="true"><use href="index.html#icon-eye"></use></svg><span>Tampilkan</span>
+                            <svg class="icon" aria-hidden="true"><use href="#icon-eye"></use></svg><span>Tampilkan</span>
                         </button>
                     </div>
                     <small id="password-help" class="sr-only">Gunakan tombol tampilkan untuk melihat kata sandi.</small>
                 </div>
 
-                <div class="login-helper-row"><label class="check-control"><input type="checkbox" value="1"><span>Ingat saya</span></label><a href="index.html#admin-help">Lupa kata sandi?</a></div>
+                <div class="login-helper-row"><label class="check-control"><input type="checkbox" value="1"><span>Ingat saya</span></label><a href="#admin-help">Lupa kata sandi?</a></div>
                 <button class="button button--login button--wide" type="submit" data-submit-button>
                     <span class="button__label">Lihat Mode Preview</span><span class="button__loading"><span class="spinner"></span>Memproses...</span>
                 </button>
             </form>
 
-            <div id="admin-help" class="login-help"><span>Butuh bantuan akses?</span><a href="bantuan.html">Hubungi administrator pondok</a></div>
+            <div id="admin-help" class="login-help"><span>Butuh bantuan akses?</span><a href="mailto:admin@babulkhoerot.sch.id">Hubungi administrator pondok</a></div>
         </div>
         <p class="login-panel__footer">Data Anda dilindungi dan akses dicatat untuk keamanan sistem.</p>
     </section>

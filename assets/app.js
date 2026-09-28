@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     input.required=required; input.setAttribute('aria-label',label);wrap.append(input);form.append(wrap);return {wrap,input};
   };
   const demoStudents=[
-    {nis:'BK26017',name:'Sinta Nur Aulia',className:'VII A',dorm:'Asrama Putri 1'},
+    {nis:'BK26017',nisn:'0012345678',name:'Sinta Nur Aulia',className:'VII A',dorm:'Asrama Putri 1'},
     {nis:'BK26018',name:'Aisyah Rahma',className:'VII A',dorm:'Asrama Putri 1'},
     {nis:'BK26019',name:'Nabila Putri',className:'VII B',dorm:'Asrama Putri 1'},
     {nis:'BK26020',name:'Zahra Khairunnisa',className:'VII B',dorm:'Asrama Putri 2'},
@@ -48,19 +48,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const panel=el('div','student-picker__panel');panel.hidden=true;
     const search=el('input','student-picker__search');search.type='search';search.placeholder='Cari nama atau NIS';search.setAttribute('aria-label','Cari '+label.toLowerCase());
     const list=el('div','student-picker__list');const empty=el('div','student-picker__empty','Data tidak ditemukan.');empty.hidden=true;
-    const render=(query='')=>{const q=query.trim().toLowerCase();list.replaceChildren();let count=0;
-      demoStudents.forEach(student=>{if(q && !((student.nis+' '+student.name).toLowerCase().includes(q)))return;count++;
-        const option=el('button','student-picker__option');option.type='button';option.dataset.value=student.nis;
-        const avatar=el('span','person-avatar',(student.name.split(' ')[0][0]+student.name.split(' ').at(-1)[0]).toUpperCase());
-        const copy=el('span','student-picker__option-copy');copy.append(el('strong','',student.name),el('small','',student.nis+' · '+student.className+' · '+student.dorm));
-        option.append(avatar,copy);option.addEventListener('click',()=>{hidden.value=student.nis;hidden.dataset.studentName=student.name;triggerMain.textContent=student.name;triggerMeta.textContent=student.nis+' · '+student.className+' · '+student.dorm;panel.hidden=true;trigger.setAttribute('aria-expanded','false');});
+    const liveRoom=location.pathname.includes('/room/sekolah')?'sekolah':'pesantren';
+    const useBackend=false;
+    let requestToken=0;
+    const normalize=student=>({
+      id:student.id??student.nis,
+      nis:student.nis??student.student_number??'',
+      nisn:student.nisn??'',
+      name:student.name??'',
+      className:student.class??student.className??'',
+      dorm:student.dorm??''
+    });
+    const source=async(query='')=>{
+      if(!useBackend){
+        return {ok:true,students:demoStudents.filter(student=>!query||((student.nis+' '+(student.nisn||'')+' '+student.name).toLowerCase().includes(query.toLowerCase())))};
+      }
+
+    };
+    const render=async(query='')=>{const token=++requestToken;list.replaceChildren(el('div','student-picker__empty','Memuat data santri…'));empty.hidden=true;
+      const result=await source(query.trim());if(token!==requestToken)return;list.replaceChildren();let count=0;
+      result.students.forEach(raw=>{const student=normalize(raw);count++;
+        const option=el('button','student-picker__option');option.type='button';option.dataset.value=student.id;
+        const parts=student.name.trim().split(/\s+/);const avatar=el('span','person-avatar',((parts[0]?.[0]||'S')+(parts.at(-1)?.[0]||'')).toUpperCase());
+        const meta=[student.nis,student.nisn?'NISN '+student.nisn:null,student.className,student.dorm].filter(Boolean).join(' · ');
+        const copy=el('span','student-picker__option-copy');copy.append(el('strong','',student.name),el('small','',meta));
+        option.append(avatar,copy);option.addEventListener('click',()=>{hidden.value=student.id;hidden.dataset.studentName=student.name;hidden.dataset.studentNis=student.nis;triggerMain.textContent=student.name;triggerMeta.textContent=meta;panel.hidden=true;trigger.setAttribute('aria-expanded','false');});
         list.append(option);
-      });empty.hidden=count!==0;
+      });
+      if(!result.ok){
+        empty.textContent='Data santri gagal dimuat. Tutup formulir lalu coba lagi.';
+        empty.hidden=false;
+        list.append(empty);
+        return;
+      }
+      empty.textContent='Data tidak ditemukan.';
+      empty.hidden=count!==0;if(!count)list.append(empty);
     };
     trigger.addEventListener('click',()=>{panel.hidden=!panel.hidden;trigger.setAttribute('aria-expanded',String(!panel.hidden));if(!panel.hidden){render(search.value);setTimeout(()=>search.focus(),0);}});
-    search.addEventListener('input',()=>render(search.value));
-    panel.append(search,list,empty);wrap.append(hidden,trigger,panel);form.append(wrap);render();
-    if(initial){const selected=demoStudents.find(x=>x.name===initial||x.nis===initial);if(selected){hidden.value=selected.nis;hidden.dataset.studentName=selected.name;triggerMain.textContent=selected.name;triggerMeta.textContent=selected.nis+' · '+selected.className+' · '+selected.dorm;}}
+    let searchTimer=null;search.addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>render(search.value),180);});
+    panel.append(search,list,empty);wrap.append(hidden,trigger,panel);form.append(wrap);
+    if(!useBackend)render();
+    if(initial&&!useBackend){const selected=demoStudents.find(x=>x.name===initial||x.nis===initial);if(selected){hidden.value=selected.nis;hidden.dataset.studentName=selected.name;triggerMain.textContent=selected.name;triggerMeta.textContent=[selected.nis,selected.className,selected.dorm].filter(Boolean).join(' · ');}}
     return {wrap,input:hidden};
   };
   let lastFocus=null, activeDialog=null;
@@ -131,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const forms={
-    santri:{title:'Tambah Santri',fields:[['Nama lengkap','text',true],['NIS','text',true],['Kelas','text',true],['Asrama / Kamar','text',true],['Status','select',true,'Aktif|Cuti|Nonaktif']]},
+    santri:{title:'Tambah Santri',fields:[['Nama lengkap','text',true],['NIS','text',true],['NISN','text',false],['Kelas','text',true],['Asrama / Kamar','text',true],['Status','select',true,'Aktif|Cuti|Nonaktif']]},
     kamar:{title:'Tambah Kamar',fields:[['Asrama','text',true],['Kode kamar','text',true],['Nama kamar','text',true],['Kapasitas','number',true]]},
     musyrif:{title:'Tambah Musyrif',fields:[['Nama','text',true],['Nomor staf','text',true],['Asrama','text',true],['Mulai tugas','date',true]]},
     tahfidz:{title:'Input Setoran Tahfidz',fields:[['Santri','student',true],['Jenis Setoran','select',true,'Setoran Baru|Murajaah'],['Juz','number',true],['Surat','text',true],['Ayat awal','number',true],['Ayat akhir','number',true],['Hasil','select',true,'Lulus|Perlu Ulang|Belum Lancar'],['Catatan pembimbing','textarea',false]]},
@@ -139,12 +167,12 @@ document.addEventListener('DOMContentLoaded', () => {
     aktivitas:{title:'Tambah Aktivitas Asrama',fields:[['Nama aktivitas','text',true],['Waktu','time',true],['Lokasi','text',true],['Penanggung jawab','text',true],['Catatan','textarea',false]]},
     kesehatan:{title:'Catat Pemeriksaan',fields:[['Santri','student',true],['Informasi yang dapat dibagikan','textarea',true],['Kondisi','select',true,'Ringan|Dipantau|Istirahat|Rujukan'],['Tindak lanjut','textarea',false],['Catatan internal petugas','textarea',false]]},
     pelanggaran:{title:'Catat Pelanggaran',fields:[['Santri','student',true],['Kategori','select',true,'Ringan|Sedang|Berat'],['Kejadian yang dapat dibagikan','textarea',true],['Status pembinaan','select',true,'Pembinaan|Selesai'],['Tindak lanjut','textarea',false],['Catatan internal petugas','textarea',false]]},
-    siswa:{title:'Tambah Siswa',fields:[['Nama lengkap','text',true],['NIS','text',true],['Kelas','text',true],['Tahun masuk','number',true],['Status','select',true,'Aktif|Nonaktif']]},
+    siswa:{title:'Tambah Siswa',fields:[['Nama lengkap','text',true],['NIS','text',true],['NISN','text',false],['Kelas','text',true],['Tahun masuk','number',true],['Status','select',true,'Aktif|Nonaktif']]},
     kelas:{title:'Tambah Kelas',fields:[['Kode kelas','text',true],['Nama kelas','text',true],['Wali kelas','text',true],['Kapasitas','number',true]]},
     'guru-staf':{title:'Tambah Guru / Staf',fields:[['Nama','text',true],['Nomor staf','text',true],['Jenis','select',true,'Guru|Staf/TU'],['Mata pelajaran','text',false],['Status','select',true,'Aktif|Nonaktif']]},
     mapel:{title:'Tambah Mata Pelajaran',fields:[['Kode','text',true],['Nama mata pelajaran','text',true],['Kategori','select',true,'Umum|Keagamaan'],['Kelas','text',false]]},
     jadwal:{title:'Atur Jadwal Pelajaran',fields:[['Hari','select',true,'Senin|Selasa|Rabu|Kamis|Jumat|Sabtu'],['Kelas','text',true],['Mata pelajaran','text',true],['Guru','text',true],['Waktu mulai','time',true],['Waktu selesai','time',true],['Ruang','text',false]]},
-    nilai:{title:'Input Nilai',fields:[['Kelas','text',true],['Mata pelajaran','text',true],['Siswa','student',true],['Nilai','number',true],['Status','select',true,'DRAFT|LOCKED']]},
+    nilai:{title:'Input Nilai',fields:[['Kelas','text',true],['Mata pelajaran','text',true],['Jenis Penilaian','select',true,'Ujian Bulanan 1|Ujian Bulanan 2|PTS|Ujian Bulanan 3|PAS|PAT'],['Siswa','student',true],['Nilai','number',true],['Status','select',true,'DRAFT|LOCKED']]},
     'tahun-akademik':{title:'Tambah Tahun Akademik',fields:[['Kode','text',true],['Nama','text',true],['Tanggal mulai','date',true],['Tanggal selesai','date',true],['Status','select',true,'Aktif|Arsip']]}
   };
   const openForm=(key,student='')=>{
@@ -239,11 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }));
 
   const excelSchemas={
-    santri:['nis','nama_lengkap','jenis_kelamin','kelas','asrama','kamar','tahun_masuk','status'],
+    santri:['nis','nisn','nama_lengkap','jenis_kelamin','kelas','asrama','kamar','tahun_masuk','status'],
     kamar:['kode_asrama','nama_asrama','kode_kamar','nama_kamar','kapasitas','status'],
     musyrif:['nomor_staf','nama_lengkap','jenis_kelamin','asrama','mulai_tugas','status'],
     aktivitas:['tanggal','waktu','nama_kegiatan','lokasi','asrama','penanggung_jawab','catatan'],
-    siswa:['nis','nama_lengkap','jenis_kelamin','kelas','tahun_masuk','status'],
+    siswa:['nis','nisn','nama_lengkap','jenis_kelamin','kelas','tahun_masuk','status'],
     kelas:['kode_kelas','nama_kelas','tingkat','wali_kelas','kapasitas','tahun_akademik','status'],
     'guru-staf':['nomor_staf','nama_lengkap','jenis','mata_pelajaran','wali_kelas','tanggal_mulai','status'],
     mapel:['kode_mapel','nama_mapel','kategori','tingkat','guru_pengampu','status'],
@@ -251,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     nilai:['nis','kelas','mata_pelajaran','jenis_penilaian','nilai','semester','tahun_akademik','status'],
     'tahun-akademik':['kode','nama','tanggal_mulai','tanggal_selesai','semester_aktif','status']
   };
-  const optionalFields=new Set(['catatan','wali_kelas','mata_pelajaran','guru_pengampu','kamar','ruang']);
+  const optionalFields=new Set(['nisn','catatan','wali_kelas','mata_pelajaran','guru_pengampu','kamar','ruang']);
   const workbook=()=>window.XLSX;
   const download=(key,note)=>{
     const columns=excelSchemas[key];if(!columns)return;
@@ -342,34 +370,85 @@ document.addEventListener('DOMContentLoaded',()=> {
 document.addEventListener('DOMContentLoaded',()=> {
  const modal=document.querySelector('[data-admin-master-modal]');
  if(!modal)return;
+ const live=false;
  const title=modal.querySelector('[data-admin-modal-title]');
+ const eyebrow=modal.querySelector('[data-admin-modal-eyebrow]');
  const fields=modal.querySelector('[data-admin-modal-fields]');
+ const note=modal.querySelector('[data-admin-modal-note]');
+ const error=modal.querySelector('[data-admin-modal-error]');
  const save=modal.querySelector('[data-admin-modal-save]');
  let mode=null, editingRow=null;
 
- const close=()=>{modal.hidden=true;document.body.classList.remove('modal-open');mode=null;editingRow=null};
- const field=(label,name,value='',type='text')=>{
+ const close=()=>{modal.hidden=true;document.body.classList.remove('modal-open');mode=null;editingRow=null;if(error)error.hidden=true};
+ const field=(label,name,value='',type='text',required=true)=>{
    const wrap=document.createElement('label');wrap.className='admin-master-modal-field';
    const span=document.createElement('span');span.textContent=label;
-   const input=document.createElement('input');input.name=name;input.type=type;input.value=value;input.required=true;
+   const input=document.createElement('input');input.name=name;input.type=type;input.value=value;input.required=required;
    wrap.append(span,input);return wrap;
  };
  const selectField=(label,name,options,current='')=>{
    const wrap=document.createElement('label');wrap.className='admin-master-modal-field';
    const span=document.createElement('span');span.textContent=label;
    const select=document.createElement('select');select.name=name;
-   options.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;o.selected=v===current;select.append(o)});
+   options.forEach(item=>{const value=typeof item==='string'?item:item.value;const text=typeof item==='string'?item:item.label;const o=document.createElement('option');o.value=value;o.textContent=text;o.selected=value===current;select.append(o)});
    wrap.append(span,select);return wrap;
  };
+ const typePayload=()=>{
+   const raw=Object.fromEntries([...fields.querySelectorAll('input,select')].map(x=>[x.name,x.value.trim()]));
+   const amountDigits=(raw.default_amount||'').replace(/[^0-9]/g,'');
+   return {
+     code:(raw.code||'').toUpperCase(),
+     name:raw.name||'',
+     frequency:raw.frequency||'',
+     default_amount:amountDigits?Number(amountDigits):null,
+     default_due_day:raw.default_due_day?Number(raw.default_due_day):null
+   };
+ };
+ const methodPayload=()=>{
+   const raw=Object.fromEntries([...fields.querySelectorAll('input,select')].map(x=>[x.name,x.value.trim()]));
+   return {
+     type:raw.type||'',
+     label:raw.label||'',
+     provider_name:raw.provider_name||null,
+     account_number:raw.account_number||null,
+     account_holder:raw.account_holder||null,
+     instructions:raw.instructions||null
+   };
+ };
+ const showError=message=>{if(error){error.textContent=message;error.hidden=false;}};
  const open=(nextMode,row=null)=>{
-   mode=nextMode;editingRow=row;fields.innerHTML='';
+   mode=nextMode;editingRow=row;fields.innerHTML='';if(error)error.hidden=true;
    if(nextMode==='type'){
-     const existing=row?.querySelector('[data-type-name]')?.textContent.trim()||'';
+     if(eyebrow)eyebrow.textContent='Master Jenis Pembayaran';
+     if(note)note.textContent=live?'Perubahan jenis pembayaran disimpan ke backend dan tercatat dalam audit trail.':'Static preview: perubahan hanya pada tampilan.';
      title.textContent=row?'Ubah jenis pembayaran':'Tambah jenis pembayaran';
-     fields.append(field('Kode','code',row?.children[0]?.textContent.trim()||''),field('Nama jenis','name',existing),selectField('Frekuensi','frequency',['Bulanan','Tahunan','Sekali','Insidental'],row?.children[2]?.textContent.trim()||'Bulanan'),field('Nominal default','amount',row?.children[3]?.textContent.trim()||'Dinamis'));
+     const amount=row?.dataset.defaultAmount||'';
+     const due=row?.dataset.defaultDueDay||'';
+     const frequency=(row?.querySelector('[data-type-frequency]')?.textContent.trim()||'Bulanan').toLowerCase();
+     fields.append(
+       field('Kode','code',row?.children[0]?.textContent.trim()||''),
+       field('Nama jenis','name',row?.querySelector('[data-type-name]')?.textContent.trim()||''),
+       selectField('Frekuensi','frequency',[
+         {value:'bulanan',label:'Bulanan'},{value:'tahunan',label:'Tahunan'},{value:'sekali',label:'Sekali'},{value:'insidental',label:'Insidental'}
+       ],frequency),
+       field('Nominal default (opsional)','default_amount',amount,'text',false),
+       field('Tanggal jatuh tempo default 1-31 (opsional)','default_due_day',due,'number',false)
+     );
+     const dueInput=fields.querySelector('[name=default_due_day]');if(dueInput){dueInput.min='1';dueInput.max='31';}
    }else{
+     if(eyebrow)eyebrow.textContent='Master Metode Pembayaran';
+     if(note)note.textContent=live?'Perubahan metode/rekening disimpan ke backend dan metode aktif otomatis ditampilkan kepada wali.':'Static preview: perubahan hanya pada tampilan.';
      title.textContent=row?'Ubah metode pembayaran':'Tambah metode pembayaran';
-     fields.append(selectField('Tipe metode','kind',['Transfer Bank','Tunai','QRIS','Virtual Account','Lainnya']),field('Nama / label','name',row?.querySelector('h2')?.textContent.trim()||''),field('Bank / lokasi','provider',row?.querySelector('strong')?.textContent.trim()||''),field('Nomor rekening / informasi','account',row?.querySelector('.payment-account-number')?.textContent.trim()||''),field('Atas nama / instruksi','holder',''));
+     fields.append(
+       selectField('Tipe metode','type',[
+         {value:'bank_transfer',label:'Transfer Bank'},{value:'cash',label:'Tunai'},{value:'qris',label:'QRIS'},{value:'virtual_account',label:'Virtual Account'},{value:'other',label:'Lainnya'}
+       ],row?.dataset.methodType||'bank_transfer'),
+       field('Nama / label','label',row?.querySelector('h2')?.textContent.trim()||''),
+       field('Bank / provider','provider_name',row?.dataset.methodProvider||'', 'text', false),
+       field('Nomor rekening / VA','account_number',row?.dataset.methodAccount||'', 'text', false),
+       field('Atas nama','account_holder',row?.dataset.methodHolder||'', 'text', false),
+       field('Instruksi pembayaran','instructions',row?.dataset.methodInstructions||'', 'text', false)
+     );
    }
    modal.hidden=false;document.body.classList.add('modal-open');
    setTimeout(()=>fields.querySelector('input,select')?.focus(),0);
@@ -380,52 +459,50 @@ document.addEventListener('DOMContentLoaded',()=> {
  document.querySelectorAll('[data-admin-edit-type]').forEach(b=>b.addEventListener('click',()=>open('type',b.closest('tr'))));
  document.querySelector('[data-admin-add-method]')?.addEventListener('click',()=>open('method'));
  document.querySelectorAll('[data-admin-edit-method]').forEach(b=>b.addEventListener('click',()=>open('method',b.closest('.payment-method-card'))));
- document.querySelectorAll('[data-admin-archive]').forEach(b=>b.addEventListener('click',()=>{
-   const row=b.closest('tr,.payment-method-card');const badge=row?.querySelector('.badge');
-   if(!badge)return;
-   const inactive=badge.textContent.trim()==='Nonaktif';
-   badge.textContent=inactive?'Aktif':'Nonaktif';badge.className='badge '+(inactive?'badge--success':'badge--warning');
-   b.textContent=inactive?(row.matches('tr')?'Arsipkan':'Nonaktifkan'):'Aktifkan';
- }));
- save?.addEventListener('click',()=>{
-   const data=Object.fromEntries([...fields.querySelectorAll('input,select')].map(x=>[x.name,x.value.trim()]));
-   if([...fields.querySelectorAll('[required]')].some(x=>!x.value.trim()))return;
-   if(mode==='type'){
-     if(editingRow){
-       editingRow.children[0].textContent=data.code;editingRow.querySelector('[data-type-name]').textContent=data.name;editingRow.children[2].textContent=data.frequency;editingRow.children[3].textContent=data.amount;
-     }else{
-       const tbody=document.querySelector('[data-payment-type-table] tbody');
-       const tr=document.createElement('tr');
-       tr.innerHTML='<td></td><td data-type-name></td><td></td><td></td><td><span class="badge badge--success">Aktif</span></td><td><button class="table-action" type="button" data-admin-edit-type>Ubah</button> <button class="table-action" type="button" data-admin-archive>Arsipkan</button></td>';
-       tr.children[0].textContent=data.code;tr.children[1].textContent=data.name;tr.children[2].textContent=data.frequency;tr.children[3].textContent=data.amount;tbody?.append(tr);
-       tr.querySelector('[data-admin-edit-type]')?.addEventListener('click',()=>open('type',tr));
-       tr.querySelector('[data-admin-archive]')?.addEventListener('click',e=>{const badge=tr.querySelector('.badge');badge.textContent='Nonaktif';badge.className='badge badge--warning';e.currentTarget.textContent='Aktifkan'});
-     }
-   }else{
-     const list=document.querySelector('[data-payment-method-list]');
-     if(editingRow){
-       editingRow.querySelector('h2').textContent=data.name;editingRow.querySelector('strong').textContent=data.provider;const acct=editingRow.querySelector('.payment-account-number');if(acct)acct.textContent=data.account||data.kind;
-     }else if(list){
-       const article=document.createElement('article');article.className='panel payment-method-card';
-       article.innerHTML='<div><span class="badge badge--success">Aktif</span><small></small></div><span class="role-panel__icon"></span><h2></h2><strong></strong><p class="payment-account-number"></p><p></p><small>Metode baru · simulasi frontend.</small><div class="role-actions"><button class="button button--secondary" type="button" data-admin-edit-method>Ubah</button><button class="button button--secondary" type="button" data-admin-archive>Nonaktifkan</button></div>';
-       article.querySelector('small').textContent=data.kind;article.querySelector('h2').textContent=data.name;article.querySelector('strong').textContent=data.provider;article.querySelector('.payment-account-number').textContent=data.account;article.querySelectorAll('p')[1].textContent=data.holder;
-       list.append(article);article.querySelector('[data-admin-edit-method]')?.addEventListener('click',()=>open('method',article));
-     }
+
+ document.querySelectorAll('[data-admin-archive][data-record-kind="type"]').forEach(button=>button.addEventListener('click',async()=>{
+   const row=button.closest('tr');const badge=row?.querySelector('.badge');if(!row||!badge)return;
+   const makeActive=badge.textContent.trim()==='Nonaktif';
+   if(!live){
+     badge.textContent=makeActive?'Aktif':'Nonaktif';badge.className='badge '+(makeActive?'badge--success':'badge--warning');button.textContent=makeActive?'Arsipkan':'Aktifkan';return;
    }
-   close();
+
+ }));
+
+ document.querySelectorAll('[data-admin-archive][data-record-kind="method"]').forEach(button=>button.addEventListener('click',async()=>{
+   const row=button.closest('.payment-method-card');const badge=row?.querySelector('.badge');if(!row||!badge)return;
+   const makeActive=badge.textContent.trim()==='Nonaktif';
+   if(!live){
+     badge.textContent=makeActive?'Aktif':'Nonaktif';badge.className='badge '+(makeActive?'badge--success':'badge--warning');button.textContent=makeActive?'Nonaktifkan':'Aktifkan';return;
+   }
+
+ }));
+
+ save?.addEventListener('click',async()=>{
+   if([...fields.querySelectorAll('[required]')].some(x=>!x.value.trim())){showError('Lengkapi kolom wajib.');return;}
+   const isType=mode==='type';
+   const data=isType?typePayload():methodPayload();
+   if(isType&&data.default_due_day!==null&&(data.default_due_day<1||data.default_due_day>31)){showError('Tanggal jatuh tempo default harus 1-31.');return;}
+   if(!isType&&['bank_transfer','virtual_account'].includes(data.type)){
+     if(!data.provider_name){showError('Bank/provider wajib diisi untuk Transfer Bank atau Virtual Account.');return;}
+     if(!data.account_number){showError('Nomor rekening/VA wajib diisi.');return;}
+     if(!data.account_holder){showError('Nama pemilik rekening wajib diisi.');return;}
+   }
+   if(!live){showError('Simulasi valid. Tidak ada data yang disimpan.');return;}
+
  });
- document.querySelectorAll('[data-admin-notify]').forEach(b=>b.addEventListener('click',()=>{b.textContent='Simulasi terkirim';b.disabled=true}));
+ document.querySelectorAll('[data-admin-notify]').forEach(b=>b.addEventListener('click',()=>{b.textContent='Simulasi saja — tidak dikirim';b.disabled=true}));
 });
 
 
 document.addEventListener('DOMContentLoaded',()=> {
   const billModal=document.querySelector('[data-bill-modal]');
   if(billModal){
+    const live=false;
     const openButtons=[...document.querySelectorAll('[data-admin-new-bill]')];
     const closeButtons=[...billModal.querySelectorAll('[data-bill-close]')];
     const search=billModal.querySelector('[data-bill-search]');
-    const rows=[...billModal.querySelectorAll('[data-bill-student]')];
-    const checks=[...billModal.querySelectorAll('[data-bill-student-check]')];
+    const list=billModal.querySelector('[data-bill-student-list]');
     const count=billModal.querySelector('[data-bill-selected-count]');
     const empty=billModal.querySelector('[data-bill-empty]');
     const validation=billModal.querySelector('[data-bill-validation]');
@@ -433,50 +510,204 @@ document.addEventListener('DOMContentLoaded',()=> {
     const submit=billModal.querySelector('[data-bill-submit]');
     const type=billModal.querySelector('[data-bill-type]');
     const amount=billModal.querySelector('[data-bill-amount]');
+    const period=billModal.querySelector('[data-bill-period]');
+    const due=billModal.querySelector('[data-bill-due]');
+    const note=billModal.querySelector('[data-bill-note]');
+    let rows=[...billModal.querySelectorAll('[data-bill-student]')];
+    let checks=[...billModal.querySelectorAll('[data-bill-student-check]')];
+    let searchTimer=null;
+    const selectedStudentIds=new Set();
+
     const updateCount=()=>{
-      const total=checks.filter(c=>c.checked).length;
-      if(count) count.textContent=total+' santri';
-      rows.forEach(row=>row.classList.toggle('is-selected',!!row.querySelector('[data-bill-student-check]')?.checked));
+      if(count) count.textContent=selectedStudentIds.size+' santri';
+      rows.forEach(row=>{
+        const check=row.querySelector('[data-bill-student-check]');
+        const selected=!!check&&selectedStudentIds.has(String(check.value));
+        if(check)check.checked=selected;
+        row.classList.toggle('is-selected',selected);
+      });
     };
+    const bindRows=()=>{
+      rows=[...billModal.querySelectorAll('[data-bill-student]')];
+      checks=[...billModal.querySelectorAll('[data-bill-student-check]')];
+      checks.forEach(c=>{
+        const id=String(c.value);
+        c.checked=selectedStudentIds.has(id);
+        c.addEventListener('change',()=>{
+          if(c.checked)selectedStudentIds.add(id);else selectedStudentIds.delete(id);
+          updateCount();
+        });
+      });
+      updateCount();
+    };
+    const renderStudents=students=>{
+      if(!list)return;
+      list.querySelectorAll('[data-bill-student]').forEach(node=>node.remove());
+      students.forEach(student=>{
+        const row=document.createElement('label');row.className='bill-student-row';row.dataset.billStudent='';row.dataset.search=((student.nis||'')+' '+(student.name||'')).toLowerCase();
+        const check=document.createElement('input');check.type='checkbox';check.value=String(student.id);check.dataset.billStudentCheck='';
+        const avatar=document.createElement('span');avatar.className='person-avatar';const parts=(student.name||'S').trim().split(/\s+/);avatar.textContent=((parts[0]?.[0]||'S')+(parts.at(-1)?.[0]||'')).toUpperCase();
+        const identity=document.createElement('span');identity.className='bill-student-row__identity';
+        const strong=document.createElement('strong');strong.textContent=student.name||'-';
+        const small=document.createElement('small');small.textContent=[student.nis,student.class,student.dorm].filter(Boolean).join(' · ');
+        identity.append(strong,small);
+        const badge=document.createElement('span');badge.className='badge badge--success';badge.textContent='Aktif';
+        row.append(check,avatar,identity,badge);
+        list.insertBefore(row,empty||null);
+      });
+      if(empty){
+        empty.textContent=students.length?'Tidak ada santri yang cocok dengan pencarian.':'Tidak ada santri aktif yang cocok dengan pencarian.';
+        empty.hidden=students.length!==0;
+      }
+      bindRows();
+    };
+    const loadStudents=async()=>true;
+    const loadPaymentTypes=async()=>true;
+    const applyTypeDefaults=()=>{
+      const selected=type?.selectedOptions?.[0];if(!selected)return;
+      const defaultAmount=selected.dataset.defaultAmount||'';
+      const dueDay=Number(selected.dataset.defaultDueDay||0);
+      if(defaultAmount&&amount&&!amount.value.trim())amount.value=String(Math.round(Number(defaultAmount)));
+      if(dueDay&&due){
+        const base=new Date();base.setMonth(base.getMonth()+1,1);
+        const lastDay=new Date(base.getFullYear(),base.getMonth()+1,0).getDate();
+        base.setDate(Math.min(dueDay,lastDay));
+        const pad=n=>String(n).padStart(2,'0');
+        due.value=base.getFullYear()+'-'+pad(base.getMonth()+1)+'-'+pad(base.getDate());
+      }
+    };
+    type?.addEventListener('change',applyTypeDefaults);
     const reset=()=>{
+      selectedStudentIds.clear();
       if(search) search.value='';
       rows.forEach(row=>{row.hidden=false;const c=row.querySelector('[data-bill-student-check]');if(c)c.checked=false;row.classList.remove('is-selected')});
       if(type)type.value='';
       if(amount)amount.value='';
-      if(validation)validation.hidden=true;
+      if(validation){validation.textContent='Pilih minimal satu santri dan lengkapi jenis pembayaran serta nominal.';validation.hidden=true;}
       if(success)success.hidden=true;
-      if(empty)empty.hidden=true;
+      if(empty){empty.textContent='Tidak ada santri contoh yang cocok.';empty.hidden=true;}
       updateCount();
     };
-    const open=()=>{
+    const open=async()=>{
       reset();
       billModal.hidden=false;
+      billModal.dataset.ready=live?'false':'true';
       document.body.classList.add('modal-open');
+      if(live){
+        if(submit)submit.disabled=true;
+        if(search)search.disabled=true;
+        const [studentsReady,typesReady]=await Promise.all([loadStudents(''),loadPaymentTypes()]);
+        billModal.dataset.ready=(studentsReady&&typesReady)?'true':'false';
+        if(submit)submit.disabled=!(studentsReady&&typesReady);
+        if(search)search.disabled=!studentsReady;
+        if(!(studentsReady&&typesReady)&&validation){
+          validation.textContent='Data santri atau jenis pembayaran gagal dimuat. Muat ulang halaman lalu coba lagi.';
+          validation.hidden=false;
+        }
+      }
       setTimeout(()=>search?.focus(),0);
     };
     const close=()=>{billModal.hidden=true;document.body.classList.remove('modal-open')};
     openButtons.forEach(b=>b.addEventListener('click',open));
     closeButtons.forEach(b=>b.addEventListener('click',close));
-    checks.forEach(c=>c.addEventListener('change',updateCount));
+    bindRows();
     search?.addEventListener('input',()=>{
-      const q=search.value.trim().toLowerCase();
-      let visible=0;
-      rows.forEach(row=>{const match=!q||(row.dataset.search||'').includes(q);row.hidden=!match;if(match)visible++});
+      const q=search.value.trim();
+      if(live){
+        clearTimeout(searchTimer);
+        searchTimer=setTimeout(()=>loadStudents(q),180);
+        return;
+      }
+      let visible=0;rows.forEach(row=>{const match=!q||(row.dataset.search||'').includes(q.toLowerCase());row.hidden=!match;if(match)visible++});
       if(empty)empty.hidden=visible!==0;
     });
-    submit?.addEventListener('click',()=>{
-      const selected=checks.filter(c=>c.checked);
-      const valid=selected.length>0 && !!type?.value && !!amount?.value.trim();
+    submit?.addEventListener('click',async()=>{
+      const selected=[...selectedStudentIds];
+      const normalizedAmount=(amount?.value||'').replace(/[^0-9]/g,'');
+      const valid=selected.length>0 && !!type?.value && !!normalizedAmount && !!period?.value.trim() && !!due?.value;
       if(validation)validation.hidden=valid;
       if(success)success.hidden=true;
       if(!valid)return;
-      if(success){
-        success.textContent='Simulasi tagihan siap untuk '+selected.length+' santri. Tidak ada data yang disimpan sebelum backend terhubung.';
-        success.hidden=false;
+      if(!live){
+        if(success){success.textContent='Simulasi tagihan siap untuk '+selected.length+' santri. Tidak ada data yang disimpan sebelum backend terhubung.';success.hidden=false;}
+        return;
       }
+
     });
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!billModal.hidden)close()});
   }
+
+  const paymentSearch=document.querySelector('[data-payment-bill-search]');
+  paymentSearch?.addEventListener('input',()=>{
+    const q=paymentSearch.value.trim().toLowerCase();
+    document.querySelectorAll('[data-payment-bill-row]').forEach(row=>{row.hidden=!!q&&!((row.dataset.search||'').includes(q));});
+  });
+
+  const paymentModal=document.querySelector('[data-payment-modal]');
+  if(paymentModal){
+    const closeButtons=[...paymentModal.querySelectorAll('[data-payment-close]')];
+    const summary=paymentModal.querySelector('[data-payment-summary]');
+    const student=paymentModal.querySelector('[data-payment-student]');
+    const remainingDisplay=paymentModal.querySelector('[data-payment-remaining-display]');
+    const method=paymentModal.querySelector('[data-payment-method]');
+    const amount=paymentModal.querySelector('[data-payment-amount]');
+    const paidAt=paymentModal.querySelector('[data-payment-paid-at]');
+    const reference=paymentModal.querySelector('[data-payment-reference]');
+    const notes=paymentModal.querySelector('[data-payment-notes]');
+    const error=paymentModal.querySelector('[data-payment-error]');
+    const success=paymentModal.querySelector('[data-payment-success]');
+    const submit=paymentModal.querySelector('[data-payment-submit]');
+    let billId=null,remaining=0;
+    const rupiah=value=>'Rp'+new Intl.NumberFormat('id-ID').format(Number(value||0));
+    const nowLocal=()=>{
+      const d=new Date();const pad=n=>String(n).padStart(2,'0');
+      return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes());
+    };
+    const close=()=>{paymentModal.hidden=true;document.body.classList.remove('modal-open');};
+    const open=button=>{
+      billId=button.dataset.billId;
+      remaining=Number(button.dataset.remaining||0);
+      if(summary)summary.textContent=(button.dataset.billLabel||'Tagihan')+' · '+(button.dataset.studentNis||'');
+      if(student)student.value=button.dataset.studentName||'';
+      if(remainingDisplay)remainingDisplay.value=rupiah(remaining);
+      if(method)method.value='';
+      if(amount){amount.value=String(Math.round(remaining));amount.max=String(Math.round(remaining));}
+      if(paidAt)paidAt.value=nowLocal();
+      if(reference)reference.value='';
+      if(notes)notes.value='';
+      if(error)error.hidden=true;
+      if(success)success.hidden=true;
+      if(submit){submit.disabled=false;submit.removeAttribute('aria-busy');}
+      paymentModal.hidden=false;document.body.classList.add('modal-open');
+      setTimeout(()=>method?.focus(),0);
+    };
+    document.querySelectorAll('[data-open-payment]').forEach(button=>button.addEventListener('click',()=>open(button)));
+    closeButtons.forEach(button=>button.addEventListener('click',close));
+    submit?.addEventListener('click',async()=>{
+      const nominal=Number(amount?.value||0);
+      if(error)error.hidden=true;if(success)success.hidden=true;
+      if(!billId||!method?.value||!nominal||nominal<=0||!paidAt?.value){
+        if(error){error.textContent='Lengkapi metode, nominal, dan tanggal pembayaran.';error.hidden=false;}return;
+      }
+      if(nominal>remaining){
+        if(error){error.textContent='Nominal tidak boleh melebihi sisa tagihan.';error.hidden=false;}return;
+      }
+      if(success){success.textContent='Simulasi input valid. Tidak ada pembayaran dikirim atau disimpan.';success.hidden=false;}
+
+    });
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!paymentModal.hidden)close();});
+  }
+
+  document.querySelectorAll('[data-payment-detail]').forEach(button=>button.addEventListener('click',()=>{
+    const modal=document.querySelector('[data-payment-detail-modal="'+button.dataset.paymentId+'"]');
+    if(!modal)return;
+    modal.hidden=false;document.body.classList.add('modal-open');
+  }));
+  document.querySelectorAll('[data-payment-detail-close]').forEach(button=>button.addEventListener('click',()=>{
+    const modal=button.closest('[data-payment-detail-modal]');
+    if(modal)modal.hidden=true;
+    if(!document.querySelector('[data-payment-detail-modal]:not([hidden])'))document.body.classList.remove('modal-open');
+  }));
 
   const onboarding=document.querySelector('[data-onboarding]');
   if(onboarding){
@@ -488,14 +719,14 @@ document.addEventListener('DOMContentLoaded',()=> {
     const open=()=>{onboarding.hidden=false;document.body.classList.add('modal-open')};
     const close=()=>{
       if(hideCheck?.checked){
-        try{localStorage.setItem(storageKey,'1')}catch(_){}
+        /* Preview does not persist preferences. */
       }
       onboarding.hidden=true;document.body.classList.remove('modal-open');
     };
     openButton?.addEventListener('click',open);
     closeButtons.forEach(b=>b.addEventListener('click',close));
     let hidden=false;
-    try{hidden=localStorage.getItem(storageKey)==='1'}catch(_){}
+    /* Always allow onboarding review. */
     if(!hidden)setTimeout(open,180);
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!onboarding.hidden)close()});
   }
