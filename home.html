@@ -11,7 +11,7 @@
 <main class="entry-shell entry-shell--portal">
 <header class="entry-header">
   <a class="brand" href="home.html"><span class="brand__mark">BK</span><span><strong>Babul Khoerot</strong><small>Sistem Informasi Manajemen</small></span></a>
-  <div class="preview-controls"><span class="preview-mode">Mode Preview</span><label>Peran:
+  <div class="preview-controls"><span class="preview-mode">Mode Preview</span><button class="button button--secondary" type="button" data-onboarding-open>Panduan cepat</button><label>Peran:
     <select data-preview-role data-preview-home-role>
       <option value="admin">Admin</option><option value="mudir">Mudir</option><option value="ketatausahaan">Ketatausahaan</option><option value="guru-musyrif">Guru / Musyrif</option><option value="santri">Santri</option><option value="orang-tua">Orang Tua / Wali</option>
     </select>
@@ -48,6 +48,14 @@
    <article class="panel portal-highlight"><span class="eyebrow">Butuh bantuan?</span><h2>Panduan penggunaan SIM</h2><p>Buka panduan sesuai role sebelum menghubungi Admin.</p><a class="button button--secondary" href="bantuan.html">Buka Pusat Bantuan</a></article>
  </aside>
 </section>
+<div class="onboarding-modal" data-onboarding hidden>
+  <div class="onboarding-modal__backdrop" data-onboarding-close></div>
+  <section class="onboarding-modal__panel" role="dialog" aria-modal="true" aria-labelledby="preview-onboarding-title">
+    <div class="onboarding-modal__header"><div><span class="eyebrow">Panduan Cepat</span><h2 id="preview-onboarding-title" data-onboarding-title>Panduan Role</h2><p data-onboarding-intro></p></div><button class="icon-button" type="button" data-onboarding-close>×</button></div>
+    <div class="onboarding-steps" data-onboarding-steps></div>
+    <div class="onboarding-actions"><label class="check-control"><input type="checkbox" data-onboarding-hide><span>Jangan tampilkan otomatis lagi di perangkat ini</span></label><div><a class="button button--secondary" href="bantuan.html">Panduan lengkap</a><button class="button button--primary" type="button" data-onboarding-close>Mulai gunakan SIM</button></div></div>
+  </section>
+</div>
 <footer class="entry-footer"><span>SIM Babul Khoerot</span><span>Mode Preview · tidak menyimpan data</span></footer>
 </main>
 <script src="assets/app.js" defer></script><script src="assets/preview.js" defer></script>
