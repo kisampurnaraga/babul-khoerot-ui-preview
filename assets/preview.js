@@ -69,3 +69,32 @@ document.addEventListener('change',event=>{
     location.assign(prefix+target);
   }
 },true);
+
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const nav=document.querySelector('[data-admin-tabs]');
+  const panes=[...document.querySelectorAll('[data-admin-pane]')];
+  if(!nav || !panes.length) return;
+  const valid=new Set(panes.map(p=>p.dataset.adminPane));
+  const activate=(tab,push=false)=>{
+    const chosen=valid.has(tab)?tab:'dashboard';
+    panes.forEach(p=>p.hidden=p.dataset.adminPane!==chosen);
+    nav.querySelectorAll('[data-admin-tab]').forEach(a=>a.classList.toggle('is-active',a.dataset.adminTab===chosen));
+    if(push){
+      const url=new URL(location.href);
+      url.searchParams.set('tab',chosen);
+      history.pushState({tab:chosen},'',url);
+    }
+    document.querySelector('[data-menu-close]')?.click();
+    window.scrollTo({top:0,behavior:'instant'});
+  };
+  const current=new URL(location.href).searchParams.get('tab')||'dashboard';
+  activate(current,false);
+  nav.addEventListener('click',event=>{
+    const link=event.target.closest('[data-admin-tab]');
+    if(!link)return;
+    event.preventDefault();
+    activate(link.dataset.adminTab,true);
+  });
+  addEventListener('popstate',()=>activate(new URL(location.href).searchParams.get('tab')||'dashboard',false));
+});
