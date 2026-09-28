@@ -22,6 +22,14 @@ document.addEventListener('submit',event=>{
 },true);
 
 document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('[data-preview-role]').forEach(select=>{
+    if(!select.querySelector('option[value="ketatausahaan"]')){
+      const option=document.createElement('option');
+      option.value='ketatausahaan';option.textContent='Ketatausahaan';
+      const guru=select.querySelector('option[value="guru-musyrif"]');
+      if(guru)select.insertBefore(option,guru);else select.append(option);
+    }
+  });
   const homeRole=document.querySelector('[data-preview-home-role]');
   const syncHome=()=>{
     if(!homeRole)return;
