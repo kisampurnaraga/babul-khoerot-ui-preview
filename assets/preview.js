@@ -98,3 +98,104 @@ document.addEventListener('DOMContentLoaded',()=>{
   });
   addEventListener('popstate',()=>activate(new URL(location.href).searchParams.get('tab')||'dashboard',false));
 });
+
+
+const onboardingGuides={
+  admin:{
+    title:'Onboarding Admin',
+    intro:'Admin mengatur akses, master data, konfigurasi, dan supervisi seluruh modul.',
+    steps:[
+      ['Mulai dari Beranda Pondok','Tentukan peran aktif lalu pilih Room Sekolah, Room Pesantren, atau Administrasi Pondok.'],
+      ['Kelola master & pengguna','Gunakan master data untuk santri, kelas, asrama, staf, mapel, serta pengaturan lain.'],
+      ['Gunakan aksi operasional seperlunya','Tetap ikuti permission, konteks room, dan audit saat membantu proses operasional.'],
+      ['Pantau bantuan & audit','Gunakan Pusat Bantuan dan histori/audit untuk menelusuri perubahan penting.']
+    ]
+  },
+  mudir:{
+    title:'Onboarding Mudir',
+    intro:'Mudir berfokus pada monitoring, ringkasan, laporan, dan tindak lanjut keputusan.',
+    steps:[
+      ['Pilih room yang ingin dipantau','Masuk ke Room Pesantren atau Sekolah untuk melihat indikator sesuai konteks.'],
+      ['Gunakan Ringkasan & Laporan','Cari santri berdasarkan nama/NIS dan tentukan periode 7, 14, 30 hari, atau tanggal khusus.'],
+      ['Pantau administrasi pembayaran','Administrasi Pondok menampilkan tagihan, pembayaran, dan tunggakan secara monitoring.'],
+      ['Tindak lanjuti temuan','Koordinasikan temuan dengan Guru, Musyrif/Musyrifah, atau Ketatausahaan.']
+    ]
+  },
+  ketatausahaan:{
+    title:'Onboarding Ketatausahaan',
+    intro:'Ketatausahaan mengelola administrasi santri, tagihan, pembayaran, rekening, dan komunikasi administratif ke wali.',
+    steps:[
+      ['Buka Administrasi Pondok','Workspace ini menjadi pusat pekerjaan TU lintas Room Sekolah dan Pesantren.'],
+      ['Atur jenis & metode pembayaran','Jenis pembayaran dan rekening bersifat dinamis dan dapat diaktifkan/nonaktifkan.'],
+      ['Buat dan pantau tagihan','Pilih santri berdasarkan nama/NIS, tentukan jenis, periode, nominal, dan jatuh tempo.'],
+      ['Verifikasi & ingatkan wali','Pantau pembayaran masuk, tunggakan, dan informasi administratif untuk wali.']
+    ]
+  },
+  'guru-musyrif':{
+    title:'Onboarding Guru / Ustadzah / Musyrif',
+    intro:'Role operasional bekerja sesuai penugasan. Guru/Ustadzah fokus Sekolah; Musyrif/Musyrifah fokus Pesantren.',
+    steps:[
+      ['Pilih room sesuai tugas','Guru/Ustadzah masuk Room Sekolah; Musyrif/Musyrifah masuk Room Pesantren.'],
+      ['Kerjakan data operasional','Isi absensi, kegiatan, Tahfidz, ibadah, nilai, atau data lain sesuai penugasan.'],
+      ['Periksa konteks sebelum menyimpan','Pastikan kelas, asrama, kamar, mapel, kegiatan, dan tanggal sudah benar.'],
+      ['Gunakan Pusat Bantuan','Jika menu tidak muncul, cek role dan penugasan lalu hubungi Admin bila akses perlu diperbarui.']
+    ]
+  }
+};
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const onboarding=document.querySelector('[data-onboarding]');
+  const roleSelect=document.querySelector('[data-preview-home-role]');
+  if(onboarding && roleSelect){
+    const title=onboarding.querySelector('[data-onboarding-title]');
+    const intro=onboarding.querySelector('[data-onboarding-intro]');
+    const steps=onboarding.querySelector('[data-onboarding-steps]');
+    const hideCheck=onboarding.querySelector('[data-onboarding-hide]');
+    const openButton=document.querySelector('[data-onboarding-open]');
+    const render=()=>{
+      const role=roleSelect.value;
+      const guide=onboardingGuides[role];
+      if(!guide){onboarding.hidden=true;openButton.hidden=true;return false}
+      openButton.hidden=false;
+      title.textContent=guide.title;intro.textContent=guide.intro;steps.innerHTML='';
+      guide.steps.forEach((step,index)=>{
+        const article=document.createElement('article');article.className='onboarding-step';
+        const num=document.createElement('span');num.className='onboarding-step__number';num.textContent=String(index+1);
+        const div=document.createElement('div');const strong=document.createElement('strong');strong.textContent=step[0];const p=document.createElement('p');p.textContent=step[1];div.append(strong,p);article.append(num,div);steps.append(article);
+      });
+      return true;
+    };
+    const key=()=> 'bk-preview-onboarding-hidden-'+roleSelect.value;
+    const open=()=>{if(render()){onboarding.hidden=false;document.body.classList.add('modal-open')}};
+    const close=()=>{if(hideCheck?.checked){try{localStorage.setItem(key(),'1')}catch(_){}}onboarding.hidden=true;document.body.classList.remove('modal-open')};
+    openButton.addEventListener('click',open);
+    onboarding.querySelectorAll('[data-onboarding-close]').forEach(b=>b.addEventListener('click',close));
+    roleSelect.addEventListener('change',()=>{render();let hidden=false;try{hidden=localStorage.getItem(key())==='1'}catch(_){}if(!hidden&&onboardingGuides[roleSelect.value])setTimeout(open,80)});
+    render();
+    let hidden=false;try{hidden=localStorage.getItem(key())==='1'}catch(_){}
+    if(!hidden&&onboardingGuides[roleSelect.value])setTimeout(open,180);
+  }
+
+  const billModal=document.querySelector('[data-bill-modal]');
+  if(billModal){
+    const rows=[...billModal.querySelectorAll('[data-bill-student]')];
+    const checks=[...billModal.querySelectorAll('[data-bill-student-check]')];
+    const search=billModal.querySelector('[data-bill-search]');
+    const count=billModal.querySelector('[data-bill-selected-count]');
+    const empty=billModal.querySelector('[data-bill-empty]');
+    const validation=billModal.querySelector('[data-bill-validation]');
+    const success=billModal.querySelector('[data-bill-success]');
+    const type=billModal.querySelector('[data-bill-type]');
+    const amount=billModal.querySelector('[data-bill-amount]');
+    const update=()=>{const total=checks.filter(c=>c.checked).length;if(count)count.textContent=total+' santri';rows.forEach(r=>r.classList.toggle('is-selected',!!r.querySelector('[data-bill-student-check]')?.checked))};
+    const reset=()=>{if(search)search.value='';rows.forEach(r=>{r.hidden=false;const c=r.querySelector('[data-bill-student-check]');if(c)c.checked=false;r.classList.remove('is-selected')});if(type)type.value='';if(amount)amount.value='';if(validation)validation.hidden=true;if(success)success.hidden=true;if(empty)empty.hidden=true;update()};
+    const open=()=>{reset();billModal.hidden=false;document.body.classList.add('modal-open');setTimeout(()=>search?.focus(),0)};
+    const close=()=>{billModal.hidden=true;document.body.classList.remove('modal-open')};
+    document.querySelectorAll('[data-admin-new-bill]').forEach(b=>b.addEventListener('click',open));
+    billModal.querySelectorAll('[data-bill-close]').forEach(b=>b.addEventListener('click',close));
+    checks.forEach(c=>c.addEventListener('change',update));
+    search?.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();let visible=0;rows.forEach(r=>{const match=!q||(r.dataset.search||'').includes(q);r.hidden=!match;if(match)visible++});if(empty)empty.hidden=visible!==0});
+    billModal.querySelector('[data-bill-submit]')?.addEventListener('click',()=>{const selected=checks.filter(c=>c.checked);const valid=selected.length>0&&!!type?.value&&!!amount?.value.trim();if(validation)validation.hidden=valid;if(success)success.hidden=true;if(!valid)return;success.textContent='Simulasi tagihan siap untuk '+selected.length+' santri. Tidak ada data yang disimpan.';success.hidden=false});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!billModal.hidden)close()});
+  }
+});
